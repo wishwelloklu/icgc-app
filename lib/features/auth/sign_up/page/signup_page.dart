@@ -23,6 +23,7 @@ class _SignupPageState extends State<SignupPage> {
   final fnameController = TextEditingController();
   final lnameController = TextEditingController();
   final emailnameController = TextEditingController();
+  final ministryController = TextEditingController();
   final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -73,6 +74,13 @@ class _SignupPageState extends State<SignupPage> {
               labelText: AppString.email,
               hintText: AppString.emailHint,
             ),
+              const Gap(20),
+            InputTextField(
+              controller: ministryController,
+              isEmail: true,
+              labelText: AppString.ministryId,
+              hintText: AppString.ministryIdHint,
+            ),
             const Gap(20),
             PasswordTextField(
               controller: passwordController,
@@ -83,7 +91,7 @@ class _SignupPageState extends State<SignupPage> {
             PrimaryButton(
                 text: AppString.createAccount,
                 onPressed: () => routeAndRemoveNavigator(
-                    context, AppRoutes.subscriptionPage)),
+                    context, AppRoutes.otpPage)),
             const Gap(56),
             Center(
               child: Text.rich(TextSpan(

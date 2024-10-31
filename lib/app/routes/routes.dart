@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:icgc/app/routes/modules/auth_routes.dart';
 import 'package:icgc/app/routes/modules/home_routes.dart';
+import 'package:icgc/app/routes/modules/manual_routes.dart';
 import 'package:icgc/app/routes/modules/onboard_routes.dart';
 import 'package:icgc/app/routes/route_type.dart';
 
@@ -17,13 +18,14 @@ class Routes {
       ...onboardRoutes,
       ...homeRoutes,
       ...wrapperRoute,
+      ...manualRoute,
     };
   }
 
   static Route onGenerateRoutes(RouteSettings settings) {
     var routes = _resolveRoutes();
     final RouteType? child = routes[settings.name];
-
+    print('jkwnefjkwenfwke ${settings.name}');
     if (child == null) {
       throw const FormatException("--- Route doesn't exist");
     }

@@ -15,7 +15,7 @@ class CustomTheme extends ThemeExtension<CustomTheme> {
       this.primaryColor = AppColor.primaryColor,
       this.tertiaryColor = AppColor.tertiaryColor,
       this.secondaryColor = AppColor.secondaryColor,
-      this.neutralColor = AppColor.neutralColor,
+      this.neutralColor = AppColor.pageBackground,
       this.greenColor = AppColor.greenColor,
       this.redColor = AppColor.lightRedColor,
       this.whiteColor = AppColor.whiteColor,

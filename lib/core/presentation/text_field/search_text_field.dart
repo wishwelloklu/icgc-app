@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:icgc/app/theme/app_color.dart';
 import 'package:icgc/app/theme/app_images.dart';
+import 'package:icgc/app/theme/app_padding.dart';
 import 'package:icgc/app/theme/app_raduis.dart';
 import 'package:icgc/app/theme/app_text_style.dart';
 import 'package:icgc/app/utils/svg_icon.dart';
 
-class SearchTextField extends StatefulWidget {
+class SearchTextField extends StatelessWidget {
   final TextEditingController controller;
   final String labelText;
   final String hintText;
@@ -14,13 +15,17 @@ class SearchTextField extends StatefulWidget {
   final Icon suffixIcon;
   final Color? borderColor;
   final Color background;
+  final FocusNode? focusNode;
   final void Function(String text)? onChange;
+  final VoidCallback? onTap;
   final Function(PointerDownEvent event)? onTapOutside;
   const SearchTextField({
     super.key,
     required this.controller,
+    this.onTap,
+    this.focusNode,
     this.labelText = '',
-    this.hintText = 'Search...',
+    this.hintText = 'Search for topic, titles, or authors',
     this.showClearIcon = false,
     this.onTapOutside,
     this.background = AppColor.pageBorder,
@@ -34,54 +39,43 @@ class SearchTextField extends StatefulWidget {
   });
 
   @override
-  _SearchTextFieldState createState() => _SearchTextFieldState();
-}
-
-class _SearchTextFieldState extends State<SearchTextField> {
-  bool _isObscured = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _isObscured = widget.showClearIcon;
-  }
-
-  @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: widget.controller,
-      obscureText: _isObscured,
-      onChanged: widget.onChange,
+      controller: controller,
+      onChanged: onChange,
       onTapOutside: (event) {
-        if (widget.onTapOutside != null) {
-          widget.onTapOutside!(event);
+        if (onTapOutside != null) {
+          onTapOutside!(event);
         }
       },
+      onTap: onTap,
+      focusNode: focusNode,
       decoration: InputDecoration(
-        hintText: widget.hintText,
+        hintText: hintText,
+        contentPadding: const EdgeInsets.symmetric(
+            vertical: AppPadding.inputHeight, horizontal: AppPadding.width),
+        isDense: true,
         prefixIcon: Container(
           padding: const EdgeInsets.symmetric(horizontal: 14),
-          child: widget.prefixIcon,
+          child: const SvgIcon(icon: AppImages.search),
         ),
-        fillColor: widget.background,
-        hintStyle: AppTextStyle.appInputText(),
-        contentPadding: EdgeInsets.zero,
+        fillColor: AppColor.textInputField,
         filled: true,
-        suffixIcon: widget.showClearIcon
-            ? IconButton(
-                icon: Icon(
-                  _isObscured ? Icons.search : Icons.close,
-                ),
-                onPressed: () {
-                  setState(() {
-                    _isObscured = !_isObscured;
-                  });
-                },
-              )
-            : null,
+        
+        hintStyle: AppTextStyle.appInputText(),
         border: OutlineInputBorder(
-            borderSide: widget.borderColor != null
-                ? BorderSide(color: widget.borderColor!)
+            borderSide: borderColor != null
+                ? BorderSide(color: borderColor!, width: 1)
+                : BorderSide.none,
+            borderRadius: BorderRadius.circular(AppRadius.small)),
+        enabledBorder: OutlineInputBorder(
+            borderSide: borderColor != null
+                ? BorderSide(color: borderColor!, width: 1)
+                : BorderSide.none,
+            borderRadius: BorderRadius.circular(AppRadius.small)),
+        focusedBorder: OutlineInputBorder(
+            borderSide: borderColor != null
+                ? BorderSide(color: borderColor!, width: 1)
                 : BorderSide.none,
             borderRadius: BorderRadius.circular(AppRadius.small)),
       ),

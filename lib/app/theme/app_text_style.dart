@@ -49,6 +49,18 @@ class AppTextStyle {
         fontWeight: FontWeight.w500);
   }
 
+  static TextStyle navBarLable({
+    double size = 10,
+    Color color = AppColor.primaryColor,
+    FontWeight fontWeight = FontWeight.w700,
+  }) {
+    return TextStyle(
+        fontFamily: ConstantConfig.mulish,
+        fontSize: size,
+        color: color,
+        fontWeight: fontWeight);
+  }
+
   static TextStyle appInputHint(
       {double size = AppFontSize.small, Color color = AppColor.textInputHint}) {
     return TextStyle(

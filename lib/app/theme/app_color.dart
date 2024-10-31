@@ -7,7 +7,7 @@ class AppColor {
   static const Color secondaryColor = Color(0xFFA3BF44);
   static const Color lineDarkColor = Color(0xFFD1D5DB);
   static const Color neutralColor = Color(0xFFE2E8F0);
-  static const Color pageBackground = Colors.white;
+  static const Color pageBackground = Color.fromARGB(255, 239, 239, 239);
   static const Color pageBorder = Color(0xFFF1F5F9);
   static const Color textInputFieldBorder = Color(0xFFE5E7EB);
   static const Color textInputField = Color(0xFFFAFAFA);
@@ -21,6 +21,7 @@ class AppColor {
   static const Color lightColor = Color(0xFFFAFAFA);
   static const Color darkColor = Color(0xFF121313);
   static const Color blackColor = Color(0xFF000000);
+  static const Color bookTitleColor = Color(0xFF172B4D);
   static const Color labelColor = Color(0xFF334154);
   static const Color descriptionColor = Color(0xFF42526E);
   static const Color grey = Color(0xFFC4C4C4);

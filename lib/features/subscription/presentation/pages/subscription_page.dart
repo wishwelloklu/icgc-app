@@ -21,14 +21,18 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: ListView(
           children: [
             const Gap(20),
             const TitleText(
               text: AppString.choosePlan,
               fontSize: AppFontSize.titleLarge,
+              textAlign: TextAlign.center,
             ),
-            const DescriptionText(text: AppString.saveText),
+            const DescriptionText(
+              text: AppString.saveText,
+              textAlign: TextAlign.center,
+            ),
             const Gap(10),
             ListView.separated(
               shrinkWrap: true,

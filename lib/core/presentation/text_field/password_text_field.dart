@@ -63,6 +63,8 @@ class _PasswordTextField extends State<PasswordTextField> {
             decoration: InputDecoration(
               hintText: widget.hintText,
               hintStyle: AppTextStyle.appInputHint(),
+              fillColor: AppColor.textInputField,
+              filled: true,
               contentPadding: const EdgeInsets.symmetric(
                   vertical: AppPadding.inputHeight,
                   horizontal: AppPadding.width),

@@ -55,6 +55,7 @@ class _InputTextFieldState extends State<InputTextField> {
             controller: widget.controller,
             onTapOutside: widget.onTapOutSide,
             style: AppTextStyle.appInputText(),
+          
             validator: widget.validator != null
                 ? (value) => widget.validator!(value)
                 : widget.isEmail
@@ -85,6 +86,8 @@ class _InputTextFieldState extends State<InputTextField> {
             decoration: InputDecoration(
               hintText: widget.hintText,
               isDense: true,
+              fillColor: AppColor.textInputField,
+              filled: true,
               hintStyle: AppTextStyle.appInputHint(),
               border: const OutlineInputBorder(
                 borderSide: BorderSide(color: AppColor.textInputFieldBorder),

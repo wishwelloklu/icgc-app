@@ -22,7 +22,7 @@ class IconTextField extends StatefulWidget {
     this.hintText = '',
     this.obscureText = false,
     this.prefixIcon,
-    required this.suffixIcon,
+    this.suffixIcon = const Icon(Icons.keyboard_arrow_down),
     this.borderColor = Colors.blue,
     this.onTap,
   });
@@ -60,36 +60,25 @@ class _SearchTextFieldState extends State<IconTextField> {
                 hintText: widget.hintText,
                 prefixIcon: widget.prefixIcon,
                 hintStyle: AppTextStyle.appInputHint(),
-                suffixIcon: widget.obscureText
-                    ? IconButton(
-                        icon: Icon(
-                          _isObscured ? Icons.visibility : Icons.visibility_off,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _isObscured = !_isObscured;
-                          });
-                        },
-                      )
-                    : widget.suffixIcon,
-                border: OutlineInputBorder(
+                suffixIcon: widget.suffixIcon,
+                border: const OutlineInputBorder(
                   borderSide: BorderSide(color: AppColor.textInputFieldBorder),
-                  borderRadius: const BorderRadius.all(
+                  borderRadius: BorderRadius.all(
                       Radius.circular(AppPadding.textFieldRadius)),
                 ),
-                focusedBorder: OutlineInputBorder(
+                focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide(color: AppColor.textInputFieldBorder),
-                  borderRadius: const BorderRadius.all(
+                  borderRadius: BorderRadius.all(
                       Radius.circular(AppPadding.textFieldRadius)),
                 ),
-                disabledBorder: OutlineInputBorder(
+                disabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide(color: AppColor.textInputFieldBorder),
-                  borderRadius: const BorderRadius.all(
+                  borderRadius: BorderRadius.all(
                       Radius.circular(AppPadding.textFieldRadius)),
                 ),
-                enabledBorder: OutlineInputBorder(
+                enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide(color: AppColor.textInputFieldBorder),
-                  borderRadius: const BorderRadius.all(
+                  borderRadius: BorderRadius.all(
                       Radius.circular(AppPadding.textFieldRadius)),
                 ),
                 focusColor: AppColor.primaryColor),

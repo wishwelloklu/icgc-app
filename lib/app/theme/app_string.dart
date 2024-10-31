@@ -27,9 +27,8 @@ class AppString {
   static const String confirmNewpasswordHint = 'Re-enter password';
   static const String forgetPassword = 'Forget Password';
   static const String login = 'Log in';
-
+  static const String signInWithPhoneNumber = 'Sign in with phone number';
   static const String signInWithEmail = 'Sign in with email';
-
   static const String and = ' and ';
   static const String privacyPolicy = 'Privacy Policy.';
   static const String delete = 'Delete';
@@ -44,15 +43,28 @@ class AppString {
   static const String loginSubTitle = "Log back into your account";
   static const String signupSubTitle =
       "Enter your credentials below to get started";
+  static const String verifyOtp = "Verify OTP";
+  static const String phoneNumber = 'Phone number';
+  static const String phoneNumberHint = 'Enter your Phone number';
 
+  static const String enterThe6DigitCode =
+      "Enter the six (6) digits sent to you";
+
+  static const String ididntReceiveCode = "I didn't not receive the code";
   static const String alreadyHasAccount = "Already have an account? ";
   static const String dontHaveAccount = "Don't have an acount? ";
   static const String suggestionHeading = "What do you like to read?";
 
+  static const String ministryId = "Ministry ID";
+
+  static const String ministryIdHint = "Enter ministry ID";
+
   //Profile
 
   static const String deleteContact = "Delete contact";
-  static const String logoutMessage = "Are you sure you want to logout?";
+  static const String logoutMessage =
+      "Are you sure you want to logout of your acount?";
+  static const String logoutTitle = "Log Out?";
   static const String logout = "Logout";
   static const String deleteContactModalText =
       "Are you sure you want to delete this contact? This action can't be undone";
@@ -66,7 +78,6 @@ class AppString {
       "Confirm password is required";
   static const String passwordsDontMatch = "Passwords don't match";
 
-//
   static const String timeOut = "Time out";
 
 //States
@@ -85,4 +96,37 @@ class AppString {
   static const String page = "Page";
   static const String whatsTrending = "What’s trending";
   static const String outTopPick = "Our top pick for you";
+  static const String viewMore = "View More";
+
+//Library
+  static const String library = "Library";
+  static const String collections = "Collections";
+  static const String recommendedForYou = "Recommended for you";
+  static const String ceremonyType = "Ceremony Type";
+  static const String ceremonyTypeHint = "Eg. Naming ceremony";
+  static const String ceremony = "Ceremony";
+  static const String ceremonyHint = "Eg. Naming at home";
+
+//Profile
+  static const String totalBooks = "Total books";
+  static const String duration = "Duration";
+  static const String completed = "Completed";
+  static const String notification = "Notification";
+  static const String subscription = "Subscription";
+  static const String security = "Security";
+  static const String help = "Help";
+
+  //Notes
+  static const String title = "Title";
+  static const String details = "Details";
+  static const String save = "Save";
+
+  static const String deleteNote = "Are you sure you want to delete?";
+
+//Manual
+  static const String namingCeremony = "Naming Cemeremony";
+  static const String childName = "Child's name";
+  static const String childNameHint = "e.g Nyamekye";
+  static const String fatherName = "Father's name";
+  static const String fatherNameHint = "e.g Freeman";
 }

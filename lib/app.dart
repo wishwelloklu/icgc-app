@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:icgc/app/config/navigation_key.dart';
 import 'package:icgc/app/routes/app_routes.dart';
 import 'package:icgc/app/routes/routes.dart';
 import 'package:icgc/init_bloc_provider.dart';
@@ -17,12 +18,14 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
-    return  MultiBlocProvider(
+    return MultiBlocProvider(
       providers: getBlocProviders,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: ConstantConfig.appName,
-        theme: const CustomTheme(isLight: false).toThemeData(),
+         scaffoldMessengerKey: AppNavigatorKeys.instance.scaffoldKey,
+        navigatorKey: AppNavigatorKeys.instance.navigatorKey,
+        theme: const CustomTheme(isLight: true).toThemeData(),
         onGenerateRoute: (settings) => Routes.onGenerateRoutes(settings),
         initialRoute: AppRoutes.walkthrough,
       ),

@@ -4,7 +4,7 @@ import 'package:icgc/app/theme/app_color.dart';
 import 'package:icgc/app/theme/app_string.dart';
 import 'package:icgc/core/presentation/text/title_text.dart';
 
-import '../../../core/data/models/book_model.dart';
+import '../../../core/data/models/book/book_model.dart';
 import '../../../core/presentation/text/description_text.dart';
 
 class ActiveBook extends StatelessWidget {

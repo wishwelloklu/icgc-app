@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:icgc/app/theme/app_color.dart';
-import 'package:icgc/core/data/models/book_model.dart';
+import 'package:icgc/core/data/models/book/book_model.dart';
 import 'package:icgc/core/presentation/text/description_text.dart';
 import 'package:icgc/core/presentation/text/title_text.dart';
 
@@ -37,12 +37,14 @@ class TopPick extends StatelessWidget {
                   color: AppColor.whiteColor,
                   textAlign: TextAlign.start,
                 ),
-                DescriptionText(
-                  text: book.description,
-                  maxLine: 10,
-                  fontSize: 10,
-                  color: AppColor.whiteColor,
-                  textAlign: TextAlign.start,
+                Expanded(
+                  child: DescriptionText(
+                    text: book.pages[0].content,
+                    maxLine: 10,
+                    fontSize: 10,
+                    color: AppColor.whiteColor,
+                    textAlign: TextAlign.start,
+                  ),
                 ),
                 DescriptionText(
                   text: book.author,

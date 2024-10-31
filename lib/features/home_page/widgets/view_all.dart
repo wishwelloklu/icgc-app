@@ -10,15 +10,20 @@ import '../../../core/presentation/buttons/app_two_icon_button.dart';
 class ViewAllTitle extends StatelessWidget {
   const ViewAllTitle({
     super.key,
-    required this.onViewAll,
+    this.onViewAll,
     required this.text,
+    this.horizontalPadding,
+    this.isViewMore = true,
   });
-  final VoidCallback onViewAll;
+  final VoidCallback? onViewAll;
   final String text;
+  final double? horizontalPadding;
+  final bool isViewMore;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 14),
+      padding: EdgeInsets.symmetric(
+          horizontal: horizontalPadding ?? 4, vertical: 10),
       child: Row(
         children: [
           Expanded(
@@ -28,15 +33,16 @@ class ViewAllTitle extends StatelessWidget {
               fontSize: 14,
             ),
           ),
-          AppTwoIconButton(
-            text: AppString.viewAll,
-            frontIcon: AppImages.arrowRight,
-            width: double.infinity,
-            onPressed: onViewAll,
-            useWidth: false,
-            padding: EdgeInsets.zero,
-            style: AppTextStyle.appDescription(color: AppColor.primaryColor),
-          ),
+          if (onViewAll != null)
+            AppTwoIconButton(
+              text: isViewMore ? AppString.viewMore : AppString.viewAll,
+              frontIcon: AppImages.arrowRight,
+              width: double.infinity,
+              onPressed: onViewAll!,
+              useWidth: false,
+              padding: EdgeInsets.zero,
+              style: AppTextStyle.appDescription(color: AppColor.primaryColor),
+            ),
         ],
       ),
     );

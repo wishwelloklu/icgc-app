@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.pageBackground,
+      backgroundColor: Colors.white,
       body: Center(
         child: ListView(
           shrinkWrap: true,
@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             const Gap(10),
             const TitleText(
-              text: AppString.createAccount,
+              text: AppString.welcome,
               maxLine: 10,
               fontSize: AppFontSize.titleLarge,
             ),
@@ -63,16 +63,17 @@ class _LoginPageState extends State<LoginPage> {
             const Gap(32),
             PrimaryButton(
               text: AppString.login,
-              onPressed: () => routeNavigator(
+              onPressed: () => routeAndRemoveNavigator(
                 context,
                 AppRoutes.wrapper,
               ),
             ),
             const Gap(56),
             AppIconButton(
-              text: AppString.signInWithGoogle,
-              onPressed: () {},
-              imageIcon: AppImages.google,
+              text: AppString.signInWithPhoneNumber,
+              onPressed: () =>
+                  routeNavigator(context, AppRoutes.loginWithPhone),
+              imageIcon: AppImages.keypad,
               height: 48,
             ),
             const Gap(56),
@@ -91,8 +92,8 @@ class _LoginPageState extends State<LoginPage> {
                           color: AppColor.primaryColor,
                           size: AppFontSize.small),
                       recognizer: TapGestureRecognizer()
-                        ..onTap = () =>
-                            routeAndRemoveNavigator(context, AppRoutes.signup))
+                        ..onTap =
+                            () => routeNavigator(context, AppRoutes.signup))
                 ],
               )),
             )
