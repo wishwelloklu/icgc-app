@@ -6,9 +6,15 @@ class NamingCustomeText extends StatelessWidget {
   final String child;
   final String father;
   final String? parent;
-
+  final String searchText;
+  final String fontName;
   const NamingCustomeText(this.text, this.fontSize,
-      {super.key, required this.child, required this.father, this.parent});
+      {super.key,
+      required this.child,
+      required this.father,
+      this.parent,
+      required this.searchText,
+      required this.fontName});
 
   List<TextSpan> parseText(String text) {
     // Updated regex to handle bold (*b), italic (*t), custom markers, and placeholders
@@ -24,7 +30,7 @@ class NamingCustomeText extends StatelessWidget {
       if (match.start > lastMatchEnd) {
         spans.add(TextSpan(
             text: text.substring(lastMatchEnd, match.start),
-            style: TextStyle(fontSize: fontSize)));
+            style: TextStyle(fontSize: fontSize, fontFamily: fontName)));
       }
 
       // Apply style based on the detected group, using safe access for each group
@@ -35,38 +41,71 @@ class NamingCustomeText extends StatelessWidget {
             : match.group(2);
         spans.add(TextSpan(
           text: sub,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize),
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: fontSize,
+              fontFamily: fontName),
         ));
       } else if (match.group(4) != null) {
         // Italic
         spans.add(TextSpan(
           text: '\n${match.group(4)}\n',
-          style: TextStyle(fontStyle: FontStyle.italic, fontSize: fontSize),
+          style: TextStyle(
+              fontStyle: FontStyle.italic,
+              fontSize: fontSize,
+              fontFamily: fontName),
         ));
       } else if (match.group(6) != null) {
         // Centered or custom styling
         spans.add(TextSpan(
           text: match.group(6),
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize),
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: fontSize,
+              fontFamily: fontName),
         ));
       } else if (match.group(7) != null) {
         // Child placeholder
         spans.add(TextSpan(
           text: child,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize),
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: fontSize,
+              fontFamily: fontName),
         ));
       } else if (match.group(8) != null) {
         // Father placeholder
         spans.add(TextSpan(
           text: father,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize),
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: fontSize,
+              fontFamily: fontName),
         ));
       } else if (match.group(9) != null) {
         // Parent placeholder
         spans.add(TextSpan(
           text: parent,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize),
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: fontSize,
+              fontFamily: fontName),
         ));
+      }
+
+      if (searchText.isNotEmpty) {
+        final searchRegex =
+            RegExp(RegExp.escape(searchText), caseSensitive: false);
+        final matches = searchRegex.allMatches(text).toList();
+        for (final match in matches) {
+          spans.add(TextSpan(
+            text: match.group(0),
+            style: TextStyle(
+              fontFamily: fontName,
+              backgroundColor: Colors.yellow, // Highlight color
+            ),
+          ));
+        }
       }
 
       lastMatchEnd = match.end;

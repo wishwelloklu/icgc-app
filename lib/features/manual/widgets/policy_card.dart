@@ -39,8 +39,9 @@ class PolicyCard extends StatelessWidget {
                 TitleText(
                   text: book.title,
                   color: AppColor.bookTitleColor,
-                  fontSize: 15,
+                  fontSize: 14,
                   textAlign: TextAlign.left,
+                  maxLine: 1,
                 ),
                 const Gap(5),
                 const DescriptionText(

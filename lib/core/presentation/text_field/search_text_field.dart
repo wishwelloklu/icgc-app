@@ -56,8 +56,9 @@ class SearchTextField extends StatelessWidget {
         focusNode: focusNode,
         decoration: InputDecoration(
           hintText: hintText,
-          contentPadding:  EdgeInsets.symmetric(
-              vertical:height?? AppPadding.inputHeight, horizontal: AppPadding.width),
+          contentPadding: EdgeInsets.symmetric(
+              vertical: height ?? AppPadding.inputHeight,
+              horizontal: AppPadding.width),
           isDense: true,
           prefixIcon: Container(
             padding: const EdgeInsets.symmetric(horizontal: 14),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:icgc/app/routes/route_navigator.dart';
+// import 'package:flutter_native_splash/flutter_native_splash.dart';
+// import 'package:icgc/app/routes/route_navigator.dart';
 import 'app/config/navigation_key.dart';
 import 'app/routes/app_routes.dart';
 import 'app/routes/routes.dart';
@@ -27,7 +27,7 @@ class _AppState extends State<App> {
   void initialization() async {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Future.delayed(const Duration(seconds: 2)).then((_) {
-        FlutterNativeSplash.remove();
+        // FlutterNativeSplash.remove();
         // if (mounted) {
         //   currentState?.pushNamedAndRemoveUntil(
         //       AppRoutes.walkthrough, (route) => false);
@@ -47,7 +47,7 @@ class _AppState extends State<App> {
         navigatorKey: AppNavigatorKeys.instance.navigatorKey,
         theme: const CustomTheme(isLight: true).toThemeData(),
         onGenerateRoute: (settings) => Routes.onGenerateRoutes(settings),
-        initialRoute: AppRoutes.walkthrough,
+        initialRoute: AppRoutes.splash,
       ),
     );
   }

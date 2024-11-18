@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../app/routes/app_routes.dart';
 import '../../../app/routes/route_navigator.dart';
 import '../../../app/utils/colors_generator.dart';
+import '../../../app/utils/screen_size.dart';
 import '../../../core/data/models/book/book_model.dart';
 import '../../manual/data/models/read_model.dart';
 
@@ -22,10 +23,8 @@ class TopManual extends StatelessWidget {
       children: [
         ViewAllTitle(
             onViewAll: () {}, text: "Top manuals", horizontalPadding: 0),
-        ConstrainedBox(
-          constraints: BoxConstraints(
-              minHeight: MediaQuery.sizeOf(context).height * .3,
-              maxHeight: MediaQuery.sizeOf(context).height * .32),
+        SizedBox(
+          height: MediaQuery.sizeOf(context).height * .32,
           child: ListView.builder(
               shrinkWrap: true,
               padding: EdgeInsets.zero,

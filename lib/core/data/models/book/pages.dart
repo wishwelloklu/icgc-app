@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class Pages {
   final int pageNumber;
   final String? title;
@@ -25,5 +26,17 @@ class Pages {
       'title': title,
       'content': content,
     };
+  }
+
+  Pages copyWith({
+    int? pageNumber,
+    String? title,
+    String? content,
+  }) {
+    return Pages(
+      pageNumber: pageNumber ?? this.pageNumber,
+      title: title ?? this.title,
+      content: content ?? this.content,
+    );
   }
 }

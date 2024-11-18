@@ -7,6 +7,7 @@ import '../../../app/routes/app_routes.dart';
 import '../../../app/routes/route_navigator.dart';
 import '../../../app/theme/app_string.dart';
 import '../../../app/utils/colors_generator.dart';
+import '../../../app/utils/screen_size.dart';
 import '../../manual/data/models/read_model.dart';
 
 import '../widgets/view_all.dart';
@@ -18,6 +19,7 @@ class Trendings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = ScreenSizeHelper.determineTabletScreenSize(context);
     final images = <String>[
       'assets/images/icgc_images/book_chooseing.png',
       'assets/images/icgc_images/book_annoited.png',
@@ -51,10 +53,8 @@ class Trendings extends StatelessWidget {
                   onViewAll: () {},
                   text: AppString.whatsTrending,
                   horizontalPadding: 0),
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                    minHeight: MediaQuery.sizeOf(context).height * .3,
-                    maxHeight: MediaQuery.sizeOf(context).height * .35),
+              SizedBox(
+                height: MediaQuery.sizeOf(context).height * .35,
                 child: ListView.builder(
                     shrinkWrap: true,
                     padding: EdgeInsets.zero,

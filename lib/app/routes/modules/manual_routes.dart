@@ -11,6 +11,5 @@ Map<String, RouteType> manualRoute = {
   AppRoutes.officiateList: (context, settings) => const OfficiatingList(),
   AppRoutes.nameVariableInserting: (context, settings) =>
       const NameVariableInserting(),
-  AppRoutes.variableReadPage: (context, settings) =>
-      const VariableReadPage(),
+  AppRoutes.variableReadPage: (context, settings) => const VariableReadPage(),
 };

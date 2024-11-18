@@ -7,6 +7,7 @@ import '../../../../app/theme/app_color.dart';
 import '../../../../app/theme/app_font_size.dart';
 import '../../../../app/theme/app_string.dart';
 import '../../../../app/theme/app_text_style.dart';
+import '../../../../app/utils/screen_size.dart';
 import '../../../../core/presentation/buttons/app_primary_button.dart';
 import '../../../../core/presentation/text/title_text.dart';
 import '../../../../core/presentation/text_field/input_text_field.dart';
@@ -27,12 +28,14 @@ class _SignupPageState extends State<SignupPage> {
   final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final screenSize = ScreenSizeHelper.determineTabletScreenSize(context);
     return Scaffold(
       backgroundColor: AppColor.pageBackground,
       body: Center(
         child: ListView(
           shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(horizontal: 25),
+          padding: EdgeInsets.symmetric(
+              horizontal: screenSize == TabletScreenSize.medium ? 100 : 25),
           children: [
             const Gap(10),
             const TitleText(
@@ -74,7 +77,7 @@ class _SignupPageState extends State<SignupPage> {
               labelText: AppString.email,
               hintText: AppString.emailHint,
             ),
-              const Gap(20),
+            const Gap(20),
             InputTextField(
               controller: ministryController,
               isEmail: true,
@@ -90,8 +93,8 @@ class _SignupPageState extends State<SignupPage> {
             const Gap(32),
             PrimaryButton(
                 text: AppString.createAccount,
-                onPressed: () => routeAndRemoveNavigator(
-                    context, AppRoutes.otpPage)),
+                onPressed: () =>
+                    routeAndRemoveNavigator(context, AppRoutes.otpPage)),
             const Gap(56),
             Center(
               child: Text.rich(TextSpan(

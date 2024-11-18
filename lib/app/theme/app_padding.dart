@@ -61,7 +61,7 @@ class AppPadding {
   static const double textFieldRadius = 8.0;
   static const double buttonRadius = 6.0;
 
-  static const double  inputHeight = 20;
+  static const double inputHeight = 10;
 
-  static const double  width = 16;
+  static const double width = 16;
 }

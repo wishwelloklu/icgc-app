@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:icgc/app/utils/screen_size.dart';
 import '../../../../app/routes/app_routes.dart';
 import '../../../../app/routes/route_navigator.dart';
 import '../../../../app/theme/app_color.dart';
@@ -22,12 +23,14 @@ class _LoginPageState extends State<LoginPhonePage> {
   final phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final screenSize = ScreenSizeHelper.determineTabletScreenSize(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
         child: ListView(
           shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(horizontal: 25),
+          padding: EdgeInsets.symmetric(
+              horizontal: screenSize == TabletScreenSize.medium ? 100 : 25),
           children: [
             const Gap(10),
             const TitleText(

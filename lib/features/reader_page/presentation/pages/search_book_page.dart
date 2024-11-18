@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icgc/app/theme/app_color.dart';
 import 'package:icgc/app/theme/app_text_style.dart';
+import 'package:icgc/app/utils/custom_text.dart';
 import 'package:icgc/app/utils/debounce.dart';
 import 'package:icgc/core/data/models/book/pages.dart';
-import 'package:icgc/core/presentation/text/description_text.dart';
 import 'package:icgc/core/presentation/text_field/search_text_field.dart';
+import 'package:icgc/features/reader_page/presentation/bloc/font_bloc.dart';
+import 'package:icgc/features/reader_page/presentation/bloc/font_states.dart';
 import '../../../../core/presentation/text/title_text.dart';
 
 class SearchBookPage extends StatefulWidget {
@@ -20,13 +23,29 @@ class _SearchBookPageState extends State<SearchBookPage> {
   final _searchController = TextEditingController();
   late Debounce _debounce;
   List<Pages> searchResult = [];
+  List<Pages> pages = [];
   bool _isSearching = false;
-
+  List<TextSpan> textSpans = [];
   @override
   void initState() {
     super.initState();
     _debounce = Debounce(delay: const Duration(milliseconds: 300));
+    for (var i = 0; i < widget.pages.length; i++) {
+      final page = widget.pages[i];
 
+      // Parse the content of the current page
+      final textSpans = parseText(page.content);
+
+      // Extract the plain text from parsed spans
+      final content = textSpans.map(extractTextFromTextSpan).join();
+
+      // Add the page to the list with the title
+      pages.add(Pages(
+        pageNumber: i,
+        content: content,
+        title: page.title, // Access title from widget.pages
+      ));
+    }
     _searchController.addListener(() {
       final text = _searchController.text.toLowerCase().trim();
 
@@ -39,8 +58,12 @@ class _SearchBookPageState extends State<SearchBookPage> {
           return;
         }
 
-        final result = widget.pages.where((data) {
-          // Check title, content, or page number
+        final result = pages.where((data) {
+          final contentMatch = data.content.toLowerCase().contains(text);
+          final titleMatch = data.content.toLowerCase().contains(text);
+          if (contentMatch || titleMatch) {
+            data.copyWith(pageNumber: pages.indexOf(data));
+          }
           return data.content.toLowerCase().contains(text) ||
               (data.title?.toLowerCase().contains(text) ?? false) ||
               data.pageNumber.toString().contains(text);
@@ -51,7 +74,6 @@ class _SearchBookPageState extends State<SearchBookPage> {
         for (var element in result) {
           RegExp sentenceSplitter = RegExp(r'[^.!?]+[.!?]');
           final sentences = sentenceSplitter.allMatches(element.content);
-
           sentences.map((match) => match.group(0)!.trim()).forEach((sentence) {
             if (sentence.toLowerCase().contains(text)) {
               filteredResults.add(Pages(
@@ -74,49 +96,64 @@ class _SearchBookPageState extends State<SearchBookPage> {
   @override
   Widget build(BuildContext context) {
     widget.pages.removeWhere((element) => element.title?.isEmpty ?? true);
-    return Flexible(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SearchTextField(
-              controller: _searchController,
-              borderColor: AppColor.textInputFieldBorder.withOpacity(1),
-              hintText: 'Type a word or page number',
-              height: 15,
-            ),
-            Expanded(
-              child: ListView.separated(
-                itemCount:
-                    _isSearching ? searchResult.length : widget.pages.length,
-                shrinkWrap: true,
-                separatorBuilder: (context, index) => const Divider(),
-                itemBuilder: (context, index) {
-                  final book =
-                      _isSearching ? searchResult[index] : widget.pages[index];
-                  return ListTile(
-                    onTap: () => widget.onResult(
-                        _isSearching ? index + 2 : index,
-                        _searchController.text.isNotEmpty
-                            ? _searchController.text
-                            : book.title!),
-                    title: TitleText(
-                      text: book.title!,
-                      textAlign: TextAlign.left,
+    return BlocBuilder<FontBloc, FontStates>(builder: (context, fontState) {
+      switch (fontState) {
+        case FontState():
+          return Flexible(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SearchTextField(
+                    controller: _searchController,
+                    borderColor: AppColor.textInputFieldBorder.withOpacity(1),
+                    hintText: 'Type a word or page number',
+                    height: 15,
+                  ),
+                  Expanded(
+                    child: ListView.separated(
+                      itemCount:
+                          _isSearching ? searchResult.length : pages.length,
+                      shrinkWrap: true,
+                      separatorBuilder: (context, index) => const Divider(),
+                      itemBuilder: (context, index) {
+                        final book = _isSearching
+                            ? searchResult[index]
+                            : widget.pages[index];
+
+                        return ListTile(
+                          onTap: () => widget.onResult(
+                              _isSearching ? book.pageNumber : index,
+                              _searchController.text.isNotEmpty
+                                  ? _searchController.text
+                                  : book.title!),
+                          title: TitleText(
+                            text: book.title!,
+                            textAlign: TextAlign.left,
+                          ),
+                          subtitle: _isSearching
+                              ? CustomeText(
+                                  book.content,
+                                  fontState.fontSize,
+                                  searchText:
+                                      _searchController.text.toLowerCase(),
+                                  fontName: fontState.fontName,
+                                )
+                              : null,
+                        );
+                      },
                     ),
-                    subtitle: _isSearching
-                        ? _buildHighlightedText(
-                            book.content, _searchController.text)
-                        : null,
-                  );
-                },
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
-    );
+          );
+
+        default:
+          return const Center(child: CircularProgressIndicator.adaptive());
+      }
+    });
   }
 
   Widget _buildHighlightedText(String sentence, String searchTerm) {

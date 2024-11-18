@@ -18,4 +18,6 @@ class AppRoutes {
   static const String loginWithPhone = 'loginWithPhone';
 
   static const String continueReading = 'continueReading';
+
+  static const String epubReader = 'epubReader';
 }

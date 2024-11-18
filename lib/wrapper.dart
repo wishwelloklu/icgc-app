@@ -3,6 +3,7 @@ import 'app/theme/app_color.dart';
 import 'app/theme/app_font_size.dart';
 import 'app/theme/app_images.dart';
 import 'app/theme/app_text_style.dart';
+import 'app/utils/screen_size.dart';
 import 'app/utils/svg_icon.dart';
 import 'features/manual/pages/manuals_page.dart';
 import 'features/home_page/pages/home_page.dart';
@@ -27,6 +28,7 @@ class _DeviceInteractiveState extends State<Wrapper> {
   ];
   @override
   Widget build(BuildContext context) {
+    ScreenSizeHelper.determineTabletScreenSize(context);
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: _pages[currentIndex],

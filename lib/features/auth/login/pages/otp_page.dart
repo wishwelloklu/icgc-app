@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:icgc/app/utils/screen_size.dart';
 import '../../../../app/routes/app_routes.dart';
 import '../../../../app/routes/route_navigator.dart';
 import '../../../../app/theme/app_color.dart';
@@ -79,6 +80,7 @@ class _OtpPageState extends State<OtpPage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = ScreenSizeHelper.determineTabletScreenSize(context);
     final arguments =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
     if (arguments != null) {
@@ -104,8 +106,10 @@ class _OtpPageState extends State<OtpPage> {
                 child: Container(
                   color: AppColor.pageBackground,
                   child: ListView(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: AppPadding.normal),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: screenSize == TabletScreenSize.medium
+                            ? 100
+                            : AppPadding.normal),
                     children: [
                       AppSpacer.verticalSpace(),
                       Image.asset(

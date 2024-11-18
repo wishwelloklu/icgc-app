@@ -6,6 +6,7 @@ import 'package:icgc/features/home_page/widgets/book_card.dart';
 import '../../../app/routes/app_routes.dart';
 import '../../../app/routes/route_navigator.dart';
 import '../../../app/utils/colors_generator.dart';
+import '../../../app/utils/screen_size.dart';
 import '../../manual/data/models/read_model.dart';
 
 import '../widgets/view_all.dart';
@@ -17,6 +18,7 @@ class LatestBook extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = ScreenSizeHelper.determineTabletScreenSize(context);
     final images = <String>[
       'assets/images/icgc_images/docterign_of_the_christian_faith.png',
       'assets/images/icgc_images/book_dominion.png',

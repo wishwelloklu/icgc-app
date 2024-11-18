@@ -3,16 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../app/routes/app_routes.dart';
 import '../../../../app/routes/route_navigator.dart';
 import '../../../../app/utils/colors_generator.dart';
+import '../../../../app/utils/screen_size.dart';
 import '../../../../core/data/bloc/book/book_bloc.dart';
 import '../../../../core/data/bloc/book/book_states.dart';
 import '../../../manual/data/models/read_model.dart';
 import '../../../home_page/widgets/book_card.dart';
 
 class Books extends StatelessWidget {
-  const Books({super.key});
+  const Books({super.key, required this.searchTerm});
+  final String searchTerm;
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = ScreenSizeHelper.determineTabletScreenSize(context);
     final images = [
       'assets/images/icgc_images/book_annoited.png',
       'assets/images/icgc_images/book_chooseing.png',
@@ -27,17 +30,22 @@ class Books extends StatelessWidget {
     }, builder: (context, state) {
       if (state is BookLoadedState) {
         final list = state.bookList;
+        final dataList = list
+            .where((book) =>
+                book.author.toLowerCase().contains(searchTerm) ||
+                book.title.toLowerCase().contains(searchTerm))
+            .toList();
         return GridView.builder(
           shrinkWrap: true,
           padding: const EdgeInsets.symmetric(horizontal: 12),
-          itemCount: list.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisExtent: 280,
+          itemCount: searchTerm.isNotEmpty ? dataList.length : list.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: screenSize == TabletScreenSize.medium ? 3 : 2,
+            mainAxisExtent: screenSize == TabletScreenSize.medium ? 320 : 280,
             crossAxisSpacing: 10,
           ),
           itemBuilder: (context, index) {
-            final book = list[index];
+            final book = searchTerm.isNotEmpty ? dataList[index] : list[index];
             book.pages.removeWhere((element) => element.content.isEmpty);
             return BookCard(
               book: book,

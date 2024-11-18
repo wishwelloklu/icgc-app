@@ -8,6 +8,7 @@ import '../../../../app/theme/app_font_size.dart';
 import '../../../../app/theme/app_images.dart';
 import '../../../../app/theme/app_string.dart';
 import '../../../../app/theme/app_text_style.dart';
+import '../../../../app/utils/screen_size.dart';
 import '../../../../core/presentation/buttons/app_icon_button.dart';
 import '../../../../core/presentation/buttons/app_primary_button.dart';
 import '../../../../core/presentation/text/title_text.dart';
@@ -27,13 +28,14 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    
+    final screenSize = ScreenSizeHelper.determineTabletScreenSize(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
         child: ListView(
           shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(horizontal: 25),
+          padding: EdgeInsets.symmetric(
+              horizontal: screenSize == TabletScreenSize.medium ? 100 : 25),
           children: [
             const Gap(10),
             const TitleText(

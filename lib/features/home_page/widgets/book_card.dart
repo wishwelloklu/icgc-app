@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:icgc/app/theme/app_color.dart';
+import 'package:icgc/app/utils/screen_size.dart';
 import 'package:icgc/core/data/models/book/book_model.dart';
 import 'package:icgc/core/presentation/text/description_text.dart';
 import 'package:icgc/core/presentation/text/title_text.dart';
@@ -19,10 +20,13 @@ class BookCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = ScreenSizeHelper.determineTabletScreenSize(context);
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: MediaQuery.sizeOf(context).width * .45,
+        width: screenSize == TabletScreenSize.medium
+            ? MediaQuery.sizeOf(context).width * .3
+            : MediaQuery.sizeOf(context).width * .45,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
         margin: const EdgeInsets.only(right: 10),
         child: Column(
@@ -33,7 +37,9 @@ class BookCard extends StatelessWidget {
               child: Image.asset(
                 images,
                 fit: BoxFit.cover,
-                height: MediaQuery.sizeOf(context).width * .55,
+                height: screenSize == TabletScreenSize.medium
+                    ? MediaQuery.sizeOf(context).width * .4
+                    : MediaQuery.sizeOf(context).width * .55,
                 width: double.infinity,
               ),
             ),

@@ -30,7 +30,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
- 
     return Scaffold(
       body: SafeArea(
           child: NestedScrollView(
@@ -176,8 +175,8 @@ class HomePage extends StatelessWidget {
               }
               return const SizedBox.shrink();
             }),
-            LatestBook(),
-            Trendings(),
+            const LatestBook(),
+            const Trendings(),
           ],
         ),
       )),

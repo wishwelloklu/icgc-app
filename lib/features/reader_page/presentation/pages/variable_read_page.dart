@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:icgc/app/config/navigation_key.dart';
 import 'package:icgc/features/reader_page/presentation/pages/reader_page.dart';
+import 'package:icgc/features/reader_page/presentation/pages/search_book_page.dart';
 import '../../../../app/routes/route_navigator.dart';
 import '../../../../app/theme/app_images.dart';
 import '../../../../app/utils/generic_modal_sheet.dart';
@@ -32,7 +33,9 @@ class _ReadJsonState extends State<VariableReadPage> {
   int currentPage = 1;
   String title = '';
   Color? coverColor;
+  String _searchText = '';
   final _showOtherWidgets = ValueNotifier(true);
+  final PageController _pageController = PageController();
 
   @override
   void dispose() {
@@ -65,6 +68,7 @@ class _ReadJsonState extends State<VariableReadPage> {
                               children: [
                                 PageView.builder(
                                   itemCount: book.pages.length,
+                                  controller: _pageController,
                                   onPageChanged: (value) {
                                     percentage =
                                         ((value + 1) / book.pages.length * 100)
@@ -93,6 +97,8 @@ class _ReadJsonState extends State<VariableReadPage> {
                                                 child: namingModel.child,
                                                 parent:
                                                     '${namingModel.mother} and ${namingModel.father}',
+                                                searchText: _searchText,
+                                                fontName: state.fontName,
                                               ),
                                             ],
                                           ),
@@ -128,53 +134,60 @@ class _ReadJsonState extends State<VariableReadPage> {
                                           const Spacer(),
                                           Row(
                                             children: [
-                                              DecoratedBox(
-                                                decoration: const BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    color: Color.fromARGB(
-                                                        15, 0, 0, 0)),
-                                                child: IconButton(
-                                                  onPressed: () {
-                                                    showGenericModalSheet(
+                                              TopButtons(
+                                                  icon: const Icon(
+                                                    FontAwesomeIcons.font,
+                                                    size: 20,
+                                                  ),
+                                                  onTap: () =>
+                                                      showGenericModalSheet(
                                                         removeDrop: true,
                                                         showHanlde: false,
                                                         isDismissible: true,
                                                         child:
                                                             const FontModal(),
-                                                        context: context);
-                                                  },
-                                                  icon: const Icon(
-                                                      FontAwesomeIcons.font),
-                                                  iconSize: 15,
-                                                ),
-                                              ),
+                                                        context: context,
+                                                      )),
                                               const Gap(2),
-                                              DecoratedBox(
-                                                decoration: const BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    color: Color.fromARGB(
-                                                        15, 0, 0, 0)),
-                                                child: IconButton(
-                                                  onPressed: () {},
+                                              TopButtons(
                                                   icon: const SvgIcon(
-                                                      icon: AppImages.search),
-                                                  iconSize: 20,
-                                                ),
-                                              ),
+                                                    icon: AppImages.search,
+                                                    size: 20,
+                                                  ),
+                                                  onTap: () {
+                                                    showGenericModalSheet(
+                                                      removeDrop: true,
+                                                      showHanlde: false,
+                                                      isDismissible: true,
+                                                      isScrollControlled: false,
+                                                      child: SearchBookPage(
+                                                          pages: book.pages,
+                                                          onResult: (index,
+                                                              resultTerm) {
+                                                            popBack(context);
+                                                            setState(() {
+                                                              _searchText =
+                                                                  resultTerm;
+                                                            });
+                                                            _pageController
+                                                                .animateToPage(
+                                                                    index,
+                                                                    duration:
+                                                                        Durations
+                                                                            .medium2,
+                                                                    curve: Curves
+                                                                        .linear);
+                                                          }),
+                                                      context: context,
+                                                    );
+                                                  }),
                                               const Gap(2),
-                                              DecoratedBox(
-                                                decoration: const BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    color: Color.fromARGB(
-                                                        15, 0, 0, 0)),
-                                                child: IconButton(
-                                                  onPressed: () {},
+                                              TopButtons(
                                                   icon: const Icon(
-                                                      FontAwesomeIcons
-                                                          .ellipsisH),
-                                                  iconSize: 20,
-                                                ),
-                                              ),
+                                                    FontAwesomeIcons.ellipsisH,
+                                                    size: 20,
+                                                  ),
+                                                  onTap: () {}),
                                             ],
                                           ),
                                         ],

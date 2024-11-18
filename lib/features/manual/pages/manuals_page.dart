@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:icgc/core/data/bloc/naming/naming_bloc.dart';
 import 'package:icgc/core/data/bloc/naming/naming_states.dart';
 import '../../../app/routes/app_routes.dart';
@@ -8,15 +7,11 @@ import '../../../app/routes/route_navigator.dart';
 import '../../../app/theme/app_color.dart';
 import '../../../app/theme/app_string.dart';
 import '../../../app/utils/generic_modal_sheet.dart';
-import '../../../core/presentation/animated_widget.dart';
-import '../../../core/presentation/buttons/app_text_button.dart';
 import '../../../core/presentation/text/title_text.dart';
-import '../../../core/presentation/text_field/search_text_field.dart';
 import '../../library/data/models/collections.dart';
 import 'manual_list.dart';
 import 'officiate_page.dart';
 import 'policies_page.dart';
-import 'search_page.dart';
 
 import '../widgets/officiate_modal.dart';
 
@@ -64,111 +59,17 @@ class _ManualsPageState extends State<ManualsPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ValueListenableBuilder(
-        valueListenable: _isShowSearchPage,
-        builder: (context, showShearcPage, child) {
-          return SafeArea(
-            child: NestedScrollView(
-                headerSliverBuilder: (context, _) => [
-                      SliverAppBar(
-                          titleSpacing: 12,
-                          pinned: true,
-                          expandedHeight:
-                              _selectedIndex != 2 ? kToolbarHeight * 3.5 : null,
-                          toolbarHeight: kToolbarHeight * 2,
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const Gap(80),
-                              const TitleText(text: AppString.manual),
-                              const Gap(20),
-                              TabBar(
-                                indicatorSize: TabBarIndicatorSize.tab,
-                                controller: _tabController,
-                                tabs: _tabs,
-                              ),
-                              const Gap(70),
-                            ],
-                          ),
-                          flexibleSpace: FlexibleSpaceBar(
-                            centerTitle: true,
-                            background: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 12),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  AppAnimatedWidget(
-                                      child:
-                                          Gap(_selectedIndex != 2 ? 112 : 0)),
-                                  Expanded(
-                                    child: AppAnimatedWidget(
-                                      opacity: _selectedIndex != 2 ? 1 : 0,
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            child: SearchTextField(
-                                              controller:
-                                                  TextEditingController(),
-                                              focusNode: _focusNode,
-                                              borderColor:
-                                                  AppColor.textInputFieldBorder,
-                                              onTap: () {
-                                                _isShowSearchPage.value =
-                                                    const SearchPage();
-                                                _isShowCancelButton.value =
-                                                    true;
-                                              },
-                                            ),
-                                          ),
-                                          ValueListenableBuilder(
-                                              valueListenable:
-                                                  _isShowCancelButton,
-                                              builder:
-                                                  (context, showButton, child) {
-                                                return AppAnimatedWidget(
-                                                    opacity: showButton ? 1 : 0,
-                                                    child: SizedBox(
-                                                      width:
-                                                          showButton ? null : 0,
-                                                      child: AppTextButton(
-                                                          text:
-                                                              AppString.cancel,
-                                                          onPressed: () {
-                                                            _isShowSearchPage
-                                                                    .value =
-                                                                TabBarPage(
-                                                                    tabController:
-                                                                        _tabController,
-                                                                    pages:
-                                                                        pages);
-                                                            _focusNode
-                                                                .unfocus();
-                                                            _isShowCancelButton
-                                                                .value = false;
-                                                          }),
-                                                    ));
-                                              }),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ))
-                    ],
-                body: AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 300),
-                    transitionBuilder:
-                        (Widget child, Animation<double> animation) {
-                      return FadeTransition(opacity: animation, child: child);
-                    },
-                    child: showShearcPage)),
-          );
-        },
+      appBar: AppBar(
+        title: const TitleText(text: AppString.manual),
+        bottom: TabBar(
+          indicatorSize: TabBarIndicatorSize.tab,
+          controller: _tabController,
+          tabs: _tabs,
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 10),
+        child: TabBarPage(tabController: _tabController, pages: pages),
       ),
       floatingActionButton: _selectedIndex == 2
           ? BlocBuilder<NamingBloc, NamingStates>(builder: (context, state) {

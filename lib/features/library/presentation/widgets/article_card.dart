@@ -40,6 +40,8 @@ class ArticleCard extends StatelessWidget {
                   text: book.title,
                   color: AppColor.bookTitleColor,
                   fontSize: 18,
+                  textAlign: TextAlign.left,
+                  maxLine: 1,
                 ),
                 const Gap(5),
                 Text(

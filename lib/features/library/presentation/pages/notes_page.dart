@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:gap/gap.dart';
+import 'package:icgc/app/theme/app_color.dart';
+import 'package:icgc/app/theme/app_string.dart';
+import 'package:icgc/core/presentation/app_states/app_empty_state.dart';
+import 'package:icgc/core/presentation/buttons/app_text_button.dart';
+import 'package:icgc/features/library/presentation/pages/add_notes.dart';
 import '../../../../app/routes/route_navigator.dart';
 import '../../../../app/utils/colors_generator.dart';
 import '../../../../app/utils/date_time.dart';
@@ -41,7 +47,30 @@ class _NotesPageState extends State<NotesPage> with TickerProviderStateMixin {
       switch (state) {
         case NotesLoadedState():
           if (state.noteList.isEmpty) {
-            return Container();
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AppEmptyStateWidget(
+                  title: 'No notes',
+                  text: 'Add notes to get started',
+                  icon: Icon(
+                    Icons.note,
+                    size: 100,
+                    color: AppColor.primaryColor.withOpacity(.8),
+                  ),
+                ),
+                const Gap(10),
+                AppTextButton(
+                    text: AppString.add,
+                    backgroundColor: AppColor.primaryColor,
+                    color: AppColor.whiteColor,
+                    width: MediaQuery.sizeOf(context).width * .4,
+                    onPressed: () => showGenericModalSheet(
+                          child: const AddNotes(),
+                          context: context,
+                        ))
+              ],
+            );
           }
           final list = state.noteList;
           return ListView.builder(

@@ -15,14 +15,15 @@ class AppEmptyStateWidget extends StatelessWidget {
 
   final String title;
   final String text;
-  final String? icon;
+  final Widget? icon;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SvgIcon(icon: icon ?? AppImages.emptyState),
+        icon ??
+        SvgIcon(icon: AppImages.emptyState),
         const Gap(10),
         TitleText(text: title),
         DescriptionText(text: text),
