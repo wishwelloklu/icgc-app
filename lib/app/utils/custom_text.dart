@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 
 class CustomeText extends StatelessWidget {
   final String text;
+  final String fontName;
+  final String searchText;
   final double fontSize;
-  const CustomeText(this.text, this.fontSize, {super.key});
+  final int? maxLine;
+  const CustomeText(this.text, this.fontSize,
+      {super.key, this.maxLine, required this.searchText, required this.fontName});
 
   List<TextSpan> parseText(String text) {
     // Updated regex to handle bold (*b) and italic (*t) text
@@ -18,7 +22,8 @@ class CustomeText extends StatelessWidget {
       if (match.start > lastMatchEnd) {
         spans.add(TextSpan(
             text: text.substring(lastMatchEnd, match.start),
-            style: TextStyle(fontSize: fontSize)));
+            style: TextStyle(
+                fontSize: fontSize, fontFamily: fontName)));
       }
 
       // Apply style based on the detected group
@@ -26,13 +31,19 @@ class CustomeText extends StatelessWidget {
         // Bold
         spans.add(TextSpan(
           text: match.group(2),
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize),
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: fontSize,
+              fontFamily: fontName),
         ));
       } else if (match.group(4) != null) {
         // Italic
         spans.add(TextSpan(
           text: match.group(4),
-          style: TextStyle(fontStyle: FontStyle.italic, fontSize: fontSize),
+          style: TextStyle(
+              fontStyle: FontStyle.italic,
+              fontSize: fontSize,
+              fontFamily: fontName),
         ));
       }
 
@@ -41,9 +52,25 @@ class CustomeText extends StatelessWidget {
 
     // Add remaining text after the last match
     if (lastMatchEnd < text.length) {
+      print('notempty ${searchText.isNotEmpty}');
       spans.add(TextSpan(
           text: text.substring(lastMatchEnd),
-          style: TextStyle(fontSize: fontSize)));
+          style: TextStyle(
+              fontSize: fontSize, fontFamily: fontName)));
+    }
+    if (searchText.isNotEmpty) {
+      final searchRegex =
+          RegExp(RegExp.escape(searchText), caseSensitive: false);
+      final matches = searchRegex.allMatches(text).toList();
+      for (final match in matches) {
+        spans.add(TextSpan(
+          text: match.group(0),
+          style:  TextStyle(
+            fontFamily: fontName,
+            backgroundColor: Colors.yellow, // Highlight color
+          ),
+        ));
+      }
     }
 
     return spans;
@@ -53,6 +80,7 @@ class CustomeText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text.rich(
       TextSpan(children: parseText(text)),
+      maxLines: maxLine,
     );
   }
 }

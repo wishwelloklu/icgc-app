@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:icgc/app/theme/app_padding.dart';
+import '../../../app/theme/app_padding.dart';
 
 class RoundFlagImage extends StatelessWidget {
   final String flagImage;

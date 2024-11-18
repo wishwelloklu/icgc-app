@@ -1,4 +1,4 @@
-import 'package:icgc/core/data/models/book/book_model.dart';
+import '../../models/book/book_model.dart';
 
 abstract class BookEvents {}
 

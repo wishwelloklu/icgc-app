@@ -2,23 +2,23 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:icgc/app/routes/app_routes.dart';
-import 'package:icgc/app/routes/route_navigator.dart';
-import 'package:icgc/app/theme/app_color.dart';
-import 'package:icgc/app/theme/app_font_size.dart';
-import 'package:icgc/app/theme/app_images.dart';
-import 'package:icgc/app/theme/app_string.dart';
-import 'package:icgc/app/utils/int_externsions.dart';
-import 'package:icgc/core/presentation/buttons/app_text_button.dart';
-import 'package:icgc/core/presentation/cards/border_card.dart';
-import 'package:icgc/core/presentation/text/description_text.dart';
-import 'package:icgc/core/presentation/text/header_text.dart';
-import 'package:icgc/core/presentation/text/title_text.dart';
-import 'package:icgc/features/auth/blocs/auth_bloc.dart';
-import 'package:icgc/features/auth/blocs/auth_states.dart';
+import '../../../../app/routes/app_routes.dart';
+import '../../../../app/routes/route_navigator.dart';
+import '../../../../app/theme/app_color.dart';
+import '../../../../app/theme/app_font_size.dart';
+import '../../../../app/theme/app_images.dart';
+import '../../../../app/theme/app_string.dart';
+import '../../../../app/utils/int_externsions.dart';
+import '../../../../core/presentation/buttons/app_text_button.dart';
+import '../../../../core/presentation/cards/border_card.dart';
+import '../../../../core/presentation/text/description_text.dart';
+import '../../../../core/presentation/text/header_text.dart';
+import '../../../../core/presentation/text/title_text.dart';
+import '../../blocs/auth_bloc.dart';
+import '../../blocs/auth_states.dart';
 
-import '../../../../../app/theme/app_padding.dart';
-import '../../../../../app/theme/app_spacer.dart';
+import '../../../../app/theme/app_padding.dart';
+import '../../../../app/theme/app_spacer.dart';
 import '../../../../core/presentation/text_field/pin_otp_text_field.dart';
 
 class OtpPage extends StatefulWidget {

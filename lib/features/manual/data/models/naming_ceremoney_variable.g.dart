@@ -18,22 +18,25 @@ class NamingCeremoneyVariableAdapter
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return NamingCeremoneyVariable(
-      parent: fields[2] as String?,
+      mother: fields[2] as String?,
       child: fields[0] as String,
       father: fields[1] as String,
+      isCompleted: fields[3] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, NamingCeremoneyVariable obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.child)
       ..writeByte(1)
       ..write(obj.father)
       ..writeByte(2)
-      ..write(obj.parent);
+      ..write(obj.mother)
+      ..writeByte(3)
+      ..write(obj.isCompleted);
   }
 
   @override

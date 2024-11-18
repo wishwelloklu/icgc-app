@@ -1,16 +1,16 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:icgc/app/routes/app_routes.dart';
-import 'package:icgc/app/routes/route_navigator.dart';
-import 'package:icgc/app/theme/app_color.dart';
-import 'package:icgc/app/theme/app_font_size.dart';
-import 'package:icgc/app/theme/app_string.dart';
-import 'package:icgc/app/theme/app_text_style.dart';
-import 'package:icgc/core/presentation/buttons/app_primary_button.dart';
-import 'package:icgc/core/presentation/text/title_text.dart';
-import 'package:icgc/core/presentation/text_field/input_text_field.dart';
-import 'package:icgc/core/presentation/text_field/password_text_field.dart';
+import '../../../../app/routes/app_routes.dart';
+import '../../../../app/routes/route_navigator.dart';
+import '../../../../app/theme/app_color.dart';
+import '../../../../app/theme/app_font_size.dart';
+import '../../../../app/theme/app_string.dart';
+import '../../../../app/theme/app_text_style.dart';
+import '../../../../core/presentation/buttons/app_primary_button.dart';
+import '../../../../core/presentation/text/title_text.dart';
+import '../../../../core/presentation/text_field/input_text_field.dart';
+import '../../../../core/presentation/text_field/password_text_field.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});

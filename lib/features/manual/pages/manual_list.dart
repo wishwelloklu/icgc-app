@@ -1,16 +1,11 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:icgc/app/routes/app_routes.dart';
-import 'package:icgc/app/routes/route_navigator.dart';
-import 'package:icgc/core/data/bloc/book/book_bloc.dart';
-import 'package:icgc/core/data/bloc/book/book_states.dart';
-import 'package:icgc/core/data/models/book/book_model.dart';
-import 'package:icgc/features/manual/widgets/manual_card.dart';
-import 'package:palette_generator/palette_generator.dart';
+import 'package:icgc/features/home_page/widgets/book_card.dart';
+import '../../../app/routes/app_routes.dart';
+import '../../../app/routes/route_navigator.dart';
+import '../../../app/utils/colors_generator.dart';
+import '../../../core/data/bloc/book/book_bloc.dart';
+import '../../../core/data/bloc/book/book_states.dart';
 
 import '../data/models/read_model.dart';
 
@@ -43,7 +38,9 @@ class _ManualListState extends State<ManualList> {
           itemBuilder: (context, index) {
             final book = list[index];
             book.pages.removeWhere((element) => element.content.isEmpty);
-            return GestureDetector(
+            return BookCard(
+              book: book,
+              images: book.coverImageUrl,
               onTap: () async {
                 final color = await getDominantColor(book.coverImageUrl);
                 routeNavigator(context, AppRoutes.readerPage,
@@ -52,7 +49,6 @@ class _ManualListState extends State<ManualList> {
                       book: book,
                     ));
               },
-              child: ManualCard(book: book),
             );
           },
         );
@@ -60,16 +56,5 @@ class _ManualListState extends State<ManualList> {
 
       return const Center(child: CircularProgressIndicator.adaptive());
     });
-  }
-
-  Future<Color?> getDominantColor(String path) async {
-    ImageProvider imageProvider = AssetImage(path);
-    final PaletteGenerator paletteGenerator =
-        await PaletteGenerator.fromImageProvider(
-      imageProvider,
-      size: const Size(200, 200),
-    );
-
-    return paletteGenerator.dominantColor?.color;
   }
 }

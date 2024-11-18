@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:icgc/app/theme/app_color.dart';
-import 'package:icgc/app/theme/app_raduis.dart';
-import 'package:icgc/app/theme/app_spacer.dart';
+import '../theme/app_color.dart';
+import '../theme/app_raduis.dart';
+import '../theme/app_spacer.dart';
 
-Future showGenericModalSheet(
+Future<T?> showGenericModalSheet<T>(
     {required Widget child,
     required BuildContext context,
     bool isDismissible = false,
@@ -18,7 +18,7 @@ Future showGenericModalSheet(
     bool showCloseIcon = true,
     bool showNoIcon = false,
     CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center}) async {
-  showModalBottomSheet(
+  return await showModalBottomSheet(
     useSafeArea: true,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
@@ -27,10 +27,15 @@ Future showGenericModalSheet(
     ),
     enableDrag: true,
     isDismissible: isDismissible,
+    useRootNavigator: true,
     isScrollControlled: isScrollControlled,
     backgroundColor: Colors.transparent,
     barrierColor: removeDrop ? const Color.fromARGB(42, 0, 0, 0) : null,
     context: context,
+    transitionAnimationController: AnimationController(
+      vsync: Navigator.of(context),
+      duration: const Duration(milliseconds: 300),
+    ),
     builder: (context) {
       return Container(
         width: MediaQuery.of(context).size.width,
@@ -68,9 +73,5 @@ Future showGenericModalSheet(
         ),
       );
     },
-  ).then((value) {
-    if (returnFunction != null) {
-      returnFunction();
-    }
-  });
+  );
 }

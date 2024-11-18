@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:icgc/app/theme/app_color.dart';
+import 'app_color.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';
 
 import '../config/constant_config.dart';

@@ -1,6 +1,6 @@
 
-import 'package:icgc/splash_screen.dart';
-import 'package:icgc/walkthrough_screen.dart';
+import '../../../splash_screen.dart';
+import '../../../walkthrough_screen.dart';
 
 import '../app_routes.dart';
 import '../route_type.dart';

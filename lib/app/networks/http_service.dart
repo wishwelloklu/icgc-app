@@ -6,9 +6,9 @@ import 'dart:io';
 import 'package:either_option/either_option.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:icgc/app/cache/cache_keys.dart';
-import 'package:icgc/app/cache/share_preference.dart';
-import 'package:icgc/app/error/exception.dart';
+import '../cache/cache_keys.dart';
+import '../cache/share_preference.dart';
+import '../error/exception.dart';
 import 'package:http/http.dart' as http;
 
 import '../config/base_url_config.dart';

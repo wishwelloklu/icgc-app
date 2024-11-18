@@ -1,8 +1,8 @@
-import 'package:icgc/features/auth/login/pages/login_page.dart';
-import 'package:icgc/features/auth/login/pages/login_phone_page.dart';
-import 'package:icgc/features/auth/login/pages/otp_page.dart';
-import 'package:icgc/features/auth/sign_up/page/signup_page.dart';
-import 'package:icgc/features/subscription/presentation/pages/subscription_page.dart';
+import '../../../features/auth/login/pages/login_page.dart';
+import '../../../features/auth/login/pages/login_phone_page.dart';
+import '../../../features/auth/login/pages/otp_page.dart';
+import '../../../features/auth/sign_up/page/signup_page.dart';
+import '../../../features/subscription/presentation/pages/subscription_page.dart';
 
 import '../app_routes.dart';
 import '../route_type.dart';

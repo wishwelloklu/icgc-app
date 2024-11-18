@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:icgc/app/routes/route_navigator.dart';
-import 'package:icgc/app/utils/colors_generator.dart';
-import 'package:icgc/app/utils/date_time.dart';
-import 'package:icgc/app/utils/generic_modal_sheet.dart';
-import 'package:icgc/app/utils/scaffold_toast.dart';
-import 'package:icgc/features/library/data/bloc/notes/notes_bloc.dart';
-import 'package:icgc/features/library/data/bloc/notes/notes_events.dart';
-import 'package:icgc/features/library/data/bloc/notes/notes_states.dart';
-import 'package:icgc/features/library/presentation/widgets/delete_modal.dart';
-import 'package:icgc/features/library/presentation/widgets/notes_card.dart';
+import '../../../../app/routes/route_navigator.dart';
+import '../../../../app/utils/colors_generator.dart';
+import '../../../../app/utils/date_time.dart';
+import '../../../../app/utils/generic_modal_sheet.dart';
+import '../../../../app/utils/scaffold_toast.dart';
+import '../../data/bloc/notes/notes_bloc.dart';
+import '../../data/bloc/notes/notes_events.dart';
+import '../../data/bloc/notes/notes_states.dart';
+import '../widgets/delete_modal.dart';
+import '../widgets/notes_card.dart';
 
 class NotesPage extends StatefulWidget {
   const NotesPage({super.key});
@@ -20,10 +20,8 @@ class NotesPage extends StatefulWidget {
 }
 
 class _NotesPageState extends State<NotesPage> with TickerProviderStateMixin {
-  late SlidableController controller;
   @override
   void initState() {
-    controller = SlidableController(this);
     context.read<NotesBloc>().add(LoadNotesEvent());
     super.initState();
   }
@@ -45,27 +43,26 @@ class _NotesPageState extends State<NotesPage> with TickerProviderStateMixin {
           if (state.noteList.isEmpty) {
             return Container();
           }
+          final list = state.noteList;
           return ListView.builder(
             padding: const EdgeInsets.all(12),
-            itemCount: state.noteList.length,
+            itemCount: list.length,
             itemBuilder: (context, index) {
-              final notes = state.noteList[index];
+              final notes = list[index];
               return Slidable(
                 key: ValueKey(index),
-                controller: controller,
                 endActionPane: ActionPane(
                   motion: StretchMotion(key: ValueKey(index)),
                   dismissible: DismissiblePane(
-                    onDismissed: () async {},
-                    closeOnCancel: false,
+                    onDismissed: () async {
+                      context.read<NotesBloc>().add(DeleteNotesEvent(index));
+                    },
+                    closeOnCancel: true,
                     confirmDismiss: () async {
-                      final result = await showGenericModalSheet(
+                      final result = await showGenericModalSheet<bool>(
                           useMagin: true,
                           child: DeleteModal(
                               onDelete: () async {
-                                context
-                                    .read<NotesBloc>()
-                                    .add(DeleteNotesEvent(notes.id!));
                                 popBack(context, true);
                               },
                               onCancle: () async => popBack(context, false)),
@@ -77,12 +74,15 @@ class _NotesPageState extends State<NotesPage> with TickerProviderStateMixin {
                   children: [
                     SlidableAction(
                       // An action can be bigger than the others.
-                      flex: 2,
-                      onPressed: (context) {},
-                      backgroundColor: const Color(0xFF7BC043),
+                      borderRadius: BorderRadius.circular(8),
+                      padding: EdgeInsets.zero,
+                      spacing: 0,
+                      onPressed: (context) {
+                        context.read<NotesBloc>().add(DeleteNotesEvent(index));
+                      },
+                      backgroundColor: Colors.red,
                       foregroundColor: Colors.white,
-                      icon: Icons.archive,
-                      label: 'Archive',
+                      icon: Icons.delete_outline_outlined,
                     ),
                   ],
                 ),

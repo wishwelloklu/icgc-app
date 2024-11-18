@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:icgc/app/theme/app_color.dart';
-import 'package:icgc/app/theme/app_string.dart';
-import 'package:icgc/core/presentation/buttons/app_primary_button.dart';
-import 'package:icgc/core/presentation/buttons/app_text_button.dart';
-import 'package:icgc/core/presentation/text/description_text.dart';
-import 'package:icgc/core/presentation/text/title_text.dart';
+import '../../../../app/theme/app_color.dart';
+import '../../../../app/theme/app_string.dart';
+import '../../../../core/presentation/buttons/app_primary_button.dart';
+import '../../../../core/presentation/buttons/app_text_button.dart';
+import '../../../../core/presentation/text/title_text.dart';
 
 class DeleteModal extends StatelessWidget {
   const DeleteModal(

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:icgc/app/theme/app_color.dart';
-import 'package:icgc/app/theme/app_padding.dart';
+import '../../../app/theme/app_color.dart';
+import '../../../app/theme/app_padding.dart';
 
 class RoundCachedImage extends StatelessWidget {
   final String imageString;

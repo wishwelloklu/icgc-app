@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:icgc/app/config/constant_config.dart';
-import 'package:icgc/app/theme/app_color.dart';
+import '../config/constant_config.dart';
+import 'app_color.dart';
 
 class ThemeStyle {
   final bool isDarkMode;

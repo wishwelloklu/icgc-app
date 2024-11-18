@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:icgc/app/theme/app_color.dart';
-import 'package:icgc/app/theme/app_padding.dart';
-import 'package:icgc/app/theme/app_raduis.dart';
+import '../../../app/theme/app_color.dart';
+import '../../../app/theme/app_padding.dart';
 
 
 class BorderContainerCard extends StatelessWidget {

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
-import 'package:icgc/app/theme/app_color.dart';
+import '../../../app/theme/app_color.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../text/label_text.dart';

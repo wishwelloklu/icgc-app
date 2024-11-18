@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:icgc/app/config/constant_config.dart';
-import 'package:icgc/app/theme/app_color.dart';
-import 'package:icgc/app/theme/app_font_size.dart';
+import '../config/constant_config.dart';
+import 'app_color.dart';
+import 'app_font_size.dart';
 
 class AppTextStyle {
   static TextStyle appHeader(
@@ -33,7 +33,7 @@ class AppTextStyle {
     FontWeight fontWeight = FontWeight.w500,
   }) {
     return TextStyle(
-      fontFamily: ConstantConfig.mulish,
+      fontFamily: ConstantConfig.satoshi,
       fontSize: size,
       color: color,
       fontWeight: fontWeight,
@@ -43,7 +43,7 @@ class AppTextStyle {
   static TextStyle appLabel(
       {double size = AppFontSize.medium, Color color = AppColor.blackColor}) {
     return TextStyle(
-        fontFamily: ConstantConfig.mulish,
+        fontFamily: ConstantConfig.satoshi,
         fontSize: size,
         color: color,
         fontWeight: FontWeight.w500);
@@ -55,7 +55,7 @@ class AppTextStyle {
     FontWeight fontWeight = FontWeight.w700,
   }) {
     return TextStyle(
-        fontFamily: ConstantConfig.mulish,
+        fontFamily: ConstantConfig.satoshi,
         fontSize: size,
         color: color,
         fontWeight: fontWeight);
@@ -64,7 +64,7 @@ class AppTextStyle {
   static TextStyle appInputHint(
       {double size = AppFontSize.small, Color color = AppColor.textInputHint}) {
     return TextStyle(
-      fontFamily: ConstantConfig.mulish,
+      fontFamily: ConstantConfig.satoshi,
       fontSize: size,
       color: color,
       fontWeight: FontWeight.w400,
@@ -74,7 +74,7 @@ class AppTextStyle {
   static TextStyle appInputText(
       {double size = AppFontSize.medium, Color color = AppColor.labelColor}) {
     return TextStyle(
-      fontFamily: ConstantConfig.mulish,
+      fontFamily: ConstantConfig.satoshi,
       fontSize: size,
       color: color,
     );
@@ -84,12 +84,14 @@ class AppTextStyle {
     double size = AppFontSize.small,
     Color color = AppColor.blackColor,
     FontWeight fontWeight = FontWeight.w400,
+    Color? backgroundColor,
   }) {
     return TextStyle(
-      fontFamily: ConstantConfig.mulish,
+      fontFamily: ConstantConfig.satoshi,
       fontSize: size,
       color: color,
       fontWeight: fontWeight,
+      backgroundColor: backgroundColor
     );
   }
 
@@ -99,7 +101,7 @@ class AppTextStyle {
     FontWeight fontWeight = FontWeight.w400,
   }) {
     return TextStyle(
-      fontFamily: ConstantConfig.mulish,
+      fontFamily: ConstantConfig.satoshi,
       fontSize: size,
       color: color,
       fontWeight: fontWeight,
@@ -109,7 +111,7 @@ class AppTextStyle {
   static TextStyle buttonSmallStyle(
       {double size = AppFontSize.small, Color color = AppColor.whiteColor}) {
     return TextStyle(
-      fontFamily: ConstantConfig.mulish,
+      fontFamily: ConstantConfig.satoshi,
       fontSize: size,
       color: color,
       fontWeight: FontWeight.w500,

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:icgc/app/routes/app_routes.dart';
-import 'package:icgc/app/routes/route_navigator.dart';
-import 'package:icgc/app/theme/app_color.dart';
-import 'package:icgc/app/theme/app_font_size.dart';
-import 'package:icgc/app/theme/app_images.dart';
-import 'package:icgc/app/theme/app_string.dart';
-import 'package:icgc/app/utils/svg_icon.dart';
-import 'package:icgc/core/presentation/buttons/app_primary_button.dart';
-import 'package:icgc/core/presentation/buttons/app_text_button.dart';
-import 'package:icgc/core/presentation/text/title_text.dart';
+import 'app/routes/app_routes.dart';
+import 'app/routes/route_navigator.dart';
+import 'app/theme/app_color.dart';
+import 'app/theme/app_font_size.dart';
+import 'app/theme/app_images.dart';
+import 'app/theme/app_string.dart';
+import 'app/utils/svg_icon.dart';
+import 'core/presentation/buttons/app_primary_button.dart';
+import 'core/presentation/buttons/app_text_button.dart';
+import 'core/presentation/text/title_text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class WalkthroughScreen extends StatefulWidget {

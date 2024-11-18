@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:icgc/app/theme/app_color.dart';
+import '../../../app/theme/app_color.dart';
 
 class RoundImage extends StatelessWidget {
   final String? imageString;

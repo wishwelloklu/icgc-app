@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:icgc/app/routes/app_routes.dart';
-import 'package:icgc/app/routes/route_navigator.dart';
-import 'package:icgc/app/theme/app_color.dart';
-import 'package:icgc/app/theme/app_string.dart';
-import 'package:icgc/core/presentation/text/title_text.dart';
-import 'package:icgc/features/library/data/models/collections.dart';
+import '../../../app/routes/app_routes.dart';
+import '../../../app/routes/route_navigator.dart';
+import '../../../app/theme/app_color.dart';
+import '../../../app/theme/app_string.dart';
+import '../../../core/presentation/text/title_text.dart';
+import '../../library/data/models/collections.dart';
 
 class OfficiatingList extends StatelessWidget {
   const OfficiatingList({super.key});
@@ -27,7 +27,7 @@ class OfficiatingList extends StatelessWidget {
           itemBuilder: (context, index) => ListTile(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            tileColor: AppColor.whiteColor,
+            tileColor: AppColor.lightColor,
             onTap: () => routeNavigator(
                 context, AppRoutes.nameVariableInserting,
                 arguments: namingList[index].text),

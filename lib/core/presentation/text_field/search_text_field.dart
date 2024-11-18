@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:icgc/app/theme/app_color.dart';
-import 'package:icgc/app/theme/app_images.dart';
-import 'package:icgc/app/theme/app_padding.dart';
-import 'package:icgc/app/theme/app_raduis.dart';
-import 'package:icgc/app/theme/app_text_style.dart';
-import 'package:icgc/app/utils/svg_icon.dart';
+import '../../../app/theme/app_color.dart';
+import '../../../app/theme/app_images.dart';
+import '../../../app/theme/app_padding.dart';
+import '../../../app/theme/app_raduis.dart';
+import '../../../app/theme/app_text_style.dart';
+import '../../../app/utils/svg_icon.dart';
 
 class SearchTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -16,6 +16,7 @@ class SearchTextField extends StatelessWidget {
   final Color? borderColor;
   final Color background;
   final FocusNode? focusNode;
+  final double? height;
   final void Function(String text)? onChange;
   final VoidCallback? onTap;
   final Function(PointerDownEvent event)? onTapOutside;
@@ -24,6 +25,7 @@ class SearchTextField extends StatelessWidget {
     required this.controller,
     this.onTap,
     this.focusNode,
+    this.height,
     this.labelText = '',
     this.hintText = 'Search for topic, titles, or authors',
     this.showClearIcon = false,
@@ -40,44 +42,46 @@ class SearchTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      onChanged: onChange,
-      onTapOutside: (event) {
-        if (onTapOutside != null) {
-          onTapOutside!(event);
-        }
-      },
-      onTap: onTap,
-      focusNode: focusNode,
-      decoration: InputDecoration(
-        hintText: hintText,
-        contentPadding: const EdgeInsets.symmetric(
-            vertical: AppPadding.inputHeight, horizontal: AppPadding.width),
-        isDense: true,
-        prefixIcon: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14),
-          child: const SvgIcon(icon: AppImages.search),
+    return SizedBox(
+      height: 40,
+      child: TextField(
+        controller: controller,
+        onChanged: onChange,
+        onTapOutside: (event) {
+          if (onTapOutside != null) {
+            onTapOutside!(event);
+          }
+        },
+        onTap: onTap,
+        focusNode: focusNode,
+        decoration: InputDecoration(
+          hintText: hintText,
+          contentPadding:  EdgeInsets.symmetric(
+              vertical:height?? AppPadding.inputHeight, horizontal: AppPadding.width),
+          isDense: true,
+          prefixIcon: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14),
+            child: const SvgIcon(icon: AppImages.search),
+          ),
+          fillColor: AppColor.textInputField,
+          filled: true,
+          hintStyle: AppTextStyle.appInputText(),
+          border: OutlineInputBorder(
+              borderSide: borderColor != null
+                  ? BorderSide(color: borderColor!, width: 1)
+                  : BorderSide.none,
+              borderRadius: BorderRadius.circular(AppRadius.small)),
+          enabledBorder: OutlineInputBorder(
+              borderSide: borderColor != null
+                  ? BorderSide(color: borderColor!, width: 1)
+                  : BorderSide.none,
+              borderRadius: BorderRadius.circular(AppRadius.small)),
+          focusedBorder: OutlineInputBorder(
+              borderSide: borderColor != null
+                  ? BorderSide(color: borderColor!, width: 1)
+                  : BorderSide.none,
+              borderRadius: BorderRadius.circular(AppRadius.small)),
         ),
-        fillColor: AppColor.textInputField,
-        filled: true,
-        
-        hintStyle: AppTextStyle.appInputText(),
-        border: OutlineInputBorder(
-            borderSide: borderColor != null
-                ? BorderSide(color: borderColor!, width: 1)
-                : BorderSide.none,
-            borderRadius: BorderRadius.circular(AppRadius.small)),
-        enabledBorder: OutlineInputBorder(
-            borderSide: borderColor != null
-                ? BorderSide(color: borderColor!, width: 1)
-                : BorderSide.none,
-            borderRadius: BorderRadius.circular(AppRadius.small)),
-        focusedBorder: OutlineInputBorder(
-            borderSide: borderColor != null
-                ? BorderSide(color: borderColor!, width: 1)
-                : BorderSide.none,
-            borderRadius: BorderRadius.circular(AppRadius.small)),
       ),
     );
   }

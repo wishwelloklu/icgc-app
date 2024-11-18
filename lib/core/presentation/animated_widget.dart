@@ -7,7 +7,7 @@ class AppAnimatedWidget extends StatelessWidget {
       this.opacity,
       this.duration,
       this.curve});
-  final Widget child;
+  final Widget? child;
   final double? opacity;
   final Duration? duration;
   final Curve? curve;

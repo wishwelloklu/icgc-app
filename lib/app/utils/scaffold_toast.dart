@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:icgc/app/config/navigation_key.dart';
+import '../config/navigation_key.dart';
 
 void showToast(
   String message, {

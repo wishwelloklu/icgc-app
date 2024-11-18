@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:icgc/app/theme/app_string.dart';
-import 'package:icgc/core/presentation/text/description_text.dart';
+import '../../../app/theme/app_string.dart';
+import '../text/description_text.dart';
 
 class AppErrorState extends StatelessWidget {
   const AppErrorState({super.key, this.error});

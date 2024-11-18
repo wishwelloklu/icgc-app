@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:icgc/app/theme/app_color.dart';
-import 'package:icgc/app/theme/app_text_style.dart';
-import 'package:icgc/app/utils/string_extension.dart';
-import 'package:icgc/core/presentation/text/title_text.dart';
+import '../../../../app/theme/app_color.dart';
+import '../../../../app/theme/app_text_style.dart';
+import '../../../../app/utils/string_extension.dart';
+import '../../../../core/presentation/text/title_text.dart';
 
 class NotesCard extends StatelessWidget {
   const NotesCard(

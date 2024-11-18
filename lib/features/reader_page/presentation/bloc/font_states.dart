@@ -7,9 +7,10 @@ abstract class FontStates extends Equatable {
 
 final class FontState extends FontStates {
   final double fontSize;
+  final String fontName;
 
-  const FontState(this.fontSize);
+  const FontState(this.fontSize, this.fontName);
 
   @override
-  List<Object?> get props => [fontSize];
+  List<Object?> get props => [fontSize, fontName];
 }

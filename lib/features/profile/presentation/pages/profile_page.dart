@@ -1,14 +1,14 @@
 import 'package:awesome_icons/awesome_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:icgc/app/routes/app_routes.dart';
-import 'package:icgc/app/routes/route_navigator.dart';
-import 'package:icgc/app/theme/app_color.dart';
-import 'package:icgc/app/theme/app_images.dart';
-import 'package:icgc/app/theme/app_string.dart';
-import 'package:icgc/app/utils/svg_icon.dart';
-import 'package:icgc/core/presentation/text/title_text.dart';
-import 'package:icgc/features/profile/presentation/widgets/row_card.dart';
+import '../../../../app/routes/app_routes.dart';
+import '../../../../app/routes/route_navigator.dart';
+import '../../../../app/theme/app_color.dart';
+import '../../../../app/theme/app_images.dart';
+import '../../../../app/theme/app_string.dart';
+import '../../../../app/utils/svg_icon.dart';
+import '../../../../core/presentation/text/title_text.dart';
+import '../widgets/row_card.dart';
 
 import '../widgets/logout_dialog.dart';
 

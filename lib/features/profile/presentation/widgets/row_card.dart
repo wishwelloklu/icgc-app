@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:icgc/app/theme/app_color.dart';
-import 'package:icgc/app/utils/svg_icon.dart';
-import 'package:icgc/core/presentation/text/title_text.dart';
+import '../../../../app/theme/app_color.dart';
+import '../../../../app/utils/svg_icon.dart';
+import '../../../../core/presentation/text/title_text.dart';
 
 class RowCard extends StatelessWidget {
   const RowCard(

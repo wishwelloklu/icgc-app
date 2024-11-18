@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 final appContext = AppNavigatorKeys.instance.navigatorKey.currentContext;
+final currentState = AppNavigatorKeys.instance.navigatorKey.currentState;
 
 class AppNavigatorKeys {
   AppNavigatorKeys._privateContructor();

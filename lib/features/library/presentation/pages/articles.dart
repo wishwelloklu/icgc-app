@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:icgc/core/data/models/book/book_model.dart';
+import '../../../../core/data/models/book/book_model.dart';
 
 import '../widgets/article_card.dart';
 

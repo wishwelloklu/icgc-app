@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
-import 'package:icgc/app/routes/route_navigator.dart';
-import 'package:icgc/app/theme/app_color.dart';
-import 'package:icgc/app/theme/app_string.dart';
-import 'package:icgc/core/presentation/buttons/app_text_button.dart';
-import 'package:icgc/core/presentation/text_field/input_text_field.dart';
-import 'package:icgc/features/library/data/bloc/notes/notes_bloc.dart';
-import 'package:icgc/features/library/data/bloc/notes/notes_events.dart';
-import 'package:icgc/features/library/data/models/notes_item_model.dart';
+import '../../../../app/routes/route_navigator.dart';
+import '../../../../app/theme/app_color.dart';
+import '../../../../app/theme/app_string.dart';
+import '../../../../core/presentation/buttons/app_text_button.dart';
+import '../../../../core/presentation/text_field/input_text_field.dart';
+import '../../data/bloc/notes/notes_bloc.dart';
+import '../../data/bloc/notes/notes_events.dart';
+import '../../data/models/notes_item_model.dart';
 
 class AddNotes extends HookWidget {
   const AddNotes({super.key});

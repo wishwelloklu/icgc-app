@@ -2,16 +2,21 @@ import 'package:awesome_icons/awesome_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:icgc/app/theme/app_color.dart';
-import 'package:icgc/app/theme/app_string.dart';
-import 'package:icgc/app/utils/custom_text.dart';
-import 'package:icgc/app/utils/generic_modal_sheet.dart';
-import 'package:icgc/core/presentation/animated_widget.dart';
-import 'package:icgc/core/presentation/text/description_text.dart';
-import 'package:icgc/core/presentation/text/title_text.dart';
-import 'package:icgc/features/manual/data/models/read_model.dart';
-import 'package:icgc/features/reader_page/presentation/bloc/font_states.dart';
-import 'package:icgc/features/reader_page/presentation/widgets/font_modal.dart';
+import 'package:icgc/core/data/models/book/book_model.dart';
+import 'package:icgc/features/reader_page/presentation/pages/search_book_page.dart';
+import '../../../../app/routes/route_navigator.dart';
+import '../../../../app/theme/app_color.dart';
+import '../../../../app/theme/app_images.dart';
+import '../../../../app/theme/app_string.dart';
+import '../../../../app/utils/custom_text.dart';
+import '../../../../app/utils/generic_modal_sheet.dart';
+import '../../../../app/utils/svg_icon.dart';
+import '../../../../core/presentation/animated_widget.dart';
+import '../../../../core/presentation/text/description_text.dart';
+import '../../../../core/presentation/text/title_text.dart';
+import '../../../manual/data/models/read_model.dart';
+import '../bloc/font_states.dart';
+import '../widgets/font_modal.dart';
 
 import '../bloc/font_bloc.dart';
 
@@ -27,16 +32,20 @@ class _ReadJsonState extends State<ReaderPage> {
   int totalPage = 0;
   int currentPage = 1;
   String title = '';
+  String _searchText = '';
   Color? coverColor;
   final _showCover = ValueNotifier(true);
   final _showOtherWidgets = ValueNotifier(true);
+  PageController _pageController = PageController();
 
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final readModel = ModalRoute.settingsOf(context)!.arguments as ReadModel;
-      title = readModel.book.pages[0].title!;
+
+      title = readModel.book.pages[readModel.currentPage].title ?? '';
       coverColor = readModel.color;
+      _pageController = PageController(initialPage: readModel.currentPage);
       setState(() {});
     });
 
@@ -83,7 +92,7 @@ class _ReadJsonState extends State<ReaderPage> {
                                 ),
                               ]),
                               child: Image.asset(
-                                book.coverImageUrl,
+                                readModel.image ?? book.coverImageUrl,
                                 width: double.infinity,
                                 height: double.infinity,
                               ),
@@ -104,12 +113,14 @@ class _ReadJsonState extends State<ReaderPage> {
                                   child: Stack(
                                     children: [
                                       PageView.builder(
+                                        controller: _pageController,
                                         itemCount: book.pages.length,
                                         onPageChanged: (value) {
                                           percentage =
                                               (value / book.pages.length * 100)
                                                   .round();
                                           currentPage = value + 1;
+                                          _searchText = '';
                                           setState(() {});
                                         },
                                         itemBuilder: (context, index) {
@@ -117,24 +128,43 @@ class _ReadJsonState extends State<ReaderPage> {
                                             title = book.pages[index].title!;
                                           }
                                           return SingleChildScrollView(
-                                            child: AppAnimatedWidget(
-                                              child: Container(
-                                                margin: EdgeInsets.symmetric(
-                                                    vertical: showOtherWidgets
-                                                        ? 78
-                                                        : 0),
-                                                padding:
-                                                    const EdgeInsets.symmetric(
+                                            child: Column(
+                                              children: [
+                                                const Gap(10),
+                                                TitleText(
+                                                    text: book.pages[index]
+                                                            .title ??
+                                                        ''),
+                                                AppAnimatedWidget(
+                                                  child: Container(
+                                                    margin:
+                                                        EdgeInsets.symmetric(
+                                                            vertical:
+                                                                showOtherWidgets
+                                                                    ? 78
+                                                                    : 0),
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
                                                         horizontal: 10),
-                                                child: Column(
-                                                  children: [
-                                                    CustomeText(
-                                                        book.pages[index]
-                                                            .content,
-                                                        state.fontSize),
-                                                  ],
+                                                    child: Column(
+                                                      children: [
+                                                        Builder(
+                                                            builder: (context) {
+                                                          return CustomeText(
+                                                            book.pages[index]
+                                                                .content,
+                                                            state.fontSize,
+                                                            searchText:
+                                                                _searchText,
+                                                            fontName:
+                                                                state.fontName,
+                                                          );
+                                                        }),
+                                                      ],
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
+                                              ],
                                             ),
                                           );
                                         },
@@ -148,29 +178,94 @@ class _ReadJsonState extends State<ReaderPage> {
                                           child: Container(
                                             height: showOtherWidgets ? null : 0,
                                             color: const Color.fromARGB(
-                                                229, 254, 254, 254),
-                                            padding: const EdgeInsets.all(16),
+                                                239, 255, 255, 255),
+                                            padding: const EdgeInsets.fromLTRB(
+                                                5, 10, 10, 10),
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                TitleText(text: title),
                                                 IconButton(
-                                                  onPressed: () {
-                                                    showGenericModalSheet(
-                                                        removeDrop: true,
-                                                        showHanlde: false,
-                                                        isDismissible: true,
-                                                        child:
-                                                            const FontModal(),
-                                                        context: context);
-                                                  },
-                                                  icon: const Icon(
-                                                      FontAwesomeIcons
-                                                          .ellipsisV),
-                                                  iconSize: 20,
-                                                )
+                                                    visualDensity:
+                                                        VisualDensity.compact,
+                                                    padding: EdgeInsets.zero,
+                                                    onPressed: () =>
+                                                        popBack(context),
+                                                    icon: const Icon(
+                                                        Icons.arrow_back)),
+                                                Expanded(
+                                                    child: TitleText(
+                                                  text: book.title,
+                                                  fontSize: 20,
+                                                  maxLine: 1,
+                                                )),
+                                                const Gap(5),
+                                                Row(
+                                                  children: [
+                                                    TopButtons(
+                                                        onTap: () {
+                                                          showGenericModalSheet(
+                                                              removeDrop: true,
+                                                              showHanlde: false,
+                                                              isDismissible:
+                                                                  true,
+                                                              child:
+                                                                  const FontModal(),
+                                                              context: context);
+                                                        },
+                                                        icon: const SvgIcon(
+                                                          icon: AppImages.font,
+                                                          size: 20,
+                                                        )),
+                                                    const Gap(2),
+                                                    TopButtons(
+                                                      onTap: () {
+                                                        showGenericModalSheet(
+                                                            removeDrop: true,
+                                                            showHanlde: false,
+                                                            isDismissible: true,
+                                                            isScrollControlled:
+                                                                false,
+                                                            child:
+                                                                SearchBookPage(
+                                                                    pages: book
+                                                                        .pages,
+                                                                    onResult:
+                                                                        (index,
+                                                                            resultTerm) {
+                                                                      popBack(
+                                                                          context);
+                                                                      setState(
+                                                                          () {
+                                                                        _searchText =
+                                                                            resultTerm;
+                                                                      });
+                                                                      _pageController.animateToPage(
+                                                                          index,
+                                                                          duration: Durations
+                                                                              .medium2,
+                                                                          curve:
+                                                                              Curves.linear);
+                                                                    }),
+                                                            context: context);
+                                                      },
+                                                      icon: const SvgIcon(
+                                                        icon: AppImages.search,
+                                                        size: 20,
+                                                      ),
+                                                    ),
+                                                    const Gap(2),
+                                                    TopButtons(
+                                                      onTap: () {},
+                                                      icon: const Icon(
+                                                        FontAwesomeIcons
+                                                            .ellipsisH,
+                                                        size: 20,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -187,40 +282,11 @@ class _ReadJsonState extends State<ReaderPage> {
                                             color: const Color.fromARGB(
                                                 246, 254, 254, 254),
                                             padding: const EdgeInsets.all(16),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    const DescriptionText(
-                                                        text: AppString.page,
-                                                        fontSize: 12),
-                                                    DescriptionText(
-                                                        text:
-                                                            ' ${currentPage.toString()} of ',
-                                                        fontSize: 12),
-                                                    DescriptionText(
-                                                        text: book.pages.length
-                                                            .toString(),
-                                                        fontSize: 12),
-                                                    const Spacer(),
-                                                    DescriptionText(
-                                                        text: '$percentage%',
-                                                        fontSize: 12),
-                                                  ],
-                                                ),
-                                                const Gap(5),
-                                                LinearProgressIndicator(
-                                                  value:
-                                                      currentPage / totalPage,
-                                                  valueColor:
-                                                      const AlwaysStoppedAnimation(
-                                                          AppColor.yellow),
-                                                  backgroundColor:
-                                                      const Color(0xFFE5E7EB),
-                                                ),
-                                              ],
-                                            ),
+                                            child: ReaderProgress(
+                                                currentPage: currentPage,
+                                                book: book,
+                                                percentage: percentage,
+                                                totalPage: totalPage),
                                           ),
                                         ),
                                       )
@@ -232,103 +298,6 @@ class _ReadJsonState extends State<ReaderPage> {
                           })
                       : null,
                 );
-
-                // if (showCover) {
-                //   return Scaffold(
-                //     key: const ValueKey(1),
-                //     backgroundColor: coverColor?.withOpacity(1),
-                //     body: Container(
-                //       decoration: BoxDecoration(boxShadow: [
-                //         BoxShadow(
-                //           color: Colors.black.withOpacity(0.2),
-                //           spreadRadius: 3,
-                //           blurRadius: 20,
-                //           offset: const Offset(0, 10), // Deeper shadow
-                //         ),
-                //       ]),
-                //       child: Image.asset(
-                //         book.coverImageUrl,
-                //         width: double.infinity,
-                //         height: double.infinity,
-                //       ),
-                //     ),
-                //   );
-
-                // }
-                // return Scaffold(
-                //   key: const ValueKey(2),
-                //   appBar: AppBar(
-                //     automaticallyImplyLeading: false,
-                //     title: TitleText(text: title),
-                //     actions: [
-                //       IconButton(
-                //         onPressed: () {
-                //           showGenericModalSheet(
-                //               removeDrop: true,
-                //               showHanlde: false,
-                //               child: const FontModal(),
-                //               context: context);
-                //         },
-                //         icon: const Icon(FontAwesomeIcons.ellipsisV),
-                //         iconSize: 20,
-                //       )
-                //     ],
-                //   ),
-                //   body: PageView.builder(
-                //     itemCount: book.pages.length,
-                //     onPageChanged: (value) {
-                //       percentage = (value / book.pages.length * 100).round();
-                //       currentPage = value + 1;
-                //       setState(() {});
-                //     },
-                //     itemBuilder: (context, index) {
-                //       if (book.pages[index].title != null) {
-                //         title = book.pages[index].title!;
-                //       }
-                //       return SingleChildScrollView(
-                //         child: Padding(
-                //           padding: const EdgeInsets.symmetric(horizontal: 10),
-                //           child: Column(
-                //             children: [
-                //               BoldText(
-                //                   book.pages[index].content, state.fontSize),
-                //             ],
-                //           ),
-                //         ),
-                //       );
-                //     },
-                //   ),
-                //   bottomSheet: Container(
-                //     margin: const EdgeInsets.only(bottom: 40),
-                //     padding: const EdgeInsets.all(16),
-                //     child: Column(
-                //       mainAxisSize: MainAxisSize.min,
-                //       children: [
-                //         Row(
-                //           children: [
-                //             const DescriptionText(
-                //                 text: AppString.page, fontSize: 12),
-                //             DescriptionText(
-                //                 text: ' ${currentPage.toString()} of ',
-                //                 fontSize: 12),
-                //             DescriptionText(
-                //                 text: book.pages.length.toString(),
-                //                 fontSize: 12),
-                //             const Spacer(),
-                //             DescriptionText(text: '$percentage%', fontSize: 12),
-                //           ],
-                //         ),
-                //         const Gap(5),
-                //         LinearProgressIndicator(
-                //           value: book.currentPage / book.totalPage,
-                //           valueColor:
-                //               const AlwaysStoppedAnimation(AppColor.yellow),
-                //           backgroundColor: const Color(0xFFE5E7EB),
-                //         ),
-                //       ],
-                //     ),
-                //   ),
-                // );
               },
             ),
           );
@@ -337,5 +306,127 @@ class _ReadJsonState extends State<ReaderPage> {
           return const SizedBox.shrink();
       }
     });
+  }
+
+ 
+}
+
+class TopButtons extends StatelessWidget {
+  const TopButtons({
+    super.key,
+    required this.icon,
+    required this.onTap,
+  });
+
+  final Widget icon;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+          padding: const EdgeInsets.all(10),
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(
+              shape: BoxShape.circle, color: Color.fromARGB(15, 0, 0, 0)),
+          child: icon),
+    );
+  }
+}
+
+class ReaderProgress extends StatefulWidget {
+  const ReaderProgress({
+    super.key,
+    required this.currentPage,
+    required this.book,
+    required this.percentage,
+    required this.totalPage,
+  });
+
+  final int currentPage;
+  final BookModel book;
+  final int percentage;
+  final int totalPage;
+
+  @override
+  State<ReaderProgress> createState() => _ReaderProgressState();
+}
+
+class _ReaderProgressState extends State<ReaderProgress>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+  double _progress = 0;
+  // initial progress value
+  @override
+  void initState() {
+    super.initState();
+    // WidgetsBinding.instance.addPostFrameCallback((duration) {
+    //   Future.delayed(const Duration(milliseconds: 200)).then((_) {
+    _progress = widget.currentPage / widget.totalPage;
+    // Initialize the AnimationController
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 200), // animation duration
+    );
+
+    // Define the animation with the AnimationController
+    _animation = Tween<double>(begin: _progress).animate(_controller)
+      ..addListener(() {});
+
+    // Start the initial animation
+    _controller.forward();
+    // });
+    // });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void updateProgress(double newProgress) {
+    // Update the animation to the new progress value
+    setState(() {
+      _progress = newProgress;
+      _animation = Tween<double>(begin: _animation.value, end: newProgress)
+          .animate(_controller)
+        ..addListener(() {
+          setState(() {});
+        });
+
+      _controller.forward(from: 0.0); // Restart the animation
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    updateProgress(widget.currentPage / widget.totalPage);
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Row(
+          children: [
+            const DescriptionText(text: AppString.page, fontSize: 12),
+            DescriptionText(
+                text: ' ${widget.currentPage.toString()} of ', fontSize: 12),
+            DescriptionText(
+                text: widget.book.pages.length.toString(), fontSize: 12),
+            const Spacer(),
+            DescriptionText(text: '${widget.percentage}%', fontSize: 12),
+          ],
+        ),
+        const Gap(5),
+        LinearProgressIndicator(
+          minHeight: 7,
+          borderRadius: BorderRadius.circular(8),
+          value: _animation.value,
+          valueColor: const AlwaysStoppedAnimation(AppColor.yellow),
+          backgroundColor: const Color(0xFFE5E7EB),
+        ),
+      ],
+    );
   }
 }

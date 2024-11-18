@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:icgc/features/library/data/bloc/notes/notes_events.dart';
-import 'package:icgc/features/library/data/bloc/notes/notes_states.dart';
+import 'notes_events.dart';
+import 'notes_states.dart';
 
 import '../../../../../app/cache/cache_keys.dart';
 import '../../models/notes_item_model.dart';
@@ -33,10 +33,10 @@ class NotesBloc extends Bloc<NotesEvents, NotesStates> {
 
     on<DeleteNotesEvent>(
       (event, emit) async {
-        emit(NotesProcessingState());
         try {
-          await box.delete(event.noteId);
-          emit(NotesProcessingDoneState('Deleted'));
+          await box.deleteAt(event.index);
+           final noteList = box.values.toList();
+          emit(NotesLoadedState(noteList));
         } on Exception catch (e) {
           debugPrint(e.toString());
           emit(NotesProcessingDoneState('Something went wrong'));

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:icgc/app/theme/app_color.dart';
-import 'package:icgc/app/theme/app_padding.dart';
-import 'package:icgc/app/theme/app_spacer.dart';
-import 'package:icgc/app/theme/app_text_style.dart';
-import 'package:icgc/app/utils/svg_icon.dart';
+import '../../../app/theme/app_color.dart';
+import '../../../app/theme/app_padding.dart';
+import '../../../app/theme/app_spacer.dart';
+import '../../../app/theme/app_text_style.dart';
+import '../../../app/utils/svg_icon.dart';
 
 class AppIconButton extends StatelessWidget {
   final String text;

@@ -1,5 +1,5 @@
-import 'package:icgc/app/routes/app_routes.dart';
-import 'package:icgc/wrapper.dart';
+import '../app_routes.dart';
+import '../../../wrapper.dart';
 import '../route_type.dart';
 
 Map<String, RouteType> wrapperRoute = {

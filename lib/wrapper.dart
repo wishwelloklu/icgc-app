@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:icgc/app/theme/app_color.dart';
-import 'package:icgc/app/theme/app_font_size.dart';
-import 'package:icgc/app/theme/app_images.dart';
-import 'package:icgc/app/theme/app_text_style.dart';
-import 'package:icgc/app/utils/svg_icon.dart';
-import 'package:icgc/features/manual/pages/manuals_page.dart';
-import 'package:icgc/features/home_page/pages/home_page.dart';
-import 'package:icgc/features/library/presentation/pages/library_page.dart';
-import 'package:icgc/features/profile/presentation/pages/profile_page.dart';
+import 'app/theme/app_color.dart';
+import 'app/theme/app_font_size.dart';
+import 'app/theme/app_images.dart';
+import 'app/theme/app_text_style.dart';
+import 'app/utils/svg_icon.dart';
+import 'features/manual/pages/manuals_page.dart';
+import 'features/home_page/pages/home_page.dart';
+import 'features/library/presentation/pages/library_page.dart';
+import 'features/profile/presentation/pages/profile_page.dart';
 
 class Wrapper extends StatefulWidget {
   const Wrapper({super.key});

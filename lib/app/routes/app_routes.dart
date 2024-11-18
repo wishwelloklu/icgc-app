@@ -15,5 +15,7 @@ class AppRoutes {
 
   static const String variableReadPage = 'variableReadPage';
 
-  static const String loginWithPhone='loginWithPhone';
+  static const String loginWithPhone = 'loginWithPhone';
+
+  static const String continueReading = 'continueReading';
 }

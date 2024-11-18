@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:icgc/app/theme/app_color.dart';
-import 'package:icgc/core/presentation/text/title_text.dart';
+import '../../../app/theme/app_color.dart';
+import '../../../core/presentation/text/title_text.dart';
 
 import '../data/models/officiating_category.dart';
 

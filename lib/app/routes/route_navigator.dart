@@ -11,6 +11,13 @@ routeAndRemoveNavigator(BuildContext context, String routeName,
       arguments: arguments);
 }
 
+routeAndReplaceNavigator(BuildContext context, String routeName,
+    {dynamic arguments}) {
+  Navigator.of(context).pushReplacementNamed(
+      routeName, 
+      arguments: arguments);
+}
+
 popBack<T extends Object?>(BuildContext context, [T? result]) async {
   Navigator.pop(context, result);
 }

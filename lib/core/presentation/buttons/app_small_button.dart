@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:icgc/app/theme/app_color.dart';
-import 'package:icgc/app/theme/app_padding.dart';
-import 'package:icgc/app/theme/app_text_style.dart';
+import '../../../app/theme/app_color.dart';
+import '../../../app/theme/app_padding.dart';
+import '../../../app/theme/app_text_style.dart';
 
 class SmallButton extends StatelessWidget {
   final String text;

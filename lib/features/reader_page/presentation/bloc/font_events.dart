@@ -9,11 +9,19 @@ final class LoadBookEvent extends FontEvents {
   List<Object?> get props => [];
 }
 
-final class UpdateFontEvent extends FontEvents {
+final class UpdateFontSizeEvent extends FontEvents {
   final double fontSize;
 
-  const UpdateFontEvent(this.fontSize);
+  const UpdateFontSizeEvent(this.fontSize);
 
   @override
   List<Object?> get props => [fontSize];
+}
+
+
+final class UpdateFontFamillyEvent extends FontEvents {
+  final String fontName;
+  const UpdateFontFamillyEvent(this.fontName);
+  @override
+  List<Object?> get props => [fontName];
 }

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:icgc/app/theme/app_color.dart';
-import 'package:icgc/app/theme/app_font_size.dart';
-import 'package:icgc/app/theme/app_images.dart';
-import 'package:icgc/app/theme/app_string.dart';
-import 'package:icgc/app/theme/app_text_style.dart';
-import 'package:icgc/app/utils/svg_icon.dart';
-import 'package:icgc/core/presentation/buttons/app_text_button.dart';
-import 'package:icgc/core/presentation/text/description_text.dart';
-import 'package:icgc/core/presentation/text/title_text.dart';
+import '../../../../app/theme/app_color.dart';
+import '../../../../app/theme/app_font_size.dart';
+import '../../../../app/theme/app_images.dart';
+import '../../../../app/theme/app_string.dart';
+import '../../../../app/theme/app_text_style.dart';
+import '../../../../app/utils/svg_icon.dart';
+import '../../../../core/presentation/buttons/app_text_button.dart';
+import '../../../../core/presentation/text/description_text.dart';
+import '../../../../core/presentation/text/title_text.dart';
 
 import '../../data/model/subscription_model.dart';
 

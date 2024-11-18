@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:icgc/app/theme/app_padding.dart';
-import 'package:icgc/core/presentation/text/description_text.dart';
+import '../../../app/theme/app_padding.dart';
+import 'description_text.dart';
 
 class TextWithBackgroundColor extends StatelessWidget {
   const TextWithBackgroundColor({

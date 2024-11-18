@@ -7,6 +7,8 @@ class AppImages {
 
   static const String profileDummy = 'assets/images/profile_dummy.png';
 
+  static const String emptyState = 'assets/icons/empty_state.svg';
+
   //Search
   static const String search = 'assets/icons/search.svg';
 
@@ -36,9 +38,10 @@ class AppImages {
   static const String trendingBookImageOne = 'assets/images/trending_1.png';
   static const String trendingBookImageTwo = 'assets/images/trending_2.png';
 
-
   //Profile
-   static const String book = 'assets/icons/book.svg';
-   static const String checkCircle = 'assets/icons/check_circle.svg';
+  static const String book = 'assets/icons/book.svg';
+  static const String checkCircle = 'assets/icons/check_circle.svg';
   static const String timer = 'assets/icons/timer.svg';
+
+  static const String font = 'assets/icons/font.svg';
 }

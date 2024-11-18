@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:icgc/app/theme/app_string.dart';
-import 'package:icgc/core/presentation/text_field/icon_text_field.dart';
+import '../../../app/theme/app_string.dart';
+import '../../../core/presentation/text_field/icon_text_field.dart';
 
 import '../data/models/officiating_category.dart';
 import '../data/models/officiating_type.dart';

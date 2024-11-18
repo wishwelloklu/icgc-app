@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:icgc/core/data/bloc/book/book_events.dart';
-import 'package:icgc/core/data/bloc/book/book_states.dart';
-import 'package:icgc/core/data/models/book/book_model.dart';
+import 'book_events.dart';
+import 'book_states.dart';
+import '../../models/book/book_model.dart';
 
 class BookBloc extends Bloc<BookEvents, BookStates> {
   BookBloc() : super(BookInitialState()) {
@@ -19,7 +19,7 @@ class BookBloc extends Bloc<BookEvents, BookStates> {
   Future<List<BookModel>> loadJsonData() async {
     // Load the JSON string from the assets
     final String jsonString =
-        await rootBundle.loadString('assets/json/property_.json');
+        await rootBundle.loadString('assets/json/json_doc.json');
 
     List<dynamic> jsonData = json.decode(jsonString);
     // Decode JSON string into a Dart map or list

@@ -3,9 +3,9 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:icgc/app/theme/app_images.dart';
+import '../../../../app/theme/app_images.dart';
 
-import 'package:icgc/core/data/models/book/pages.dart';
+import 'pages.dart';
 
 class BookModel extends Equatable {
   final UniqueKey id = UniqueKey();
@@ -84,32 +84,56 @@ class BookModel extends Equatable {
 
   static List<BookModel> trendingBookList = [
     BookModel(
-        author: 'Wishwell',
+        author: 'Mensah Otabil',
         totalPage: 20,
         currentPage: 2,
         coverImageUrl: AppImages.trendingBookImageOne,
-        title: 'Book title',
-        pages: [Pages(pageNumber: 1, content: "")]),
+        title:
+            'The Rise of Urban Farming: A Solution to Global Food Insecurity?',
+        pages: [
+          Pages(
+              pageNumber: 1,
+              content:
+                  "Mr. Gregg is most notable for his 1853 appointment by President Franklin Pierce as Commissioner to the Kingdom of Hawaii. In this role he was to negotiate its annexation, which he failed to do. The picture of Mr. Gregg on his Wikipedia entry is a very faded grayish brown, and is either a competent drawing or a bad photograph of a young looking man with small glasses, a receding hairline, and a pleasant not-quite smile on his face. It occurs to me")
+        ]),
     BookModel(
-        author: 'Wishwell',
+        author: 'Mensah Otabil',
         totalPage: 20,
         currentPage: 2,
         coverImageUrl: AppImages.trendingBookImageTwo,
-        title: 'Book title',
-        pages: [Pages(pageNumber: 1, content: "")]),
+        title:
+            'Rediscovering Ancient Cultures: Lost Civilizations of South America',
+        pages: [
+          Pages(
+              pageNumber: 1,
+              content:
+                  "Mr. Gregg is most notable for his 1853 appointment by President Franklin Pierce as Commissioner to the Kingdom of Hawaii. In this role he was to negotiate its annexation, which he failed to do. The picture of Mr. Gregg on his Wikipedia entry is a very faded grayish brown, and is either a competent drawing or a bad photograph of a young looking man with small glasses, a receding hairline, and a pleasant not-quite smile on his face. It occurs to me")
+        ]),
     BookModel(
-        author: 'Wishwell',
+        author: 'Mensah Otabil',
         totalPage: 20,
         currentPage: 2,
         coverImageUrl: AppImages.trendingBookImageOne,
-        title: 'Book title',
-        pages: [Pages(pageNumber: 1, content: "")]),
+        title:
+            'Unlocking the Mysteries of the Deep Sea: New Discoveries from the Ocean Floor',
+        pages: [
+          Pages(
+              pageNumber: 1,
+              content:
+                  "Mr. Gregg is most notable for his 1853 appointment by President Franklin Pierce as Commissioner to the Kingdom of Hawaii. In this role he was to negotiate its annexation, which he failed to do. The picture of Mr. Gregg on his Wikipedia entry is a very faded grayish brown, and is either a competent drawing or a bad photograph of a young looking man with small glasses, a receding hairline, and a pleasant not-quite smile on his face. It occurs to me")
+        ]),
     BookModel(
-        author: 'Wishwell',
+        author: 'Mensah Otabil',
         totalPage: 20,
         currentPage: 2,
         coverImageUrl: AppImages.trendingBookImageTwo,
-        title: 'Book title',
-        pages: [Pages(pageNumber: 1, content: "")]),
+        title:
+            'The Future of Artificial Intelligence: How AI is Reshaping Our World',
+        pages: [
+          Pages(
+              pageNumber: 1,
+              content:
+                  "Mr. Gregg is most notable for his 1853 appointment by President Franklin Pierce as Commissioner to the Kingdom of Hawaii. In this role he was to negotiate its annexation, which he failed to do. The picture of Mr. Gregg on his Wikipedia entry is a very faded grayish brown, and is either a competent drawing or a bad photograph of a young looking man with small glasses, a receding hairline, and a pleasant not-quite smile on his face. It occurs to me")
+        ]),
   ];
 }

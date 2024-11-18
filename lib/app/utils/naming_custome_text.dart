@@ -6,13 +6,14 @@ class NamingCustomeText extends StatelessWidget {
   final String child;
   final String father;
   final String? parent;
+
   const NamingCustomeText(this.text, this.fontSize,
       {super.key, required this.child, required this.father, this.parent});
 
   List<TextSpan> parseText(String text) {
-    // Updated regex to handle bold (*b) and italic (*t) text
+    // Updated regex to handle bold (*b), italic (*t), custom markers, and placeholders
     final regex = RegExp(
-        r'(\*b(.*?)\*b)|(\*t(.*?)\*t)|(\*cc(.*?)\*cc)|(\*nc(.*?)\*nc)|(\*fn(.*?)\*fn)|(\*pr(.*?)\*pr)');
+        r'(\*b(.*?)\*b)|(\*t(.*?)\*t)|(\*cc(.*?)\*cc)|(\*nc)|(\*fn)|(\*pn)');
     final matches = regex.allMatches(text);
 
     List<TextSpan> spans = [];
@@ -26,44 +27,48 @@ class NamingCustomeText extends StatelessWidget {
             style: TextStyle(fontSize: fontSize)));
       }
 
-      // Apply style based on the detected group
+      // Apply style based on the detected group, using safe access for each group
       if (match.group(2) != null) {
         // Bold
+        final sub = match.group(2)!.toLowerCase().contains('sample prayer')
+            ? '${match.group(2)}:'
+            : match.group(2);
         spans.add(TextSpan(
-          text: match.group(2),
+          text: sub,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize),
         ));
       } else if (match.group(4) != null) {
         // Italic
         spans.add(TextSpan(
-          text: match.group(4),
+          text: '\n${match.group(4)}\n',
           style: TextStyle(fontStyle: FontStyle.italic, fontSize: fontSize),
         ));
       } else if (match.group(6) != null) {
-        // Italic
+        // Centered or custom styling
         spans.add(TextSpan(
           text: match.group(6),
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize),
         ));
-      } else if (match.group(8) != null) {
-        // Italic
+      } else if (match.group(7) != null) {
+        // Child placeholder
         spans.add(TextSpan(
           text: child,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize),
         ));
-      } else if (match.group(10) != null) {
-        // Italic
+      } else if (match.group(8) != null) {
+        // Father placeholder
         spans.add(TextSpan(
           text: father,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize),
         ));
-      } else if (match.group(12) != null) {
-        // Italic
+      } else if (match.group(9) != null) {
+        // Parent placeholder
         spans.add(TextSpan(
-          text: parent ?? match.group(12),
+          text: parent,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSize),
         ));
       }
+
       lastMatchEnd = match.end;
     }
 

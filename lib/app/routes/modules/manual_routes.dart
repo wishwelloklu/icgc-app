@@ -1,7 +1,7 @@
-import 'package:icgc/features/manual/pages/name_variable_inserting.dart';
-import 'package:icgc/features/manual/pages/officiating_list.dart';
-import 'package:icgc/features/reader_page/presentation/pages/reader_page.dart';
-import 'package:icgc/features/reader_page/presentation/pages/variable_read_page.dart';
+import '../../../features/manual/pages/name_variable_inserting.dart';
+import '../../../features/manual/pages/officiating_list.dart';
+import '../../../features/reader_page/presentation/pages/reader_page.dart';
+import '../../../features/reader_page/presentation/pages/variable_read_page.dart';
 
 import '../app_routes.dart';
 import '../route_type.dart';

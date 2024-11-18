@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:icgc/app/theme/app_raduis.dart';
+import '../../../app/theme/app_raduis.dart';
 
 class TabButton extends StatelessWidget {
   const TabButton({super.key, required this.text, this.color});

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:icgc/app/routes/app_routes.dart';
-import 'package:icgc/app/routes/route_navigator.dart';
-import 'package:icgc/app/theme/app_font_size.dart';
-import 'package:icgc/app/theme/app_string.dart';
-import 'package:icgc/core/presentation/text/description_text.dart';
-import 'package:icgc/core/presentation/text/title_text.dart';
-import 'package:icgc/features/subscription/data/model/subscription_model.dart';
-import 'package:icgc/features/subscription/presentation/widgets/sub_card.dart';
+import '../../../../app/routes/app_routes.dart';
+import '../../../../app/routes/route_navigator.dart';
+import '../../../../app/theme/app_font_size.dart';
+import '../../../../app/theme/app_string.dart';
+import '../../../../core/presentation/text/description_text.dart';
+import '../../../../core/presentation/text/title_text.dart';
+import '../../data/model/subscription_model.dart';
+import '../widgets/sub_card.dart';
 
 class SubscriptionPage extends StatefulWidget {
   const SubscriptionPage({super.key});

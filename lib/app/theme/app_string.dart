@@ -95,7 +95,7 @@ class AppString {
   static const String viewAll = "View All";
   static const String page = "Page";
   static const String whatsTrending = "What’s trending";
-  static const String outTopPick = "Our top pick for you";
+  static const String outTopPick = "Articles";
   static const String viewMore = "View More";
 
 //Library
@@ -129,4 +129,13 @@ class AppString {
   static const String childNameHint = "e.g Nyamekye";
   static const String fatherName = "Father's name";
   static const String fatherNameHint = "e.g Freeman";
+  static const String emptyOfficiatePageText = "Your offiating page is empty";
+  static const String emptyOfficiatePageTextSub =
+      "Keep track of your officiating activities here";
+  static const String add = "Add";
+  static const String manual = "Manual";
+  static const String markDone = "Mark this item as done?";
+  static const String unMarkDone = "Mark this item as undone?";
+  static const String check = "Check";
+  static const String unCheck = "Uncheck";
 }
