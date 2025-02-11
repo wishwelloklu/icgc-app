@@ -2,10 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:icgc/app/routes/modules/sermon_routes%20copy.dart';
 import 'modules/auth_routes.dart';
 import 'modules/home_routes.dart';
 import 'modules/manual_routes.dart';
+import 'modules/more_routes.dart';
 import 'modules/onboard_routes.dart';
+import 'modules/sermon_routes.dart';
 import 'route_type.dart';
 
 import 'modules/wrapper_routes.dart';
@@ -19,6 +22,9 @@ class Routes {
       ...homeRoutes,
       ...wrapperRoute,
       ...manualRoute,
+      ...moreRoutes,
+      ...sermonRoutes,
+      ...declarationRoutes,
     };
   }
 

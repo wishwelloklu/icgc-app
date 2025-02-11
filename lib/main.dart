@@ -3,7 +3,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'app/cache/cache_keys.dart';
 import 'features/library/data/models/notes_item_model.dart';
 import 'features/manual/data/models/naming_ceremoney_variable.dart';
-// import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'app.dart';
 
 void main() async {
@@ -14,6 +13,7 @@ void main() async {
   Hive.registerAdapter(NotesItemModelAdapter());
   Hive.registerAdapter(NamingCeremoneyVariableAdapter());
   await Hive.openBox<NotesItemModel>(CacheKeys.notesKey);
+  await Hive.openBox<bool>('device');
   await Hive.openBox<NamingCeremoneyVariable>(CacheKeys.namingKey);
  
   runApp(const App());

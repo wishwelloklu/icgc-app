@@ -3,11 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:icgc/app/theme/app_color.dart';
 import 'package:icgc/app/utils/debounce.dart';
+import 'package:icgc/features/home_page/widgets/policy_card.dart';
 import 'package:icgc/features/manual/data/models/policy_model.dart';
 import '../../../app/routes/app_routes.dart';
 import '../../../app/routes/route_navigator.dart';
 import '../../../app/utils/colors_generator.dart';
 
+import '../../../app/utils/screen_size.dart';
 import '../../../core/data/models/book/book_model.dart';
 import '../../../core/data/models/book/pages.dart';
 import '../../../core/presentation/text_field/search_text_field.dart';
@@ -15,7 +17,7 @@ import '../data/bloc/policy_bloc/policy_bloc.dart';
 import '../data/bloc/policy_bloc/policy_events.dart';
 import '../data/bloc/policy_bloc/policy_states.dart';
 import '../data/models/read_model.dart';
-import '../widgets/policy_card.dart';
+import '../widgets/policy_tile.dart';
 
 class PoliciesPage extends StatefulWidget {
   const PoliciesPage({super.key});
@@ -58,6 +60,9 @@ class _PoliciesPageState extends State<PoliciesPage> {
 
   @override
   Widget build(BuildContext context) {
+    var isTablet = ScreenSizeHelper(context).isTablet;
+    var isPortrait = ScreenSizeHelper(context).isPortrait;
+    final height = MediaQuery.sizeOf(context).height;
     return BlocBuilder<PolicyBloc, PolicyStates>(builder: (context, state) {
       if (state is PolicyLoadedState) {
         state.policyList.removeWhere((test) => test.pages.isEmpty);
@@ -69,10 +74,24 @@ class _PoliciesPageState extends State<PoliciesPage> {
               SearchTextField(
                 controller: _searchController,
                 borderColor: AppColor.textInputFieldBorder,
-                height: 10,
               ),
               const Gap(10),
-              ListView.builder(
+              GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: isTablet ? 3 : 2,
+                  mainAxisExtent: isTablet
+                      ? isPortrait
+                          ? height * .29
+                          : height * .43
+                      : height * .29,
+                  // childAspectRatio: 0.3,
+                  crossAxisSpacing: isTablet ? 20 : 5,
+                  mainAxisSpacing: isTablet
+                      ? isPortrait
+                          ? 20
+                          : 20
+                      : 15,
+                ),
                 shrinkWrap: true,
                 padding: EdgeInsets.zero,
                 itemCount: _isSearching
@@ -85,7 +104,6 @@ class _PoliciesPageState extends State<PoliciesPage> {
 
                   return GestureDetector(
                       onTap: () async {
-                        state.policyList[index].pages.removeAt(0);
                         final color = await getDominantColor(
                             'assets/images/policy_image.png');
                         routeNavigator(context, AppRoutes.readerPage,

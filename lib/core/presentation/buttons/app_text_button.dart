@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../../app/theme/app_color.dart';
+import '../../../app/theme/app_font_size.dart';
 import '../../../app/theme/app_padding.dart';
 import '../../../app/theme/app_text_style.dart';
+import '../../../app/utils/screen_size.dart';
 
 class AppTextButton extends StatelessWidget {
   final String text;
@@ -26,15 +28,19 @@ class AppTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     var isTablet = ScreenSizeHelper(context).isTablet;
     return SizedBox(
-      height: height,
+      height:
+          isTablet ? AppPadding.tabletButtonHeight : AppPadding.buttonHeight,
       width: width,
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
           backgroundColor: backgroundColor,
           shape: RoundedRectangleBorder(
-            side: showBorder ? const BorderSide(color: AppColor.textInputFieldBorder) : BorderSide.none,
+            side: showBorder
+                ? const BorderSide(color: AppColor.textInputFieldBorder)
+                : BorderSide.none,
             borderRadius: BorderRadius.circular(AppPadding.buttonRadius),
           ),
         ),
@@ -45,7 +51,10 @@ class AppTextButton extends StatelessWidget {
                 child: CircularProgressIndicator.adaptive(strokeWidth: 2))
             : Text(
                 text,
-                style: AppTextStyle.buttonText(color: color),
+                style: AppTextStyle.buttonText(
+                    fontWeight: FontWeight.w500,
+                    color: color,
+                    size: isTablet ? AppFontSize.normal : AppFontSize.medium),
               ),
       ),
     );

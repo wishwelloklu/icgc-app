@@ -13,8 +13,8 @@ class OfficiatingList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = ScreenSizeHelper.determineTabletScreenSize(context);
-    final isSmallTablet = screenSize == TabletScreenSize.medium;
+    final screenSize = ScreenSizeHelper(context).determineTabletScreenSize;
+    final isSmallTablet = screenSize == DeviceScreenSize.medium;
     final data = ModalRoute.settingsOf(context)?.arguments as dynamic;
     final isList = data is List;
     if (isList) {

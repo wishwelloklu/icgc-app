@@ -7,10 +7,11 @@ class CustomeText extends StatelessWidget {
   final double fontSize;
   final int? maxLine;
   const CustomeText(
-    this.text,
-    this.fontSize, {
+ {
     super.key,
     this.maxLine,
+    required this.text,
+    required this.fontSize,
     required this.searchText,
     required this.fontName,
   });

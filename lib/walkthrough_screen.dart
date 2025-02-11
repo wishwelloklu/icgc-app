@@ -6,6 +6,7 @@ import 'app/theme/app_color.dart';
 import 'app/theme/app_font_size.dart';
 import 'app/theme/app_images.dart';
 import 'app/theme/app_string.dart';
+import 'app/utils/screen_size.dart';
 import 'app/utils/svg_icon.dart';
 import 'core/presentation/buttons/app_primary_button.dart';
 import 'core/presentation/buttons/app_text_button.dart';
@@ -21,18 +22,23 @@ class WalkthroughScreen extends StatefulWidget {
 
 class _WalkthroughScreenState extends State<WalkthroughScreen> {
   int _selectIndex = 0;
+  final walkThroughImages = <String>[
+    AppImages.walkthroughOne,
+    AppImages.walkthroughTwo,
+    AppImages.walkthroughThree,
+  ];
+  final walkThroughText = <String>[
+    AppString.walkthroughOneText,
+    AppString.walkthroughTwoText,
+    AppString.walkthroughThreeText,
+  ];
   @override
   Widget build(BuildContext context) {
-    const walkThroughImages = <String>[
-      AppImages.walkthroughOne,
-      AppImages.walkthroughTwo,
-      AppImages.walkthroughThree,
-    ];
-    const walkThroughText = <String>[
-      AppString.walkthroughOneText,
-      AppString.walkthroughTwoText,
-      AppString.walkthroughThreeText,
-    ];
+    var isTablet = ScreenSizeHelper(context).isTablet;
+    var isPortrait = ScreenSizeHelper(context).isPortrait;
+    final width = MediaQuery.sizeOf(context).width;
+    final double dotSize = isTablet ? 15 : 8;
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -44,39 +50,50 @@ class _WalkthroughScreenState extends State<WalkthroughScreen> {
               child: PageView.builder(
                 onPageChanged: (value) => setState(() => _selectIndex = value),
                 itemCount: walkThroughImages.length,
-                itemBuilder: (context, index) => Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 32),
-                      child: TitleText(
-                        text: walkThroughText[index],
-                        maxLine: 10,
-                        fontSize: AppFontSize.titleMedium,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 32),
+                        child: TitleText(
+                          text: walkThroughText[index],
+                          maxLine: 10,
+                          fontSize: isTablet
+                              ? AppFontSize.titleLarge
+                              : AppFontSize.titleMedium,
+                        ),
                       ),
-                    ),
-                    const Gap(32),
-                    SvgIcon(
-                      icon: walkThroughImages[index],
-                      size: 300,
-                    ),
-                  ],
-                ),
+                      const Gap(32),
+                      Expanded(
+                        child: SvgIcon(
+                          icon: walkThroughImages[index],
+                          size: isTablet ? 500 : null,
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
             const Gap(32),
             AnimatedSmoothIndicator(
               activeIndex: _selectIndex,
               count: walkThroughImages.length,
-              effect: const WormEffect(
-                  dotWidth: 8,
-                  dotHeight: 8,
+              effect: WormEffect(
+                  dotWidth: dotSize,
+                  dotHeight: dotSize,
                   spacing: 19,
                   activeDotColor: AppColor.secondaryColor,
                   dotColor: AppColor.grey),
             ),
             const Gap(32),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
+              padding: EdgeInsets.symmetric(
+                  horizontal: isTablet
+                      ? isPortrait
+                          ? width * .1
+                          : width * .2
+                      : 40),
               child: Column(
                 children: [
                   PrimaryButton(

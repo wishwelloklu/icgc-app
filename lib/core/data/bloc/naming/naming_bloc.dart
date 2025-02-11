@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -68,22 +67,6 @@ class NamingBloc extends Bloc<NamingEvents, NamingStates> {
     // Use the data (this can be cast or used directly depending on your JSON structure)
   }
 
-  Future<BookModel> _loadJsonData(String path) async {
-    // Run the decryption in a different isolate using `compute`
-    return await compute(_isolateLoadJson, {'path': path});
-  }
 }
 
 // This function runs in the isolate
-Future<BookModel> _isolateLoadJson(Map<String, dynamic> args) async {
-  final path = args['path'];
-
-  final String jsonString =
-      await rootBundle.loadString('assets/json/$path.json');
-
-  final jsonData = json.decode(jsonString);
-  // Decode JSON string into a Dart map or list
-  final book = BookModel.fromMap(jsonData);
-
-  return book;
-}

@@ -1,7 +1,11 @@
 extension StringExtension on String {
   String get initial {
     final tokens = split(' ');
-    return tokens.first[0];
+    if (tokens.length > 1) {
+      final token0 = tokens.firstWhere((token) => num.tryParse(token) == null);
+      return token0[0];
+    }
+    return this[0];
   }
 
   String get capitalizeFirst {

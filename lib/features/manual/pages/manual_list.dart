@@ -58,7 +58,10 @@ class _ManualListState extends State<ManualList> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = ScreenSizeHelper.determineTabletScreenSize(context);
+    var isTablet = ScreenSizeHelper(context).isTablet;
+    var isPortrait = ScreenSizeHelper(context).isPortrait;
+    final height = MediaQuery.sizeOf(context).height;
+    final width = MediaQuery.sizeOf(context).width;
     return BlocBuilder<BookBloc, BookStates>(buildWhen: (previous, current) {
       return current is BookLoadedState ||
           current is BookInitialState ||
@@ -74,7 +77,7 @@ class _ManualListState extends State<ManualList> {
               SearchTextField(
                 controller: _searchController,
                 borderColor: AppColor.textInputFieldBorder,
-                height: 10,
+                height: isTablet ? null : 10,
               ),
               const Gap(10),
               Expanded(
@@ -83,12 +86,19 @@ class _ManualListState extends State<ManualList> {
                   itemCount:
                       _isSearching ? _searchBookList.length : list.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount:
-                        screenSize == TabletScreenSize.medium ? 3 : 2,
-                    mainAxisExtent:
-                        screenSize == TabletScreenSize.medium ? 320 : 280,
-                    // childAspectRatio: 0.,
-                    // mainAxisSpacing: 10,
+                    crossAxisCount: isTablet ? 3 : 2,
+                    mainAxisExtent: isTablet
+                        ? isPortrait
+                            ? height * .29
+                            : height * .47
+                        : height * .29,
+                    // childAspectRatio: 0.3,
+                    crossAxisSpacing: isTablet ? 10 : 5,
+                    mainAxisSpacing: isTablet
+                        ? isPortrait
+                            ? 20
+                            : 20
+                        : 15,
                   ),
                   itemBuilder: (context, index) {
                     final book =
@@ -96,13 +106,14 @@ class _ManualListState extends State<ManualList> {
                     book.pages
                         .removeWhere((element) => element.content.isEmpty);
                     return BookCard(
+                      width: isTablet
+                          ? isPortrait
+                              ? width * .3
+                              : width * .25
+                          : width * .53,
                       book: book,
                       images: book.coverImageUrl,
-                      // imageHeight: screenSize == TabletScreenSize.medium
-                      //     ? MediaQuery.sizeOf(context).width * .4
-                      //     : null,
                       onTap: () async {
-                        // book.pages.removeAt(0);
                         final color =
                             await getDominantColor(book.coverImageUrl);
                         routeNavigator(context, AppRoutes.readerPage,

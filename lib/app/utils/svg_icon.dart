@@ -8,12 +8,14 @@ class SvgIcon extends StatelessWidget {
       required this.icon,
       this.color,
       this.width,
+      this.fit,
       this.height});
   final Color? color;
   final double? size;
   final double? width;
   final double? height;
   final String icon;
+  final BoxFit? fit;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,9 @@ class SvgIcon extends StatelessWidget {
       icon,
       height: height ?? size,
       width: width ?? size,
-      color: color,
+      fit: fit?? BoxFit.contain,
+      colorFilter:
+          color != null ? ColorFilter.mode(color!, BlendMode.srcATop) : null,
     );
   }
 }

@@ -28,48 +28,49 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = ScreenSizeHelper.determineTabletScreenSize(context);
+    var isTablet = ScreenSizeHelper(context).isTablet;
+    var isPortrait = ScreenSizeHelper(context).isPortrait;
+    final width = MediaQuery.sizeOf(context).width;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
         child: ListView(
           shrinkWrap: true,
           padding: EdgeInsets.symmetric(
-              horizontal: screenSize == TabletScreenSize.medium ? 100 : 25),
+              horizontal: isTablet
+                  ? isPortrait
+                      ? width * .1
+                      : width * .2
+                  : 25),
           children: [
             const Gap(10),
-            const TitleText(
+            TitleText(
               text: AppString.welcome,
               maxLine: 10,
-              fontSize: AppFontSize.titleLarge,
+              fontSize:
+                  isTablet ? AppFontSize.headLineLarge : AppFontSize.titleLarge,
             ),
             const Gap(10),
             Text(
               AppString.loginSubTitle,
               style: AppTextStyle.appDescription(
-                  size: AppFontSize.medium, color: AppColor.subTextColor),
+                  size: isTablet ? AppFontSize.normal : AppFontSize.medium,
+                  color: AppColor.subTextColor),
               textAlign: TextAlign.center,
             ),
             const Gap(22),
             const Gap(20),
             InputTextField(
               controller: emailnameController,
-              isEmail: true,
-              labelText: AppString.email,
-              hintText: AppString.emailHint,
-            ),
-            const Gap(20),
-            PasswordTextField(
-              controller: passwordController,
-              labelText: AppString.password,
-              hintText: AppString.passwordHint,
+              labelText: AppString.phoneNumber,
+              hintText: AppString.phoneNumberHint,
             ),
             const Gap(32),
             PrimaryButton(
               text: AppString.login,
               onPressed: () => routeAndRemoveNavigator(
                 context,
-                AppRoutes.wrapper,
+                AppRoutes.otpPage,
               ),
             ),
             const Gap(56),

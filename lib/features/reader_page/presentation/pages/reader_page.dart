@@ -10,6 +10,7 @@ import '../../../../app/theme/app_images.dart';
 import '../../../../app/theme/app_string.dart';
 import '../../../../app/utils/custom_text.dart';
 import '../../../../app/utils/generic_modal_sheet.dart';
+import '../../../../app/utils/screen_size.dart';
 import '../../../../app/utils/svg_icon.dart';
 import '../../../../core/presentation/animated_widget.dart';
 import '../../../../core/presentation/text/description_text.dart';
@@ -38,10 +39,16 @@ class _ReadJsonState extends State<ReaderPage> {
   final _showOtherWidgets = ValueNotifier(true);
   PageController _pageController = PageController();
   late ScrollController _scrollController;
-
+  bool _isAtTop = true;
   @override
   void initState() {
     _scrollController = ScrollController();
+    // Add listener to the ScrollController
+    _scrollController.addListener(() {
+      setState(() {
+        _isAtTop = _scrollController.offset > 1000.0;
+      });
+    });
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final readModel = ModalRoute.settingsOf(context)!.arguments as ReadModel;
 
@@ -60,8 +67,8 @@ class _ReadJsonState extends State<ReaderPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = ScreenSizeHelper(context).isTablet;
     final readModel = ModalRoute.settingsOf(context)!.arguments as ReadModel;
-
     final book = readModel.book;
     totalPage = book.pages.length;
     return BlocBuilder<FontBloc, FontStates>(builder: (context, state) {
@@ -160,9 +167,14 @@ class _ReadJsonState extends State<ReaderPage> {
                                                           Builder(builder:
                                                               (context) {
                                                             return CustomeText(
-                                                              book.pages[index]
+                                                              text: book
+                                                                  .pages[index]
                                                                   .content,
-                                                              state.fontSize,
+                                                              fontSize: isTablet
+                                                                  ? state.fontSize +
+                                                                      5
+                                                                  : state
+                                                                      .fontSize,
                                                               searchText:
                                                                   _searchText,
                                                               fontName: state
@@ -178,6 +190,7 @@ class _ReadJsonState extends State<ReaderPage> {
                                             );
                                           },
                                         ),
+                                       
                                         Positioned(
                                           top: 0,
                                           left: 0,
@@ -307,12 +320,13 @@ class _ReadJsonState extends State<ReaderPage> {
                                             ),
                                           ),
                                         )
+                                     
                                       ],
                                     ),
                                   ),
                                   floatingActionButton: _scrollController
                                           .hasClients
-                                      ? _scrollController.offset + 100 == 0.0
+                                      ? !_isAtTop
                                           ? IconButton(
                                               onPressed: () {
                                                 _scrollController.jumpTo(

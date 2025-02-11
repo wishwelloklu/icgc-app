@@ -28,14 +28,14 @@ class _SignupPageState extends State<SignupPage> {
   final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final screenSize = ScreenSizeHelper.determineTabletScreenSize(context);
+    final screenSize = ScreenSizeHelper(context).determineTabletScreenSize;
     return Scaffold(
       backgroundColor: AppColor.pageBackground,
       body: Center(
         child: ListView(
           shrinkWrap: true,
           padding: EdgeInsets.symmetric(
-              horizontal: screenSize == TabletScreenSize.medium ? 100 : 25),
+              horizontal: screenSize == DeviceScreenSize.medium ? 100 : 25),
           children: [
             const Gap(10),
             const TitleText(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../../app/theme/app_color.dart';
+import '../../../app/theme/app_font_size.dart';
 import '../../../app/theme/app_padding.dart';
 import '../../../app/theme/app_text_style.dart';
+import '../../../app/utils/screen_size.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String text;
@@ -24,9 +26,11 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     var isTablet = ScreenSizeHelper(context).isTablet;
     return SizedBox(
       width: width ?? MediaQuery.of(context).size.width,
-      height: height,
+      height:
+          isTablet ? AppPadding.tabletButtonHeight : AppPadding.buttonHeight,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           textStyle: AppTextStyle.buttonText(),
@@ -46,7 +50,9 @@ class PrimaryButton extends StatelessWidget {
             : Text(
                 text,
                 style: AppTextStyle.buttonText(
-                    color: textColor ?? AppColor.whiteColor),
+                    fontWeight: FontWeight.w500,
+                    color: textColor ?? AppColor.whiteColor,
+                    size: isTablet ? AppFontSize.normal : AppFontSize.medium),
               ),
       ),
     );

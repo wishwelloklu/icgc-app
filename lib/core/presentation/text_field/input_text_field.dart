@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import '../../../app/config/constant_config.dart';
 import '../../../app/theme/app_color.dart';
+import '../../../app/theme/app_font_size.dart';
 import '../../../app/theme/app_spacer.dart';
 import '../../../app/theme/app_text_style.dart';
+import '../../../app/utils/screen_size.dart';
 import '../text/label_text.dart';
 
 import '../../../app/theme/app_padding.dart';
 
-
-class InputTextField extends StatefulWidget {
+class InputTextField extends StatelessWidget {
   final TextEditingController controller;
   final String labelText;
   final String hintText;
@@ -36,59 +37,59 @@ class InputTextField extends StatefulWidget {
   });
 
   @override
-  State<InputTextField> createState() => _InputTextFieldState();
-}
-
-class _InputTextFieldState extends State<InputTextField> {
-  @override
   Widget build(BuildContext context) {
+    var isTablet = ScreenSizeHelper(context).isTablet;
     return Column(
       children: [
-          LabelText(
-            text: widget.labelText,
-          ),
-    
-        AppSpacer.verticalSpace(height: AppPadding.extraSmall),
+        LabelText(
+          text: labelText,
+        ),
+        AppSpacer.verticalSpace(
+            height:  AppPadding.extraSmall),
         SizedBox(
           width: MediaQuery.of(context).size.width,
           child: TextFormField(
-            controller: widget.controller,
-            onTapOutside: widget.onTapOutSide,
-            style: AppTextStyle.appInputText(),
-          
-            validator: widget.validator != null
-                ? (value) => widget.validator!(value)
-                : widget.isEmail
+            controller: controller,
+            onTapOutside: onTapOutSide,
+            style: AppTextStyle.appInputText(
+                size: isTablet ? AppFontSize.normal : AppFontSize.medium),
+            validator: validator != null
+                ? (value) => validator!(value)
+                : isEmail
                     ? (value) {
                         RegExp regex = RegExp(ConstantConfig.emailPattern);
                         if (value == null || value.isEmpty) {
-                          return "${widget.labelText} field is required";
+                          return "$labelText field is required";
                         } else if (!regex.hasMatch(value)) {
                           return "Please enter a valid email address";
                         }
                         return null;
                       }
-                    : widget.isRequired
+                    : isRequired
                         ? (text) {
                             if (text == null || text.isEmpty) {
-                              return "${widget.labelText} field is required";
+                              return "$labelText field is required";
                             }
                             return null;
                           }
                         : null,
-            enableSuggestions: widget.isSuggest,
-            keyboardType: widget.isEmail
-                ? TextInputType.emailAddress
-                : widget.textInputType,
-            textCapitalization: widget.isEmail
-                ? TextCapitalization.none
-                : widget.textCapitalization,
+            enableSuggestions: isSuggest,
+            keyboardType: isEmail ? TextInputType.emailAddress : textInputType,
+            textCapitalization:
+                isEmail ? TextCapitalization.none : textCapitalization,
             decoration: InputDecoration(
-              hintText: widget.hintText,
+              hintText: hintText,
               isDense: true,
               fillColor: AppColor.textInputField,
               filled: true,
-              hintStyle: AppTextStyle.appInputHint(),
+              hintStyle: isTablet
+                  ? AppTextStyle.tabletAppInputText()
+                  : AppTextStyle.appInputHint(),
+              contentPadding: EdgeInsets.symmetric(
+                  vertical: isTablet
+                      ? (AppPadding.tabletInputHeight)
+                      : (AppPadding.inputHeight),
+                  horizontal: AppPadding.width),
               border: const OutlineInputBorder(
                 borderSide: BorderSide(color: AppColor.textInputFieldBorder),
                 borderRadius: BorderRadius.all(

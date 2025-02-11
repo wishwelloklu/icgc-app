@@ -111,7 +111,7 @@ class AppString {
   static const String totalBooks = "Total books";
   static const String duration = "Duration";
   static const String completed = "Completed";
-  static const String notification = "Notification";
+  static const String notification = "Notifications";
   static const String subscription = "Subscription";
   static const String security = "Security";
   static const String help = "Help";
@@ -138,4 +138,60 @@ class AppString {
   static const String unMarkDone = "Mark this item as undone?";
   static const String check = "Check";
   static const String unCheck = "Uncheck";
+
+  static const String churchName = 'International Central\nGosple Church';
+
+  static const String sermons = 'Sermons';
+
+  static const String officiate = 'Officiate';
+
+  static const String samples = 'Samples';
+
+  static const String declaration = 'Declaration';
+
+  static const String others = 'Others';
+
+  static const String prayer = 'Prayer';
+
+  static const String theme = 'Theme';
+
+  static const String noNotification = 'No Notification';
+
+  static const String notificationText =
+      'All your notifications will appear here';
+
+  static const String noSample = 'No Sample';
+
+  static const String emptySampleText = 'There are no samples yet';
+
+ static const String htmlSermon = """
+<h1 style="color:#2C3E50; text-align:center;">The Power of Faith</h1>
+
+<h2 style="color:#2980B9;">Opening Scripture</h2>
+<p><strong>Hebrews 11:1 (NIV)</strong> - "Now faith is confidence in what we hope for and assurance about what we do not see."</p>
+
+<h2 style="color:#2980B9;">Introduction</h2>
+<p>Faith is the foundation of our walk with God. It gives us the courage to trust Him even when we cannot see the outcome. Today, we will explore how faith empowers us to overcome challenges, grow spiritually, and experience God's promises.</p>
+
+<h2 style="color:#2980B9;">Main Points</h2>
+
+<h3>1. Faith Overcomes Fear</h3>
+<p>When Peter walked on water, his faith kept him afloat, but when he doubted, he began to sink. <strong>(Matthew 14:29-31)</strong>.</p>
+
+<h3>2. Faith Moves Mountains</h3>
+<p>Jesus said, "If you have faith as small as a mustard seed, you can say to this mountain, ‘Move from here to there,’ and it will move." <strong>(Matthew 17:20)</strong></p>
+
+<h3>3. Faith Pleases God</h3>
+<p>Without faith, it is impossible to please God. <strong>(Hebrews 11:6)</strong></p>
+
+<h2 style="color:#2980B9;">Conclusion</h2>
+<p>Faith is not just believing in God's existence, but trusting Him completely in all aspects of our lives. Let us walk by faith and not by sight. <strong>(2 Corinthians 5:7)</strong></p>
+
+<h2 style="color:#2980B9;">Closing Prayer</h2>
+<p>Lord, strengthen our faith and help us trust You in every situation. Let us be guided by Your Word and walk boldly in faith. Amen.</p>
+""";
+
+  static  const String emptyThemeText = 'There are no themes yet';
+
+  static  const String noTheme = 'No themes';
 }

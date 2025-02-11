@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../app/theme/app_color.dart';
 import '../../../app/theme/app_font_size.dart';
 import '../../../app/theme/app_text_style.dart';
+import '../../../app/utils/screen_size.dart';
 
 class LabelText extends StatelessWidget {
   final String text;
@@ -22,13 +23,15 @@ class LabelText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isTablet = ScreenSizeHelper(context).isTablet;
     return SizedBox(
       width: width ?? MediaQuery.of(context).size.width,
       child: Text(
         text,
         maxLines: maxLine,
         textAlign: textAlign,
-        style: AppTextStyle.appLabel(color: color, size: fontSize),
+        style: AppTextStyle.appLabel(
+            color: color, size: isTablet ? AppFontSize.medium : fontSize),
       ),
     );
   }

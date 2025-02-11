@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:icgc/app/utils/screen_size.dart';
 import '../../../app/theme/app_color.dart';
 import '../../../app/theme/app_images.dart';
 import '../../../app/theme/app_padding.dart';
@@ -42,8 +43,9 @@ class SearchTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     var isTablet = ScreenSizeHelper(context).isTablet;
     return SizedBox(
-      height: 40,
+      height: isTablet ? 60 : 40,
       child: TextField(
         controller: controller,
         onChanged: onChange,
@@ -57,16 +59,23 @@ class SearchTextField extends StatelessWidget {
         decoration: InputDecoration(
           hintText: hintText,
           contentPadding: EdgeInsets.symmetric(
-              vertical: height ?? AppPadding.inputHeight,
+              vertical: isTablet
+                  ? AppPadding.tabletInputHeight
+                  : AppPadding.inputHeight,
               horizontal: AppPadding.width),
           isDense: true,
           prefixIcon: Container(
             padding: const EdgeInsets.symmetric(horizontal: 14),
-            child: const SvgIcon(icon: AppImages.search),
+            child: SvgIcon(
+              icon: AppImages.search,
+              size: isTablet ? AppPadding.tabletIconSize : null,
+            ),
           ),
           fillColor: AppColor.textInputField,
           filled: true,
-          hintStyle: AppTextStyle.appInputText(),
+          hintStyle: isTablet
+              ? AppTextStyle.tabletAppInputText()
+              : AppTextStyle.appInputHint(),
           border: OutlineInputBorder(
               borderSide: borderColor != null
                   ? BorderSide(color: borderColor!, width: 1)

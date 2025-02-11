@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../app/theme/app_color.dart';
+import '../../../app/theme/app_font_size.dart';
+import '../../../app/utils/screen_size.dart';
 import '../../../core/presentation/text/title_text.dart';
 
 import '../data/models/officiating_category.dart';
@@ -10,6 +12,7 @@ class OfficiateModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isTablet = ScreenSizeHelper(context).isTablet;
     return ListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       shrinkWrap: true,
@@ -21,6 +24,8 @@ class OfficiateModal extends StatelessWidget {
         title: TitleText(
           text: OfficiatingCategory.categoryList[index].ceremony,
           textAlign: TextAlign.left,
+          fontSize:
+              isTablet ? AppFontSize.titleMedium : AppFontSize.labelMedium,
         ),
       ),
     );

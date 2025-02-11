@@ -15,6 +15,7 @@ import 'package:icgc/features/manual/widgets/officiate_modal.dart';
 import '../../../app/routes/app_routes.dart';
 import '../../../app/routes/route_navigator.dart';
 import '../../../app/utils/colors_generator.dart';
+// import '../../../app/utils/screen_size.dart';
 import '../../../core/data/bloc/naming/naming_bloc.dart';
 import '../../../core/data/bloc/naming/naming_events.dart';
 import '../../../core/data/bloc/naming/naming_states.dart';
@@ -37,6 +38,7 @@ class _OfficiatePageState extends State<OfficiatePage> {
 
   @override
   Widget build(BuildContext context) {
+  //  var isTablet = ScreenSizeHelper(context).isTablet;
     return BlocBuilder<NamingBloc, NamingStates>(builder: (context, state) {
       if (state is AllNamingLoadedState) {
         final list = state.namings;
@@ -143,18 +145,21 @@ class _OfficiatePageState extends State<OfficiatePage> {
                   context
                       .read<NamingBloc>()
                       .add(LoadNamingEvent('naming_home'));
-                  routeNavigator(context, AppRoutes.variableReadPage,
-                      arguments: NamingCeremoneyVariable(
-                        child: state.namings[index].child,
-                        isCompleted: state.namings[index].isCompleted,
-                        father: state.namings[index].father,
-                        mother: state.namings[index].mother,
-                      ));
+                  routeNavigator(
+                    context,
+                    AppRoutes.variableReadPage,
+                    arguments: NamingCeremoneyVariable(
+                      child: state.namings[index].child,
+                      isCompleted: state.namings[index].isCompleted,
+                      father: state.namings[index].father,
+                      mother: state.namings[index].mother,
+                    ),
+                  );
                 },
                 child: OfficiateCard(
                   isCompleted: data.isCompleted,
                   title: 'The naming of ${data.child}',
-                  color: getRandomDarkerPrimaryColor(),
+                  color: generateColor.color,
                 ),
               ),
             );

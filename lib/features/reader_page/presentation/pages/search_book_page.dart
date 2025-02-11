@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icgc/app/theme/app_color.dart';
-import 'package:icgc/app/theme/app_text_style.dart';
 import 'package:icgc/app/utils/custom_text.dart';
 import 'package:icgc/app/utils/debounce.dart';
 import 'package:icgc/core/data/models/book/pages.dart';
@@ -95,7 +94,7 @@ class _SearchBookPageState extends State<SearchBookPage> {
 
   @override
   Widget build(BuildContext context) {
-    widget.pages.removeWhere((element) => element.title?.isEmpty ?? true);
+    // widget.pages.removeWhere((element) => element.title?.isEmpty ?? true);
     return BlocBuilder<FontBloc, FontStates>(builder: (context, fontState) {
       switch (fontState) {
         case FontState():
@@ -127,14 +126,16 @@ class _SearchBookPageState extends State<SearchBookPage> {
                               _isSearching ? book.pageNumber : index,
                               _searchController.text.isNotEmpty
                                   ? _searchController.text
-                                  : book.title!),
-                          title: TitleText(
-                            text: book.title!,
-                            textAlign: TextAlign.left,
-                          ),
+                                  : book.title ?? ''),
+                          title: book.title != null
+                              ? TitleText(
+                                  text: book.title!,
+                                  textAlign: TextAlign.left,
+                                )
+                              : null,
                           subtitle: _isSearching
                               ? CustomeText(
-                                  book.content,
+                                  text:book.content,fontSize: 
                                   fontState.fontSize,
                                   searchText:
                                       _searchController.text.toLowerCase(),
@@ -156,63 +157,7 @@ class _SearchBookPageState extends State<SearchBookPage> {
     });
   }
 
-  Widget _buildHighlightedText(String sentence, String searchTerm) {
-    final lowerSentence = sentence.toLowerCase();
-    final lowerSearchTerm = searchTerm.toLowerCase();
 
-    // Find all matches of the search term
-    final matches = <Match>[];
-    int start = 0;
-    while (start < lowerSentence.length) {
-      final index = lowerSentence.indexOf(lowerSearchTerm, start);
-      if (index == -1) break;
-      matches.add(Match(index, index + lowerSearchTerm.length));
-      start = index + lowerSearchTerm.length;
-    }
-
-    if (matches.isEmpty) {
-      return Text(sentence); // No matches, return normal text
-    }
-
-    // Build TextSpan with highlights
-    List<TextSpan> spans = [];
-    int lastIndex = 0;
-
-    for (final match in matches) {
-      if (match.start > lastIndex) {
-        spans.add(TextSpan(
-            text: sentence.substring(lastIndex, match.start),
-            style: const TextStyle(color: Colors.black)));
-      }
-
-      spans.add(TextSpan(
-        text: sentence.substring(match.start, match.end),
-        style: AppTextStyle.appDescription(
-            backgroundColor: AppColor.yellow,
-            color: AppColor.blackColor,
-            size: 16),
-      ));
-
-      lastIndex = match.end;
-    }
-
-    // Add remaining text if any
-    if (lastIndex < sentence.length) {
-      spans.add(TextSpan(
-        text: sentence.substring(lastIndex),
-        style:
-            AppTextStyle.appDescription(color: AppColor.blackColor, size: 16),
-      ));
-    }
-
-    return RichText(
-      text: TextSpan(
-        children: spans,
-        style:
-            AppTextStyle.appDescription(color: AppColor.blackColor, size: 16),
-      ),
-    );
-  }
 }
 
 class Match {

@@ -125,8 +125,8 @@ class ContinueReading extends StatelessWidget {
                       builder: (context, state) {
                     if (state is FontState) {
                       return CustomeText(
-                        book.pages[0].content,
-                        18,
+                        text: book.pages[0].content,
+                        fontSize: 18,
                         searchText: '',
                         fontName: state.fontName,
                       );

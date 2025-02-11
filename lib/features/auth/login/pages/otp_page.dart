@@ -80,7 +80,9 @@ class _OtpPageState extends State<OtpPage> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = ScreenSizeHelper.determineTabletScreenSize(context);
+    var isTablet = ScreenSizeHelper(context).isTablet;
+    var isPortrait = ScreenSizeHelper(context).isPortrait;
+    final width = MediaQuery.sizeOf(context).width;
     final arguments =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
     if (arguments != null) {
@@ -107,8 +109,10 @@ class _OtpPageState extends State<OtpPage> {
                   color: AppColor.pageBackground,
                   child: ListView(
                     padding: EdgeInsets.symmetric(
-                        horizontal: screenSize == TabletScreenSize.medium
-                            ? 100
+                        horizontal: isTablet
+                            ? isPortrait
+                                ? width * .15
+                                : width * .25
                             : AppPadding.normal),
                     children: [
                       AppSpacer.verticalSpace(),
@@ -146,7 +150,7 @@ class _OtpPageState extends State<OtpPage> {
                                 focusNode: focusNode,
                                 onCompleted: (pin) {
                                   routeAndRemoveNavigator(
-                                      context, AppRoutes.subscriptionPage);
+                                      context, AppRoutes.wrapper);
                                 },
                               ),
                             ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import '../../../../app/theme/app_color.dart';
 import '../../../../app/theme/app_string.dart';
+import '../../../../app/utils/screen_size.dart';
 import '../../../../core/presentation/buttons/app_primary_button.dart';
 import '../../../../core/presentation/buttons/app_text_button.dart';
 import '../../../../core/presentation/text/description_text.dart';
@@ -15,11 +16,19 @@ class LogoutDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isTablet = ScreenSizeHelper(context).isTablet;
+    var isPortrait = ScreenSizeHelper(context).isPortrait;
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Center(
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20),
+          width: MediaQuery.sizeOf(context).width *
+              (isTablet
+                  ? isPortrait
+                      ? .6
+                      : .5
+                  : .8),
+          // margin: EdgeInsets.symmetric(horizontal:  ? 40 : 20),
           padding: const EdgeInsets.symmetric(horizontal: 16),
           height: 200,
           alignment: Alignment.center,

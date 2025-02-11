@@ -32,6 +32,7 @@ class AppPadding {
   //Button
   static const double buttonWidth = 150.0;
   static const double buttonHeight = 44.0;
+  static const double tabletButtonHeight = 55.0;
   static const double buttonNormaHeight = 40.0;
   static const double buttonSmallHeight = 35.0;
 
@@ -51,6 +52,7 @@ class AppPadding {
   static const double contactDetailsProfile = 100.0;
   static const double profileImage = 54.0;
   static const double defaultIcon = 24.0;
+  static const double tabletIconSize = 30.0;
   static const double userNavIcon = 20.0;
   static const double smallIcon = 18.0;
   static const double smallerIcon = 16.0;
@@ -61,7 +63,9 @@ class AppPadding {
   static const double textFieldRadius = 8.0;
   static const double buttonRadius = 6.0;
 
-  static const double inputHeight = 10;
+  static const double inputHeight = 14;
+
+  static const double tabletInputHeight = 18;
 
   static const double width = 16;
 }

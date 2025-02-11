@@ -20,4 +20,12 @@ class AppRoutes {
   static const String continueReading = 'continueReading';
 
   static const String epubReader = 'epubReader';
+
+  static const String library = 'library';
+
+  static const String notifications = 'notifications';
+
+  static const String sampleDetails = 'sampleDetails';
+
+  static const String themeDetails = 'themeDetails';
 }

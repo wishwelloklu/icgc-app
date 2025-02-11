@@ -119,7 +119,7 @@ class _NotesPageState extends State<NotesPage> with TickerProviderStateMixin {
                   time: notes.dateTime.deliveredTime(),
                   note: notes.note,
                   title: notes.title,
-                  color: getRandomDarkerPrimaryColor(),
+                  color: generateColor.color,
                 ),
               );
             },

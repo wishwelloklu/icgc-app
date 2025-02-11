@@ -20,8 +20,8 @@ class NameVariableInserting extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = ScreenSizeHelper.determineTabletScreenSize(context);
-    final isSmallTablet = screenSize == TabletScreenSize.medium;
+    final screenSize = ScreenSizeHelper(context).determineTabletScreenSize;
+    final isSmallTablet = screenSize == DeviceScreenSize.medium;
     final title = ModalRoute.settingsOf(context)?.arguments as String;
     final childNameController = useTextEditingController();
     final fatherNameController = useTextEditingController();

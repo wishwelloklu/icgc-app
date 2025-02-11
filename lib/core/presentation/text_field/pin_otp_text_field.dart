@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import '../../../app/theme/app_color.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import '../../../app/utils/screen_size.dart';
 import '../text/label_text.dart';
 
 class PinOrOTPTextField extends StatefulWidget {
@@ -38,6 +39,7 @@ class _PinOrOTPTextFieldState extends State<PinOrOTPTextField> {
 
   @override
   Widget build(BuildContext context) {
+    var isTablet = ScreenSizeHelper(context).isTablet;
     return Column(
       children: [
         if (widget.labelText != null)
@@ -55,8 +57,8 @@ class _PinOrOTPTextFieldState extends State<PinOrOTPTextField> {
           pinTheme: PinTheme(
             shape: PinCodeFieldShape.box,
             borderRadius: BorderRadius.circular(8),
-            fieldHeight: 45,
-            fieldWidth: 45,
+            fieldHeight: isTablet ? 70 : 45,
+            fieldWidth: isTablet ? 70 : 45,
             activeFillColor: AppColor.textInputFieldBorder,
             activeColor: AppColor.textInputFieldBorder,
             inactiveFillColor: AppColor.whiteColor,

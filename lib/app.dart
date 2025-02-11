@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:icgc/orientation_lock.dart';
 // import 'package:flutter_native_splash/flutter_native_splash.dart';
 // import 'package:icgc/app/routes/route_navigator.dart';
 import 'app/config/navigation_key.dart';
@@ -40,14 +41,16 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: getBlocProviders,
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: ConstantConfig.appName,
-        scaffoldMessengerKey: AppNavigatorKeys.instance.scaffoldKey,
-        navigatorKey: AppNavigatorKeys.instance.navigatorKey,
-        theme: const CustomTheme(isLight: true).toThemeData(),
-        onGenerateRoute: (settings) => Routes.onGenerateRoutes(settings),
-        initialRoute: AppRoutes.splash,
+      child: OrientationLock(
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: ConstantConfig.appName,
+          scaffoldMessengerKey: AppNavigatorKeys.instance.scaffoldKey,
+          navigatorKey: AppNavigatorKeys.instance.navigatorKey,
+          theme: const CustomTheme(isLight: true).toThemeData(),
+          onGenerateRoute: (settings) => Routes.onGenerateRoutes(settings),
+          initialRoute: AppRoutes.splash,
+        ),
       ),
     );
   }

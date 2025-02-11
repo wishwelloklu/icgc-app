@@ -16,6 +16,7 @@ class AppImages {
   static const String home = 'assets/icons/home.svg';
   static const String books = 'assets/icons/books.svg';
   static const String library = 'assets/icons/library.svg';
+  static const String declaration = 'assets/icons/declaration.svg';
   static const String profile = 'assets/icons/profile.svg';
 
   //On boading
@@ -31,6 +32,8 @@ class AppImages {
 
 //Home
   static const String bell = 'assets/icons/bell.svg';
+  static const String sermons = 'assets/icons/sermon.svg';
+  static const String more = 'assets/icons/more.svg';
   static const String arrowRight = "assets/icons/arrow_right.svg";
 
   static const String bookImage = 'assets/images/book_image_1.png';
@@ -44,4 +47,10 @@ class AppImages {
   static const String timer = 'assets/icons/timer.svg';
 
   static const String font = 'assets/icons/font.svg';
+
+  static const String event2 = 'assets/images/events_images/event1.jpeg';
+
+  static const String event1 = 'assets/images/events_images/event2.jpg';
+
+  static const String event3 = 'assets/images/events_images/event3.png';
 }

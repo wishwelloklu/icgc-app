@@ -31,9 +31,10 @@ class AppTextStyle {
     double size = AppFontSize.normal,
     Color color = AppColor.blackColor,
     FontWeight fontWeight = FontWeight.w500,
+    String? fontFamily,
   }) {
     return TextStyle(
-      fontFamily: ConstantConfig.satoshi,
+      fontFamily:fontFamily?? ConstantConfig.satoshi,
       fontSize: size,
       color: color,
       fontWeight: fontWeight,
@@ -80,6 +81,16 @@ class AppTextStyle {
     );
   }
 
+  static TextStyle tabletAppInputText(
+      {double size = AppFontSize.normal,
+      Color color = AppColor.textInputHint}) {
+    return TextStyle(
+      fontFamily: ConstantConfig.satoshi,
+      fontSize: size,
+      color: color,
+    );
+  }
+
   static TextStyle appDescription({
     double size = AppFontSize.small,
     Color color = AppColor.blackColor,
@@ -87,12 +98,11 @@ class AppTextStyle {
     Color? backgroundColor,
   }) {
     return TextStyle(
-      fontFamily: ConstantConfig.satoshi,
-      fontSize: size,
-      color: color,
-      fontWeight: fontWeight,
-      backgroundColor: backgroundColor
-    );
+        fontFamily: ConstantConfig.satoshi,
+        fontSize: size,
+        color: color,
+        fontWeight: fontWeight,
+        backgroundColor: backgroundColor);
   }
 
   static TextStyle buttonText({

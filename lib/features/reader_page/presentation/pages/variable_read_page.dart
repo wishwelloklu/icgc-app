@@ -1,10 +1,8 @@
-import 'package:awesome_icons/awesome_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:icgc/app/config/navigation_key.dart';
+import 'package:icgc/app/utils/screen_size.dart';
 import 'package:icgc/features/reader_page/presentation/pages/reader_page.dart';
-import 'package:icgc/features/reader_page/presentation/pages/search_book_page.dart';
 import '../../../../app/routes/route_navigator.dart';
 import '../../../../app/theme/app_images.dart';
 import '../../../../app/utils/generic_modal_sheet.dart';
@@ -33,7 +31,7 @@ class _ReadJsonState extends State<VariableReadPage> {
   int currentPage = 1;
   String title = '';
   Color? coverColor;
-  String _searchText = '';
+  final String _searchText = '';
   final _showOtherWidgets = ValueNotifier(true);
   final PageController _pageController = PageController();
 
@@ -45,6 +43,7 @@ class _ReadJsonState extends State<VariableReadPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = ScreenSizeHelper(context).isTablet;
     final namingModel =
         ModalRoute.settingsOf(context)!.arguments as NamingCeremoneyVariable;
     return BlocBuilder<FontBloc, FontStates>(builder: (context, state) {
@@ -92,7 +91,9 @@ class _ReadJsonState extends State<VariableReadPage> {
                                             children: [
                                               NamingCustomeText(
                                                 book.pages[index].content,
-                                                state.fontSize,
+                                                isTablet
+                                                    ? state.fontSize + 5
+                                                    : state.fontSize,
                                                 father: namingModel.father,
                                                 child: namingModel.child,
                                                 parent:
@@ -131,65 +132,29 @@ class _ReadJsonState extends State<VariableReadPage> {
                                               },
                                               icon: const Icon(
                                                   Icons.keyboard_arrow_left)),
-                                          const Spacer(),
-                                          Row(
-                                            children: [
-                                              TopButtons(
-                                                  icon: const Icon(
-                                                    FontAwesomeIcons.font,
-                                                    size: 20,
-                                                  ),
-                                                  onTap: () =>
-                                                      showGenericModalSheet(
-                                                        removeDrop: true,
-                                                        showHanlde: false,
-                                                        isDismissible: true,
-                                                        child:
-                                                            const FontModal(),
-                                                        context: context,
-                                                      )),
-                                              const Gap(2),
-                                              TopButtons(
-                                                  icon: const SvgIcon(
-                                                    icon: AppImages.search,
-                                                    size: 20,
-                                                  ),
-                                                  onTap: () {
-                                                    showGenericModalSheet(
-                                                      removeDrop: true,
-                                                      showHanlde: false,
-                                                      isDismissible: true,
-                                                      isScrollControlled: false,
-                                                      child: SearchBookPage(
-                                                          pages: book.pages,
-                                                          onResult: (index,
-                                                              resultTerm) {
-                                                            popBack(context);
-                                                            setState(() {
-                                                              _searchText =
-                                                                  resultTerm;
-                                                            });
-                                                            _pageController
-                                                                .animateToPage(
-                                                                    index,
-                                                                    duration:
-                                                                        Durations
-                                                                            .medium2,
-                                                                    curve: Curves
-                                                                        .linear);
-                                                          }),
-                                                      context: context,
-                                                    );
-                                                  }),
-                                              const Gap(2),
-                                              TopButtons(
-                                                  icon: const Icon(
-                                                    FontAwesomeIcons.ellipsisH,
-                                                    size: 20,
-                                                  ),
-                                                  onTap: () {}),
-                                            ],
-                                          ),
+                                          Expanded(
+                                              child: NamingCustomeText(
+                                            book.title,
+                                            20,
+                                            isTitle: true,
+                                            father: '',
+                                            searchText: '',
+                                            child: "${namingModel.child}'s",
+                                            fontName: state.fontName,
+                                          )),
+                                          TopButtons(
+                                              icon: const SvgIcon(
+                                                icon: AppImages.font,
+                                                size: 20,
+                                              ),
+                                              onTap: () =>
+                                                  showGenericModalSheet(
+                                                    removeDrop: true,
+                                                    showHanlde: false,
+                                                    isDismissible: true,
+                                                    child: const FontModal(),
+                                                    context: context,
+                                                  )),
                                         ],
                                       ),
                                     ),

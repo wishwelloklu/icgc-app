@@ -23,14 +23,14 @@ class _LoginPageState extends State<LoginPhonePage> {
   final phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final screenSize = ScreenSizeHelper.determineTabletScreenSize(context);
+    final screenSize = ScreenSizeHelper(context).determineTabletScreenSize;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
         child: ListView(
           shrinkWrap: true,
           padding: EdgeInsets.symmetric(
-              horizontal: screenSize == TabletScreenSize.medium ? 100 : 25),
+              horizontal: screenSize == DeviceScreenSize.medium ? 100 : 25),
           children: [
             const Gap(10),
             const TitleText(

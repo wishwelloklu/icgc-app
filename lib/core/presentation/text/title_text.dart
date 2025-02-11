@@ -31,6 +31,7 @@ class TitleText extends StatelessWidget {
         color: color,
         size: fontSize,
         fontWeight: fontWeight,
+        
       ),
       overflow: TextOverflow.ellipsis,
     );

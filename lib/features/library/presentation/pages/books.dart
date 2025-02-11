@@ -15,7 +15,10 @@ class Books extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = ScreenSizeHelper.determineTabletScreenSize(context);
+    var isTablet = ScreenSizeHelper(context).isTablet;
+    var isPortrait = ScreenSizeHelper(context).isPortrait;
+    final height = MediaQuery.sizeOf(context).height;
+    final width = MediaQuery.sizeOf(context).width;
     final images = [
       'assets/images/icgc_images/book_annoited.png',
       'assets/images/icgc_images/book_chooseing.png',
@@ -40,14 +43,36 @@ class Books extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12),
           itemCount: searchTerm.isNotEmpty ? dataList.length : list.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: screenSize == TabletScreenSize.medium ? 3 : 2,
-            mainAxisExtent: screenSize == TabletScreenSize.medium ? 320 : 280,
-            crossAxisSpacing: 10,
+            crossAxisCount: isTablet
+                ? isPortrait
+                    ? 3
+                    : 4
+                : 2,
+            mainAxisExtent: isTablet
+                ? isPortrait
+                    ? height * .29
+                    : height * .47
+                : height * .29,
+            crossAxisSpacing: isTablet
+                ? isPortrait
+                    ? 10
+                    : 0
+                : 10,
+            mainAxisSpacing: isTablet
+                ? isPortrait
+                    ? 20
+                    : 20
+                : 10,
           ),
           itemBuilder: (context, index) {
             final book = searchTerm.isNotEmpty ? dataList[index] : list[index];
             book.pages.removeWhere((element) => element.content.isEmpty);
             return BookCard(
+              width: isTablet
+                    ? isPortrait
+                        ? width * .3
+                        : width * .2
+                    : width * .4,
               book: book,
               images: images[index],
               onTap: () async {

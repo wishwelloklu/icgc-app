@@ -25,7 +25,7 @@ class PasswordTextField extends StatefulWidget {
   });
 
   @override
-  _PasswordTextField createState() => _PasswordTextField();
+  State<PasswordTextField> createState() => _PasswordTextField();
 }
 
 class _PasswordTextField extends State<PasswordTextField> {

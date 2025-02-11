@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 
 class NamingCustomeText extends StatelessWidget {
   final String text;
-  final double fontSize;
-  final String child;
-  final String father;
+  final double? fontSize;
+  final String? child;
+  final bool isTitle;
+  final String? father;
   final String? parent;
   final String searchText;
-  final String fontName;
+  final String? fontName;
   const NamingCustomeText(this.text, this.fontSize,
       {super.key,
       required this.child,
       required this.father,
+      this.isTitle = false,
       this.parent,
       required this.searchText,
       required this.fontName});
@@ -46,7 +48,8 @@ class NamingCustomeText extends StatelessWidget {
               fontSize: fontSize,
               fontFamily: fontName),
         ));
-      } else if (match.group(4) != null) {
+      }
+      if (match.group(4) != null) {
         // Italic
         spans.add(TextSpan(
           text: '\n${match.group(4)}\n',
@@ -55,7 +58,8 @@ class NamingCustomeText extends StatelessWidget {
               fontSize: fontSize,
               fontFamily: fontName),
         ));
-      } else if (match.group(6) != null) {
+      }
+      if (match.group(6) != null) {
         // Centered or custom styling
         spans.add(TextSpan(
           text: match.group(6),
@@ -64,7 +68,8 @@ class NamingCustomeText extends StatelessWidget {
               fontSize: fontSize,
               fontFamily: fontName),
         ));
-      } else if (match.group(7) != null) {
+      }
+      if (match.group(7) != null) {
         // Child placeholder
         spans.add(TextSpan(
           text: child,
@@ -73,7 +78,8 @@ class NamingCustomeText extends StatelessWidget {
               fontSize: fontSize,
               fontFamily: fontName),
         ));
-      } else if (match.group(8) != null) {
+      }
+      if (match.group(8) != null) {
         // Father placeholder
         spans.add(TextSpan(
           text: father,
@@ -82,7 +88,8 @@ class NamingCustomeText extends StatelessWidget {
               fontSize: fontSize,
               fontFamily: fontName),
         ));
-      } else if (match.group(9) != null) {
+      }
+      if (match.group(9) != null) {
         // Parent placeholder
         spans.add(TextSpan(
           text: parent,
@@ -115,7 +122,9 @@ class NamingCustomeText extends StatelessWidget {
     if (lastMatchEnd < text.length) {
       spans.add(TextSpan(
           text: text.substring(lastMatchEnd),
-          style: TextStyle(fontSize: fontSize)));
+          style: TextStyle(
+              fontSize: fontSize,
+              fontWeight: isTitle ? FontWeight.bold : null)));
     }
 
     return spans;
@@ -125,6 +134,8 @@ class NamingCustomeText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text.rich(
       TextSpan(children: parseText(text)),
+      maxLines: isTitle ? 1 : null,
+      overflow: isTitle ? TextOverflow.ellipsis : null,
     );
   }
 }
