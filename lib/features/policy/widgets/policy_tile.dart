@@ -3,7 +3,7 @@ import 'package:gap/gap.dart';
 import '../../../app/theme/app_color.dart';
 import '../../../app/utils/screen_size.dart';
 import '../../../core/presentation/text/description_text.dart';
-import '../data/models/policy_model.dart';
+import '../../manual/data/models/policy_model.dart';
 
 import '../../../core/presentation/text/title_text.dart';
 

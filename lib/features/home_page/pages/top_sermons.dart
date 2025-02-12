@@ -5,10 +5,12 @@ import 'package:icgc/app/utils/screen_size.dart';
 import 'package:icgc/core/presentation/app_states/app_loading_state.dart';
 import 'package:icgc/features/sermons/data/bloc/sample_bloc/sample_bloc.dart';
 import 'package:icgc/features/sermons/data/bloc/sample_bloc/sample_states.dart';
+import 'package:icgc/features/sermons/widgets/book_cover.dart';
 
 import '../../../app/routes/app_routes.dart';
 import '../../../app/routes/route_navigator.dart';
-import '../../sermons/pages/sermon_sample.dart';
+import '../../../core/data/bloc/nav_bar_bloc/nav_bar_bloc.dart';
+import '../../../core/data/bloc/nav_bar_bloc/nav_bar_event.dart';
 import '../widgets/view_all.dart';
 
 class TopSermons extends StatelessWidget {
@@ -31,16 +33,16 @@ class TopSermons extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             ViewAllTitle(
-              onViewAll: () {},
-              text: "Top officiating manuals",
+              onViewAll: () => context.read<NavBarBloc>().add(NavBarEvent(2)),
+              text: "Top sermons",
               horizontalPadding: 0,
             ),
             SizedBox(
               height: isTablet
                   ? isPortrait
-                      ? height * .3
+                      ? height * .25
                       : height * .4
-                  : height * .3,
+                  : height * .25,
               child: ListView.separated(
                   shrinkWrap: true,
                   padding: EdgeInsets.zero,
@@ -60,14 +62,14 @@ class TopSermons extends StatelessWidget {
                         onTap: () {
                           routeNavigator(
                             context,
-                            AppRoutes.sampleDetails,
+                            AppRoutes.sermonDetails,
                             arguments: sample,
                           );
                         },
                         child: BookCover(
                           title: sample.title,
                           subTitle: sample.subTitle,
-                          color: sample.color.color,
+                          color: sample.color!.color,
                         ),
                       ),
                     );

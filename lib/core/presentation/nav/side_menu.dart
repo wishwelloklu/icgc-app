@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:icgc/app/theme/app_color.dart';
 import 'package:icgc/app/theme/app_images.dart';
@@ -9,18 +10,19 @@ import 'package:icgc/core/data/models/side_nave_item_model.dart';
 import 'package:icgc/core/presentation/nav/side_nave_item.dart';
 import 'package:icgc/core/presentation/text/title_text.dart';
 
+import '../../data/bloc/nav_bar_bloc/nav_bar_bloc.dart';
+import '../../data/bloc/nav_bar_bloc/nav_bar_event.dart';
+
 class SideMenu extends StatelessWidget {
   const SideMenu({
     super.key,
     required this.pages,
     required this.currentIndex,
-    required this.onTap,
     required this.child,
   });
 
   final int currentIndex;
   final List<Widget> pages;
-  final void Function(int) onTap;
   final Widget child;
 
   @override
@@ -86,7 +88,8 @@ class SideMenu extends StatelessWidget {
                     final isSelected = index == currentIndex;
                     final item = sideNavItems[index];
                     return InkWell(
-                      onTap: () => onTap(index),
+                      onTap: () =>
+                          context.read<NavBarBloc>().add(NavBarEvent(index)),
                       child: SideNaveItem(
                         text: item.text,
                         icon: item.icon,

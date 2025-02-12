@@ -6,6 +6,8 @@ import '../../../app/theme/app_text_style.dart';
 import '../../../app/utils/screen_size.dart';
 import '../../../core/presentation/tab_bar_page.dart';
 import '../../../core/presentation/text/title_text.dart';
+import '../../others/pages/others.dart';
+import '../../prayer/pages/prayer.dart';
 import '../../theme/pages/themes.dart';
 
 class Declaration extends StatefulWidget {
@@ -27,8 +29,8 @@ class _DeclarationState extends State<Declaration>
 
   final pages = [
     const Themes(),
-    Container(),
-    Container(),
+    const Prayer(),
+    const Others(),
   ];
 
   @override

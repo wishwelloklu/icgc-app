@@ -2,21 +2,29 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:icgc/app/theme/app_string.dart';
 import 'package:icgc/app/utils/colors_generator.dart';
 import 'package:icgc/core/data/models/color_model.dart';
 
+part 'sample_model.g.dart';
+
+@HiveType(typeId: 2)
 class SampleModel extends Equatable {
+  @HiveField(0)
   final String title;
+  @HiveField(1)
   final String subTitle;
+  @HiveField(2)
   final String sample;
-  final ColorModel color;
+
+  final ColorModel? color;
 
   const SampleModel({
     required this.title,
     required this.sample,
     required this.subTitle,
-    required this.color,
+     this.color,
   });
 
   SampleModel copyWith({
@@ -47,7 +55,7 @@ class SampleModel extends Equatable {
       title: map['title'] as String,
       subTitle: map['subTitle'] as String,
       sample: map['sample'] as String,
-      color: ColorModel.fromMap(map['sample']),
+      color: generateColor,
     );
   }
 
@@ -60,28 +68,28 @@ class SampleModel extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object> get props => [title, sample];
+  List<Object?> get props => [title, sample, subTitle, color];
 
   static List<SampleModel> sampleMock = [
-     SampleModel(
+    SampleModel(
       title: 'The Power of Faith',
       subTitle: 'This is a sermon sample sub title for testing purpose',
       sample: AppString.htmlSermon,
       color: generateColor,
     ),
-     SampleModel(
+    SampleModel(
       title: 'The Power of Faith',
       subTitle: 'This is a sermon sample sub title for testing purpose',
       sample: AppString.htmlSermon,
       color: generateColor,
     ),
-     SampleModel(
+    SampleModel(
       title: 'The Power of Faith',
       subTitle: 'This is a sermon sample sub title for testing purpose',
       sample: AppString.htmlSermon,
       color: generateColor,
     ),
-     SampleModel(
+    SampleModel(
       title: 'The Power of Faith',
       subTitle: 'This is a sermon sample sub title for testing purpose',
       sample: AppString.htmlSermon,

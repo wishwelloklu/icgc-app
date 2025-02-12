@@ -4,6 +4,7 @@ import 'package:icgc/app/theme/app_text_style.dart';
 import 'package:icgc/core/data/bloc/naming/naming_bloc.dart';
 import 'package:icgc/core/data/bloc/naming/naming_states.dart';
 import 'package:icgc/core/presentation/tab_bar_page.dart';
+import 'package:icgc/features/manual/data/bloc/manual_page_event.dart';
 import '../../../app/routes/app_routes.dart';
 import '../../../app/routes/route_navigator.dart';
 import '../../../app/theme/app_color.dart';
@@ -13,9 +14,10 @@ import '../../../app/utils/generic_modal_sheet.dart';
 import '../../../app/utils/screen_size.dart';
 import '../../../core/presentation/text/title_text.dart';
 import '../../library/data/models/collections.dart';
+import '../data/bloc/manual_page_bloc.dart';
 import 'manual_list.dart';
 import 'officiate_page.dart';
-import 'policies_page.dart';
+import '../../policy/pages/policies_page.dart';
 
 import '../widgets/officiate_modal.dart';
 
@@ -44,7 +46,11 @@ class _ManualsPageState extends State<ManualsPage>
   @override
   void initState() {
     _tabController = TabController(length: 3, vsync: this);
-
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final state = context.read<ManualPageBloc>().state;
+      _tabController.animateTo(state.index);
+      context.read<ManualPageBloc>().add(ManualPageEvent(0));
+    });
     super.initState();
   }
 

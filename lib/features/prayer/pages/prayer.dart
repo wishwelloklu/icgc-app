@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:icgc/app/routes/app_routes.dart';
-import 'package:icgc/app/routes/route_navigator.dart';
-import 'package:icgc/app/theme/app_spacer.dart';
-import 'package:icgc/core/presentation/app_states/app_loading_state.dart';
-import 'package:icgc/core/presentation/text/description_text.dart';
-import 'package:icgc/core/presentation/text/title_text.dart';
-import 'package:icgc/features/theme/data/bloc/theme_bloc.dart';
-import 'package:icgc/features/theme/data/bloc/theme_states.dart';
 
 import '../../../app/theme/app_string.dart';
 import '../../../app/utils/screen_size.dart';
 import '../../../core/presentation/app_states/app_empty_state.dart';
 import '../../../core/presentation/app_states/app_error_state.dart';
+import '../../../core/presentation/app_states/app_loading_state.dart';
+import '../../../core/presentation/text/description_text.dart';
+import '../../../core/presentation/text/title_text.dart';
+import '../../theme/data/bloc/theme_bloc.dart';
+import '../../theme/data/bloc/theme_states.dart';
 
-class Themes extends StatelessWidget {
-  const Themes({super.key});
+class Prayer extends StatelessWidget {
+  const Prayer({super.key});
 
   @override
-  Widget build(BuildContext context) {
+   Widget build(BuildContext context) {
     var isTablet = ScreenSizeHelper(context).isTablet;
     var isPortrait = ScreenSizeHelper(context).isPortrait;
     final height = MediaQuery.sizeOf(context).height;
@@ -46,16 +43,14 @@ class Themes extends StatelessWidget {
               );
             }
             return ListView.separated(
-                itemCount: themes.length,
+                itemCount: 1,
                 separatorBuilder: (context, index) => const Gap(20),
                 itemBuilder: (context, index) {
                   final theme = themes[index];
                   return ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: InkWell(
-                      onTap: () => routeNavigator(
-                          context, AppRoutes.themeDetails,
-                          arguments: theme),
+                      onTap: (){},
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Row(
@@ -70,7 +65,7 @@ class Themes extends StatelessWidget {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            AppSpacer.horizontalSpace(),
+                            Gap(16),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,7 +89,6 @@ class Themes extends StatelessWidget {
                       ),
                     ),
                   );
-               
                 });
           case ThemeErrorState():
             return AppErrorState(error: state.error);

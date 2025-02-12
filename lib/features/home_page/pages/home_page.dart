@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:icgc/app/config/constant_config.dart';
 import 'package:icgc/app/routes/app_routes.dart';
 import 'package:icgc/app/routes/route_navigator.dart';
 import 'package:icgc/app/theme/app_text_style.dart';
+import 'package:icgc/app/utils/screen_size.dart';
 import 'package:icgc/features/home_page/pages/top_policy.dart';
 import 'package:icgc/features/home_page/widgets/theme_banner.dart';
-import 'package:icgc/features/notifications/data/bloc/notification_bloc.dart';
-import 'package:icgc/features/notifications/data/bloc/notification_events.dart';
 import '../../../app/theme/app_color.dart';
 import '../../../app/theme/app_images.dart';
 import '../../../app/utils/svg_icon.dart';
@@ -22,6 +20,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = ScreenSizeHelper(context).isTablet;
     return Scaffold(
       body: SafeArea(
           child: NestedScrollView(
@@ -42,18 +41,18 @@ class HomePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Gap(30),
-                        Text(
-                          ConstantConfig.appName,
-                          style: AppTextStyle.appTitle(
-                            size: 15,
-                            fontFamily: ConstantConfig.playfairDisplay,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
                         const TitleText(
-                          text: 'Hello Victor',
-                          fontSize: 25,
-                          fontWeight: FontWeight.w900,
+                          text: ConstantConfig.appName,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        Text(
+                          'Hello Victor',
+                          style: AppTextStyle.appTitle(
+                            size: 25,
+                            fontFamily: ConstantConfig.playfairDisplay,
+                            fontWeight: FontWeight.w900,
+                          ),
                         ),
                         const Gap(10),
                       ],
@@ -65,7 +64,6 @@ class HomePage extends StatelessWidget {
                           color: AppColor.primaryColor.withOpacity(.05)),
                       child: IconButton(
                           onPressed: () {
-                         
                             routeNavigator(context, AppRoutes.notifications);
                           },
                           icon: const SvgIcon(icon: AppImages.bell)),
@@ -79,15 +77,16 @@ class HomePage extends StatelessWidget {
         body: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           shrinkWrap: true,
-          children: const [
-            EventSlider(),
-            Gap(30),
-            ThemeBanner(),
-            Gap(20),
-            TopManual(),
-            TopSermons(),
-            Gap(20),
-            TopPolicy()
+          children: [
+            const EventSlider(),
+            Gap(isTablet ? 30 : 20),
+            const ThemeBanner(),
+            Gap(isTablet ? 30 : 20),
+            const TopManual(),
+            Gap(isTablet ? 30 : 0),
+            const TopSermons(),
+            Gap(isTablet ? 30 : 20),
+            const TopPolicy()
 
             // const LatestBook(),
             // const Trendings(),

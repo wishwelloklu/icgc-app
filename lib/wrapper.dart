@@ -1,6 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icgc/app/theme/app_string.dart';
+import 'package:icgc/core/data/bloc/nav_bar_bloc/nav_bar_bloc.dart';
+import 'package:icgc/core/data/bloc/nav_bar_bloc/nav_bar_event.dart';
+import 'package:icgc/core/data/bloc/nav_bar_bloc/nav_bar_states.dart';
 import 'package:icgc/core/presentation/nav/side_menu.dart';
 
 import 'package:icgc/features/profile/presentation/pages/more_page.dart';
@@ -16,141 +20,124 @@ import 'features/home_page/pages/home_page.dart';
 import 'features/manual/pages/manuals_page.dart';
 import 'features/sermons/pages/sermons.dart';
 
-class Wrapper extends StatefulWidget {
+class Wrapper extends StatelessWidget {
   const Wrapper({super.key});
-
-  @override
-  State<Wrapper> createState() => _DeviceInteractiveState();
-}
-
-class _DeviceInteractiveState extends State<Wrapper> {
-  final _currentIndex = ValueNotifier(0);
-
-  final _pages = <Widget>[
-    const HomePage(),
-    const ManualsPage(),
-    const Sermons(),
-    const Declaration(),
-    const More(),
-  ];
 
   @override
   Widget build(BuildContext context) {
     var isTablet = ScreenSizeHelper(context).isTablet;
     var isPortrait = ScreenSizeHelper(context).isPortrait;
     final double iconSize = isTablet ? 35 : 20;
-
-    return ValueListenableBuilder(
-        valueListenable: _currentIndex,
-        builder: (context, currentIndex, _) {
-          return Scaffold(
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            body: isTablet && !isPortrait
-                ? SideMenu(
-                    currentIndex: currentIndex,
-                    pages: _pages,
-                    onTap: (index) {
-                      _currentIndex.value = index;
-                    },
-                    child: Expanded(child: _pages[currentIndex]),
-                  )
-                : _pages[currentIndex],
-            bottomNavigationBar: isPortrait
-                ? BottomNavigationBar(
-                    landscapeLayout:
-                        BottomNavigationBarLandscapeLayout.centered,
-                    type: BottomNavigationBarType.fixed,
-
-                    useLegacyColorScheme: false,
-                    selectedIconTheme:
-                        const IconThemeData(color: AppColor.primaryColor),
-                    selectedLabelStyle: AppTextStyle.navBarLable(
-                      fontWeight: FontWeight.w600,
+    final pages = <Widget>[
+      const HomePage(),
+      const ManualsPage(),
+      const Sermons(),
+      const Declaration(),
+      const More(),
+    ];
+    return BlocBuilder<NavBarBloc, NavBarStates>(builder: (context, state) {
+      final index = state.index;
+      return Scaffold(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        body: isTablet && !isPortrait
+            ? SideMenu(
+                currentIndex: index,
+                pages: pages,
+                child: Expanded(child: pages[index]),
+              )
+            : pages[index],
+        bottomNavigationBar: isPortrait
+            ? BottomNavigationBar(
+                landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
+                type: BottomNavigationBarType.fixed,
+                useLegacyColorScheme: false,
+                selectedLabelStyle: AppTextStyle.navBarLable(
+                  fontWeight: FontWeight.w500,
+                  color: AppColor.primaryColor,
+                  size: isTablet ? AppFontSize.labelSmall : 12,
+                ),
+                unselectedLabelStyle: AppTextStyle.navBarLable(
+                  fontWeight: FontWeight.w400,
+                  color: AppColor.blackColor,
+                  size: isTablet ? AppFontSize.labelSmall : 12,
+                ),
+                backgroundColor: AppColor.pageBackground,
+                unselectedItemColor: AppColor.blackColor,
+                // showUnselectedLabels: true,
+                onTap: (index) {
+                  context.read<NavBarBloc>().add(NavBarEvent(index));
+                },
+                currentIndex: index,
+                items: [
+                  BottomNavigationBarItem(
+                    icon: SvgIcon(
+                      icon: AppImages.homeLight,
+                      size: iconSize,
+                      color: AppColor.secondaryColor,
+                    ),
+                    activeIcon: SvgIcon(
+                      icon: AppImages.homeBold,
+                      size: iconSize + 3,
                       color: AppColor.primaryColor,
-                      size: isTablet ? AppFontSize.labelSmall : 10,
                     ),
-                    unselectedLabelStyle: AppTextStyle.navBarLable(
-                      fontWeight: FontWeight.w400,
-                      color: AppColor.subTextColor,
-                      size: isTablet ? AppFontSize.labelSmall : 10,
+                    label: "Home",
+                  ),
+                  BottomNavigationBarItem(
+                    icon: SvgIcon(
+                      icon: AppImages.booksLight,
+                      size: iconSize,
+                      color: AppColor.secondaryColor,
                     ),
-                    backgroundColor: AppColor.pageBackground,
-                    unselectedItemColor: AppColor.subTextColor,
-                    // showUnselectedLabels: true,
-                    onTap: (index) {
-                      _currentIndex.value = index;
-                    },
-                    currentIndex: currentIndex,
-                    items: [
-                      BottomNavigationBarItem(
-                        icon: SvgIcon(
-                          icon: AppImages.home,
-                          size: iconSize,
-                          color: AppColor.secondaryColor,
-                        ),
-                        activeIcon: SvgIcon(
-                          icon: AppImages.home,
-                          size: iconSize,
-                          color: AppColor.primaryColor,
-                        ),
-                        label: "Home",
-                      ),
-                      BottomNavigationBarItem(
-                        icon: SvgIcon(
-                          icon: AppImages.books,
-                          size: iconSize,
-                          color: AppColor.secondaryColor,
-                        ),
-                        activeIcon: SvgIcon(
-                          icon: AppImages.books,
-                          size: iconSize,
-                          color: AppColor.primaryColor,
-                        ),
-                        label: AppString.manual,
-                      ),
-                      BottomNavigationBarItem(
-                        icon: SvgIcon(
-                          icon: AppImages.sermons,
-                          size: iconSize,
-                          color: AppColor.secondaryColor,
-                        ),
-                        activeIcon: SvgIcon(
-                          icon: AppImages.sermons,
-                          size: iconSize,
-                          color: AppColor.primaryColor,
-                        ),
-                        label: AppString.sermons,
-                      ),
-                      BottomNavigationBarItem(
-                        icon: SvgIcon(
-                          icon: AppImages.declaration,
-                          size: iconSize,
-                          color: AppColor.secondaryColor,
-                        ),
-                        activeIcon: SvgIcon(
-                          icon: AppImages.declaration,
-                          size: iconSize,
-                          color: AppColor.primaryColor,
-                        ),
-                        label: "Declaration",
-                      ),
-                      BottomNavigationBarItem(
-                        icon: SvgIcon(
-                          icon: AppImages.more,
-                          size: iconSize,
-                          color: AppColor.secondaryColor,
-                        ),
-                        activeIcon: SvgIcon(
-                          icon: AppImages.more,
-                          size: iconSize,
-                          color: AppColor.primaryColor,
-                        ),
-                        label: "More",
-                      ),
-                    ],
-                  )
-                : null,
-          );
-        });
+                    activeIcon: SvgIcon(
+                      icon: AppImages.booksBold,
+                      size: iconSize + 3,
+                      color: AppColor.primaryColor,
+                    ),
+                    label: AppString.manual,
+                  ),
+                  BottomNavigationBarItem(
+                    icon: SvgIcon(
+                      icon: AppImages.sermonsLight,
+                      size: iconSize,
+                      color: AppColor.secondaryColor,
+                    ),
+                    activeIcon: SvgIcon(
+                      icon: AppImages.sermonsBold,
+                      size: iconSize + 3,
+                      color: AppColor.primaryColor,
+                    ),
+                    label: AppString.sermons,
+                  ),
+                  BottomNavigationBarItem(
+                    icon: SvgIcon(
+                      icon: AppImages.declarationLight,
+                      size: iconSize,
+                      color: AppColor.secondaryColor,
+                    ),
+                    activeIcon: SvgIcon(
+                      icon: AppImages.declarationBold,
+                      size: iconSize + 3,
+                      color: AppColor.primaryColor,
+                    ),
+                    label: "Declaration",
+                  ),
+                  BottomNavigationBarItem(
+                    icon: SvgIcon(
+                      icon: AppImages.moreLight,
+                      size: iconSize,
+                      color: AppColor.secondaryColor,
+                    ),
+                    activeIcon: SvgIcon(
+                      icon: AppImages.moreBold,
+                      size: iconSize + 3,
+                      color: AppColor.primaryColor,
+                    ),
+                    label: "More",
+                  ),
+                ],
+              )
+            : null,
+      );
+    });
   }
 }

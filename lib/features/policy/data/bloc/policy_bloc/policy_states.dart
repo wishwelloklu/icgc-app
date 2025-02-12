@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '../../models/policy_model.dart';
+import '../../../../manual/data/models/policy_model.dart';
 
 abstract class PolicyStates extends Equatable {}
 

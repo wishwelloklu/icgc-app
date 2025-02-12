@@ -6,4 +6,6 @@ class CacheKeys {
   static String namingKey = 'namingKey';
 
   static String accessTokeKey = "accessTokeKey";
+
+  static String officiate = 'officiate';
 }

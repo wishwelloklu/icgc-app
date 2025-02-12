@@ -16,8 +16,7 @@ import '../../../core/presentation/text_field/search_text_field.dart';
 import '../data/bloc/policy_bloc/policy_bloc.dart';
 import '../data/bloc/policy_bloc/policy_events.dart';
 import '../data/bloc/policy_bloc/policy_states.dart';
-import '../data/models/read_model.dart';
-import '../widgets/policy_tile.dart';
+import '../../manual/data/models/read_model.dart';
 
 class PoliciesPage extends StatefulWidget {
   const PoliciesPage({super.key});
@@ -85,7 +84,7 @@ class _PoliciesPageState extends State<PoliciesPage> {
                           : height * .43
                       : height * .29,
                   // childAspectRatio: 0.3,
-                  crossAxisSpacing: isTablet ? 20 : 5,
+                  crossAxisSpacing: isTablet ? 25 : 5,
                   mainAxisSpacing: isTablet
                       ? isPortrait
                           ? 20

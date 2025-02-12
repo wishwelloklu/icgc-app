@@ -1,4 +1,4 @@
-import '../../models/policy_page.dart';
+import '../../../../manual/data/models/policy_page.dart';
 
 abstract class PolicyEvents {}
 

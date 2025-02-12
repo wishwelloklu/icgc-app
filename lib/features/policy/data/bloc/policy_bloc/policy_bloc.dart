@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../models/policy_model.dart';
+import '../../../../manual/data/models/policy_model.dart';
 import 'policy_states.dart';
 
 import 'policy_events.dart';

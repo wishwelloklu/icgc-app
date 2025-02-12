@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
+import 'package:icgc/app/routes/app_routes.dart';
 import 'package:icgc/core/presentation/read_widgets.dart';
 import 'package:icgc/features/reader_page/presentation/bloc/font_bloc.dart';
 import 'package:icgc/features/reader_page/presentation/bloc/font_states.dart';
 import 'package:icgc/features/sermons/data/models/sample_model.dart';
 
+import '../../../app/routes/route_navigator.dart';
 import '../../../app/utils/screen_size.dart';
 
-class SampleDetails extends StatelessWidget {
-  const SampleDetails({super.key});
+class SermonDetails extends StatelessWidget {
+  const SermonDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,12 @@ class SampleDetails extends StatelessWidget {
           return const SizedBox.shrink();
         }),
       ),
+      floatingActionButton: sample.color != null
+          ? FloatingActionButton.extended(
+              onPressed: () => routeNavigator(context, AppRoutes.textEditor,
+                  arguments: sample),
+              label: const Text('Create Sermon'))
+          : null,
     );
   }
 }

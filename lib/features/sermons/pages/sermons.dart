@@ -7,6 +7,7 @@ import 'package:icgc/core/presentation/text/title_text.dart';
 import '../../../app/theme/app_font_size.dart';
 import '../../../app/theme/app_text_style.dart';
 import '../../../core/presentation/tab_bar_page.dart';
+import 'officiates_list.dart';
 import 'sermon_sample.dart';
 
 class Sermons extends StatefulWidget {
@@ -26,7 +27,7 @@ class _SermonsState extends State<Sermons> with TickerProviderStateMixin {
 
   final pages = [
     const SermonSample(),
-    Container(),
+    const OfficiatesList(),
   ];
 
   @override

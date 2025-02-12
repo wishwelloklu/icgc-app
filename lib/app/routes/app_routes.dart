@@ -25,7 +25,9 @@ class AppRoutes {
 
   static const String notifications = 'notifications';
 
-  static const String sampleDetails = 'sampleDetails';
+  static const String sermonDetails = 'sermonDetails';
 
   static const String themeDetails = 'themeDetails';
+
+  static const String textEditor = 'textEditor';
 }

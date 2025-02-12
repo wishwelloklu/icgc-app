@@ -3,14 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:icgc/app/utils/screen_size.dart';
 import 'package:icgc/core/presentation/app_states/app_loading_state.dart';
-import 'package:icgc/features/manual/data/bloc/policy_bloc/policy_bloc.dart';
-import 'package:icgc/features/manual/data/bloc/policy_bloc/policy_states.dart';
+import 'package:icgc/features/manual/data/bloc/manual_page_event.dart';
+import 'package:icgc/features/policy/data/bloc/policy_bloc/policy_bloc.dart';
+import 'package:icgc/features/policy/data/bloc/policy_bloc/policy_states.dart';
 
 import '../../../app/routes/app_routes.dart';
 import '../../../app/routes/route_navigator.dart';
 import '../../../app/utils/colors_generator.dart';
+import '../../../core/data/bloc/nav_bar_bloc/nav_bar_bloc.dart';
+import '../../../core/data/bloc/nav_bar_bloc/nav_bar_event.dart';
 import '../../../core/data/models/book/book_model.dart';
 import '../../../core/data/models/book/pages.dart';
+import '../../manual/data/bloc/manual_page_bloc.dart';
 import '../../manual/data/models/read_model.dart';
 import '../widgets/policy_card.dart';
 import '../widgets/view_all.dart';
@@ -38,7 +42,10 @@ class TopPolicy extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ViewAllTitle(
-              onViewAll: () {},
+              onViewAll: () {
+                context.read<NavBarBloc>().add(NavBarEvent(1));
+                context.read<ManualPageBloc>().add(ManualPageEvent(1));
+              },
               text: "Top policy manuals",
               horizontalPadding: 0,
             ),

@@ -8,6 +8,8 @@ import '../../../app/routes/route_navigator.dart';
 import '../../../app/utils/colors_generator.dart';
 import '../../../core/data/bloc/book/book_bloc.dart';
 import '../../../core/data/bloc/book/book_states.dart';
+import '../../../core/data/bloc/nav_bar_bloc/nav_bar_bloc.dart';
+import '../../../core/data/bloc/nav_bar_bloc/nav_bar_event.dart';
 import '../../manual/data/models/read_model.dart';
 
 import '../widgets/view_all.dart';
@@ -36,7 +38,7 @@ class TopManual extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             ViewAllTitle(
-              onViewAll: () {},
+              onViewAll: () => context.read<NavBarBloc>().add(NavBarEvent(1)),
               text: "Top officiating manuals",
               horizontalPadding: 0,
             ),

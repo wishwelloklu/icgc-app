@@ -62,12 +62,14 @@ class ThemeBanner extends StatelessWidget {
                     ),
                   ),
                   const Gap(10),
-                  TitleText(
-                    text: theme.declaration,
-                    fontSize: isTablet ? 20 : 15,
-                    color: Colors.white,
-                    maxLine: 2,
-                    textAlign: TextAlign.start,
+                  Expanded(
+                    child: TitleText(
+                      text: theme.declaration,
+                      fontSize: isTablet ? 20 : 15,
+                      color: Colors.white,
+                      maxLine: 2,
+                      textAlign: TextAlign.start,
+                    ),
                   ),
                 ],
               ),

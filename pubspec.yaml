@@ -40,6 +40,7 @@ dependencies:
   dio: ^5.7.0
   carousel_slider: ^5.0.0
   flutter_widget_from_html_core: ^0.15.2
+  quill_html_editor: ^2.2.8
   
   
 dev_dependencies:
@@ -84,6 +85,8 @@ flutter:
     - assets/images/icgc_images/
     - assets/images/events_images/
     - assets/icons/
+    - assets/icons/nav/side/
+    - assets/icons/nav/bottom/
     - assets/json/
 
   #   - images/a_dot_ham.jpeg
