@@ -41,6 +41,11 @@ dependencies:
   carousel_slider: ^5.0.0
   flutter_widget_from_html_core: ^0.15.2
   quill_html_editor: ^2.2.8
+  flutter_local_notifications: ^18.0.1
+  timezone: ^0.10.0
+
+dependency_overrides:
+  file_picker: ^8.3.5
   
   
 dev_dependencies:

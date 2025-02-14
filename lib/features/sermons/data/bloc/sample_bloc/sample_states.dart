@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:icgc/features/notifications/data/models/notification.dart';
 
-import '../../models/sample_model.dart';
+import '../../models/sermon_model.dart';
 
 abstract class SampleStates extends Equatable {}
 
@@ -11,7 +11,7 @@ class InitialSampleState extends SampleStates {
 }
 
 class SamplesLoaded extends SampleStates {
-  final List<SampleModel> samples;
+  final List<SermonModel> samples;
   SamplesLoaded(this.samples);
   @override
   List<Object?> get props => [samples];

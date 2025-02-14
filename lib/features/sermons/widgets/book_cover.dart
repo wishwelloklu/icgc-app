@@ -3,6 +3,8 @@ import 'package:icgc/app/utils/colors_generator.dart';
 import 'package:icgc/app/utils/screen_size.dart';
 import 'package:icgc/core/presentation/text/title_text.dart';
 
+import 'line_paint.dart';
+
 class BookCover extends StatelessWidget {
   const BookCover({
     super.key,
@@ -41,7 +43,7 @@ class BookCover extends StatelessWidget {
           left: 1,
           child: Container(
             height: height,
-            width: 5,
+            width: 3,
             decoration: const BoxDecoration(
               boxShadow: [
                 BoxShadow(
@@ -58,7 +60,7 @@ class BookCover extends StatelessWidget {
           left: 12,
           child: Container(
             height: height,
-            width: 5,
+            width: 3,
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
@@ -106,6 +108,13 @@ class BookCover extends StatelessWidget {
               color: Colors.white,
             ),
           ),
+        Container(
+          margin:
+              const EdgeInsets.only(top: 10, right: 10, bottom: 10, left: 15),
+          child: CustomPaint(
+            painter: LinePaint(),
+          ),
+        )
       ],
     );
   }

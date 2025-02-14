@@ -52,8 +52,8 @@ class TopPolicy extends StatelessWidget {
             SizedBox(
               height: isTablet
                   ? isPortrait
-                      ? height * .26
-                      : height * .45
+                      ? height * .25
+                      : height * .4
                   : height * .25,
               child: ListView.separated(
                   shrinkWrap: true,

@@ -5,14 +5,14 @@ import '../../../app/theme/app_text_style.dart';
 
 class DescriptionText extends StatelessWidget {
   final String text;
-  final double fontSize;
+  final double? fontSize;
   final Color color;
-  final int maxLine;
+  final int? maxLine;
   final TextAlign textAlign;
   const DescriptionText({
     super.key,
     required this.text,
-    this.fontSize = AppFontSize.labelSmall,
+    this.fontSize,
     this.color = AppColor.descriptionColor,
     this.maxLine = 10,
     this.textAlign = TextAlign.left,
@@ -24,7 +24,8 @@ class DescriptionText extends StatelessWidget {
       text,
       maxLines: maxLine,
       textAlign: textAlign,
-      style: AppTextStyle.appDescription(color: color, size: fontSize),
+      style: AppTextStyle.appDescription(
+          color: color, size: fontSize ?? AppFontSize.labelSmall),
       overflow: TextOverflow.ellipsis,
     );
   }

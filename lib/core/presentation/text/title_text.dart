@@ -5,7 +5,7 @@ import '../../../app/theme/app_text_style.dart';
 
 class TitleText extends StatelessWidget {
   final String text;
-  final double fontSize;
+  final double? fontSize;
   final Color color;
   final int maxLine;
   final TextAlign textAlign;
@@ -14,7 +14,7 @@ class TitleText extends StatelessWidget {
   const TitleText({
     super.key,
     required this.text,
-    this.fontSize = AppFontSize.labelMedium,
+    this.fontSize,
     this.color = AppColor.darkColor,
     this.fontWeight = FontWeight.w700,
     this.maxLine = 2,
@@ -29,7 +29,7 @@ class TitleText extends StatelessWidget {
       textAlign: textAlign,
       style: AppTextStyle.appTitle(
         color: color,
-        size: fontSize,
+        size: fontSize?? AppFontSize.labelMedium,
         fontWeight: fontWeight,
         
       ),

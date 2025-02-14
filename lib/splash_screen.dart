@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:icgc/features/sermons/data/bloc/officiate_bloc/officiate_bloc.dart';
-import 'package:icgc/features/sermons/data/bloc/officiate_bloc/officiate_events.dart';
+import 'package:icgc/features/sermons/data/bloc/officiate_bloc/sermon_bloc.dart';
+import 'package:icgc/features/sermons/data/bloc/officiate_bloc/sermon_events.dart';
 import 'app/routes/app_routes.dart';
 import 'app/routes/route_navigator.dart';
 import 'app/theme/app_color.dart';
@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
         context.read<SampleBloc>().add(LoadSample());
         context.read<NotificationBloc>().add(LoadNotifications());
         context.read<ThemeBloc>().add(LoadThemes());
-        context.read<OfficiateBloc>().add(LoadOficiate());
+        context.read<SermonBloc>().add(LoadSermon());
         routeAndRemoveNavigator(context, AppRoutes.wrapper);
       }
     });

@@ -92,14 +92,14 @@ class AppTextStyle {
   }
 
   static TextStyle appDescription({
-    double size = AppFontSize.small,
+    double? size ,
     Color color = AppColor.blackColor,
     FontWeight fontWeight = FontWeight.w400,
     Color? backgroundColor,
   }) {
     return TextStyle(
         fontFamily: ConstantConfig.satoshi,
-        fontSize: size,
+        fontSize: size?? AppFontSize.small,
         color: color,
         fontWeight: fontWeight,
         backgroundColor: backgroundColor);

@@ -29,4 +29,5 @@ class AppColor {
   static const Color yellow = Color(0XFFFFD300);
 
   static const Color subTextColor = Color(0xFF858FA1);
+
 }

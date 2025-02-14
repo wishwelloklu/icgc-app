@@ -6,7 +6,7 @@ import '../../../app/theme/app_text_style.dart';
 
 import '../text/label_text.dart';
 
-class IconTextField extends StatefulWidget {
+class IconTextField extends StatelessWidget {
   final TextEditingController controller;
   final String labelText;
   final String hintText;
@@ -15,12 +15,14 @@ class IconTextField extends StatefulWidget {
   final Icon suffixIcon;
   final Color borderColor;
   final VoidCallback? onTap;
+  final bool isRequired;
   const IconTextField({
     super.key,
     required this.controller,
     this.labelText = '',
     this.hintText = '',
     this.obscureText = false,
+    this.isRequired = false,
     this.prefixIcon,
     this.suffixIcon = const Icon(Icons.keyboard_arrow_down),
     this.borderColor = Colors.blue,
@@ -28,39 +30,33 @@ class IconTextField extends StatefulWidget {
   });
 
   @override
-  _SearchTextFieldState createState() => _SearchTextFieldState();
-}
-
-class _SearchTextFieldState extends State<IconTextField> {
-  bool _isObscured = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _isObscured = widget.obscureText;
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         LabelText(
-          text: widget.labelText,
+          text: labelText,
         ),
         AppSpacer.verticalSpace(height: AppPadding.extraSmall),
         SizedBox(
           width: MediaQuery.of(context).size.width,
-          child: TextField(
-            controller: widget.controller,
-            obscureText: _isObscured,
-            onTap: widget.onTap,
+          child: TextFormField(
+            controller: controller,
+            onTap: onTap,
             readOnly: true,
+            validator: isRequired
+                ? (text) {
+                    if (text == null || text.isEmpty) {
+                      return "$labelText field is required";
+                    }
+                    return null;
+                  }
+                : null,
             style: AppTextStyle.appInputText(),
             decoration: InputDecoration(
-                hintText: widget.hintText,
-                prefixIcon: widget.prefixIcon,
+                hintText: hintText,
+                prefixIcon: prefixIcon,
                 hintStyle: AppTextStyle.appInputHint(),
-                suffixIcon: widget.suffixIcon,
+                suffixIcon: suffixIcon,
                 border: const OutlineInputBorder(
                   borderSide: BorderSide(color: AppColor.textInputFieldBorder),
                   borderRadius: BorderRadius.all(

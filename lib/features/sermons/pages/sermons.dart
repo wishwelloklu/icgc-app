@@ -7,8 +7,8 @@ import 'package:icgc/core/presentation/text/title_text.dart';
 import '../../../app/theme/app_font_size.dart';
 import '../../../app/theme/app_text_style.dart';
 import '../../../core/presentation/tab_bar_page.dart';
-import 'officiates_list.dart';
-import 'sermon_sample.dart';
+import 'sermon_list.dart';
+import 'sample_sermon.dart';
 
 class Sermons extends StatefulWidget {
   const Sermons({super.key});
@@ -22,11 +22,11 @@ class _SermonsState extends State<Sermons> with TickerProviderStateMixin {
 
   final _tabs = [
     const Tab(text: AppString.samples),
-    const Tab(text: AppString.officiate),
+    const Tab(text: AppString.mySermons),
   ];
 
   final pages = [
-    const SermonSample(),
+    const SampleSermon(),
     const OfficiatesList(),
   ];
 

@@ -87,9 +87,6 @@ class HomePage extends StatelessWidget {
             const TopSermons(),
             Gap(isTablet ? 30 : 20),
             const TopPolicy()
-
-            // const LatestBook(),
-            // const Trendings(),
           ],
         ),
       )),

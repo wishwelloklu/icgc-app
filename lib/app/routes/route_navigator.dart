@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-routeNavigator(BuildContext context, String routeName, {dynamic arguments}) {
-  Navigator.pushNamed(context, routeName, arguments: arguments);
+Future<T?> routeNavigator<T extends Object?>(
+    BuildContext context, String routeName,
+    {dynamic arguments}) async {
+  return Navigator.pushNamed(context, routeName, arguments: arguments);
 }
 
 routeAndRemoveNavigator(BuildContext context, String routeName,
@@ -13,9 +15,7 @@ routeAndRemoveNavigator(BuildContext context, String routeName,
 
 routeAndReplaceNavigator(BuildContext context, String routeName,
     {dynamic arguments}) {
-  Navigator.of(context).pushReplacementNamed(
-      routeName, 
-      arguments: arguments);
+  Navigator.of(context).pushReplacementNamed(routeName, arguments: arguments);
 }
 
 popBack<T extends Object?>(BuildContext context, [T? result]) async {

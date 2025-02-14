@@ -71,7 +71,7 @@ class _ManualListState extends State<ManualList> {
         final list = state.bookList;
         _bookList = state.bookList;
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
+          padding: EdgeInsets.symmetric(horizontal: isTablet ? 25 : 20),
           child: Column(
             children: [
               SearchTextField(
@@ -89,11 +89,11 @@ class _ManualListState extends State<ManualList> {
                     crossAxisCount: isTablet ? 3 : 2,
                     mainAxisExtent: isTablet
                         ? isPortrait
-                            ? height * .29
+                            ? height * .3
                             : height * .47
-                        : height * .29,
+                        : height * .3,
                     // childAspectRatio: 0.3,
-                    crossAxisSpacing: isTablet ? 25 : 5,
+                    crossAxisSpacing: isTablet ? 25 : 20,
                     mainAxisSpacing: isTablet
                         ? isPortrait
                             ? 20

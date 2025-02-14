@@ -11,9 +11,10 @@ import 'package:icgc/features/sermons/data/bloc/sample_bloc/sample_states.dart';
 import 'package:icgc/features/sermons/widgets/book_cover.dart';
 
 import '../../../app/utils/screen_size.dart';
+import '../data/models/sermon_detail_model.dart';
 
-class SermonSample extends StatelessWidget {
-  const SermonSample({super.key});
+class SampleSermon extends StatelessWidget {
+  const SampleSermon({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +32,16 @@ class SermonSample extends StatelessWidget {
             );
           }
           return GridView.builder(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
             itemCount: samples.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: isTablet ? 3 : 2,
               mainAxisExtent: isTablet
                   ? isPortrait
                       ? height * .25
-                      : height * .43
-                  : height * .29,
-              // childAspectRatio: 0.3,
-              crossAxisSpacing: isTablet ? 20 : 5,
+                      : height * .4
+                  : height * .25,
+              crossAxisSpacing: isTablet ? 20 : 15,
               mainAxisSpacing: isTablet
                   ? isPortrait
                       ? 20
@@ -54,7 +55,10 @@ class SermonSample extends StatelessWidget {
                   routeNavigator(
                     context,
                     AppRoutes.sermonDetails,
-                    arguments: sample,
+                    arguments: SermonDetailModel(
+                      sermonModel: sample,
+                      showOption: false,
+                    ),
                   );
                 },
                 child: BookCover(

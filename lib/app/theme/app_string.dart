@@ -164,7 +164,7 @@ class AppString {
 
   static const String emptySampleText = 'There are no samples yet';
 
- static const String htmlSermon = """
+  static const String htmlSermon = """
 <h1 style="color:#2C3E50; text-align:center;">The Power of Faith</h1>
 
 <h2 style="color:#2980B9;">Opening Scripture</h2>
@@ -191,7 +191,29 @@ class AppString {
 <p>Lord, strengthen our faith and help us trust You in every situation. Let us be guided by Your Word and walk boldly in faith. Amen.</p>
 """;
 
-  static  const String emptyThemeText = 'There are no themes yet';
+  static const String emptyThemeText = 'There are no themes yet';
 
-  static  const String noTheme = 'No themes';
+  static const String noTheme = 'No themes';
+
+  static const String place = 'Audience';
+
+  static const String date = 'Date';
+
+  static const String titleHint = 'Sermon title...';
+
+  static const String placeHint = 'Where sermon will be preached';
+
+  static const String dateHint = 'Date sermon will be preached';
+
+  static const String mySermons = 'My Sermons';
+
+  static const String description = 'Description';
+
+  static const String descriptionHint = 'Write description about this sermon';
+
+  static const String time = 'Reminder';
+
+  static const String timeHint = 'Time of reminder';
+
+  static const String deleteSermon = 'Delete sermon?';
 }

@@ -23,7 +23,8 @@ class AppImages {
 
   static const String homeLight = 'assets/icons/nav/bottom/home.svg';
   static const String booksLight = 'assets/icons/nav/bottom/books.svg';
-  static const String declarationLight = 'assets/icons/nav/bottom/declaration.svg';
+  static const String declarationLight =
+      'assets/icons/nav/bottom/declaration.svg';
   static const String sermonsLight = 'assets/icons/nav/bottom/sermons.svg';
   static const String moreLight = 'assets/icons/nav/bottom/more.svg';
 
@@ -47,7 +48,7 @@ class AppImages {
 
 //Home
   static const String bell = 'assets/icons/bell.svg';
-  
+
   static const String arrowRight = "assets/icons/arrow_right.svg";
 
   static const String bookImage = 'assets/images/book_image_1.png';
@@ -67,4 +68,8 @@ class AppImages {
   static const String event1 = 'assets/images/events_images/event2.jpg';
 
   static const String event3 = 'assets/images/events_images/event3.png';
+
+  static const String child = 'assets/images/namingceremonybaby.jpg';
+
+  static const String preach = 'assets/images/preach.jpeg';
 }

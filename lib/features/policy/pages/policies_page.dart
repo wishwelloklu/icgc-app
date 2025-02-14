@@ -67,7 +67,7 @@ class _PoliciesPageState extends State<PoliciesPage> {
         state.policyList.removeWhere((test) => test.pages.isEmpty);
         _bookList = state.policyList;
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
+          padding: EdgeInsets.symmetric(horizontal: isTablet ? 25 : 20),
           child: Column(
             children: [
               SearchTextField(
@@ -80,11 +80,15 @@ class _PoliciesPageState extends State<PoliciesPage> {
                   crossAxisCount: isTablet ? 3 : 2,
                   mainAxisExtent: isTablet
                       ? isPortrait
-                          ? height * .29
-                          : height * .43
-                      : height * .29,
+                          ? height * .25
+                          : height * .45
+                      : height * .25,
                   // childAspectRatio: 0.3,
-                  crossAxisSpacing: isTablet ? 25 : 5,
+                  crossAxisSpacing: isTablet
+                      ? isPortrait
+                          ? 25
+                          : 30
+                      : 20,
                   mainAxisSpacing: isTablet
                       ? isPortrait
                           ? 20

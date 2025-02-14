@@ -30,4 +30,6 @@ class AppRoutes {
   static const String themeDetails = 'themeDetails';
 
   static const String textEditor = 'textEditor';
+
+  static const String newSermon = 'newSermon';
 }

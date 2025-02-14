@@ -18,9 +18,11 @@ class ReadWidgets extends StatefulWidget {
     super.key,
     required this.child,
     required this.title,
+    this.onOption,
   });
   final Widget child;
   final String title;
+  final VoidCallback? onOption;
 
   @override
   State<ReadWidgets> createState() => _ReadWidgetsState();
@@ -89,14 +91,15 @@ class _ReadWidgetsState extends State<ReadWidgets> {
                                     icon: AppImages.font,
                                     size: 20,
                                   )),
+                              if(widget.onOption != null)...[
                               const Gap(2),
                               TopButtons(
-                                onTap: () {},
+                                onTap:  widget.onOption!,
                                 icon: const Icon(
                                   FontAwesomeIcons.ellipsisH,
                                   size: 20,
                                 ),
-                              ),
+                              ),]
                             ],
                           ),
                         ],

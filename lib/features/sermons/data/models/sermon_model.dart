@@ -1,99 +1,135 @@
+// ignore_for_file:  sort_constructors_first
 // ignore_for_file: public_member_api_docs, sort_ructors_first
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
 import 'package:icgc/app/theme/app_string.dart';
 import 'package:icgc/app/utils/colors_generator.dart';
 import 'package:icgc/core/data/models/color_model.dart';
 
-part 'sample_model.g.dart';
+import 'tag.dart';
+
+part 'sermon_model.g.dart';
 
 @HiveType(typeId: 2)
-class SampleModel extends Equatable {
+class SermonModel extends Equatable {
   @HiveField(0)
   final String title;
   @HiveField(1)
   final String subTitle;
   @HiveField(2)
   final String sample;
-
+  @HiveField(3)
   final ColorModel? color;
-
-  const SampleModel({
+  @HiveField(4)
+  final List<Tag>? tags;
+  @HiveField(5)
+  final String? id;
+  const SermonModel({
     required this.title,
-    required this.sample,
     required this.subTitle,
-     this.color,
+    required this.tags,
+    required this.sample,
+    this.id,
+    this.color,
   });
 
-  SampleModel copyWith({
+  SermonModel copyWith({
     String? title,
-    String? sample,
     String? subTitle,
+    String? sample,
+    String? id,
     ColorModel? color,
+    List<Tag>? tags,
   }) {
-    return SampleModel(
+    return SermonModel(
       title: title ?? this.title,
       subTitle: subTitle ?? this.subTitle,
       sample: sample ?? this.sample,
       color: color ?? this.color,
+      id: id ?? this.id,
+      tags: tags ?? this.tags,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'title': title,
-      'sample': sample,
       'subTitle': subTitle,
-      'color': color,
+      'sample': sample,
+      'id': id,
+      'color': color?.toMap(),
+      'tags': tags?.map((x) => x.toMap()).toList(),
     };
   }
 
-  factory SampleModel.fromMap(Map<String, dynamic> map) {
-    return SampleModel(
+  factory SermonModel.fromMap(Map<String, dynamic> map) {
+    return SermonModel(
       title: map['title'] as String,
       subTitle: map['subTitle'] as String,
       sample: map['sample'] as String,
-      color: generateColor,
+      id: map['id'] as String?,
+      color: map['color'] != null
+          ? ColorModel.fromMap(map['color'] as Map<String, dynamic>)
+          : null,
+      tags: map['tags'] != null
+          ? List<Tag>.from(
+              (map['tags'] as List<int>).map<Tag?>(
+                (x) => Tag.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : [],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory SampleModel.fromJson(String source) =>
-      SampleModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory SermonModel.fromJson(String source) =>
+      SermonModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   bool get stringify => true;
 
   @override
-  List<Object?> get props => [title, sample, subTitle, color];
+  List<Object?> get props => [
+        title,
+        sample,
+        subTitle,
+        color,
+        tags,
+        id,
+      ];
 
-  static List<SampleModel> sampleMock = [
-    SampleModel(
+  static List<SermonModel> sampleMock = [
+    SermonModel(
       title: 'The Power of Faith',
       subTitle: 'This is a sermon sample sub title for testing purpose',
       sample: AppString.htmlSermon,
       color: generateColor,
+      tags: const [],
     ),
-    SampleModel(
+    SermonModel(
       title: 'The Power of Faith',
       subTitle: 'This is a sermon sample sub title for testing purpose',
       sample: AppString.htmlSermon,
       color: generateColor,
+      tags: const [],
     ),
-    SampleModel(
+    SermonModel(
       title: 'The Power of Faith',
       subTitle: 'This is a sermon sample sub title for testing purpose',
       sample: AppString.htmlSermon,
       color: generateColor,
+      tags: const [],
     ),
-    SampleModel(
+    SermonModel(
       title: 'The Power of Faith',
       subTitle: 'This is a sermon sample sub title for testing purpose',
       sample: AppString.htmlSermon,
       color: generateColor,
+      tags: const [],
     ),
   ];
 }

@@ -5,7 +5,7 @@ import 'package:icgc/core/data/bloc/trending/trending_book_bloc.dart';
 import 'package:icgc/core/data/bloc/trending/trending_book_events.dart';
 import 'package:icgc/features/manual/data/bloc/manual_page_bloc.dart';
 import 'package:icgc/features/notifications/data/bloc/notification_bloc.dart';
-import 'package:icgc/features/sermons/data/bloc/officiate_bloc/officiate_bloc.dart';
+import 'package:icgc/features/sermons/data/bloc/officiate_bloc/sermon_bloc.dart';
 import 'package:icgc/features/sermons/data/bloc/sample_bloc/sample_bloc.dart';
 import 'package:icgc/features/theme/data/bloc/theme_bloc.dart';
 import 'core/data/bloc/book/book_bloc.dart';
@@ -28,7 +28,7 @@ List<SingleChildWidget> get getBlocProviders {
     BlocProvider(create: (_) => SampleBloc()),
     BlocProvider(create: (_) => ThemeBloc()),
     BlocProvider(create: (_) => NavBarBloc()),
-    BlocProvider(create: (_) => OfficiateBloc()),
+    BlocProvider(create: (_) => SermonBloc()),
     BlocProvider(create: (_) => ManualPageBloc()),
     BlocProvider(create: (_) => BookBloc()..add(LoadBookEvent())),
     BlocProvider(create: (_) => LatestBookBloc()..add(LoadLatestBookEvent())),

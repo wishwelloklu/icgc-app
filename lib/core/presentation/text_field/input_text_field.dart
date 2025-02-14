@@ -21,6 +21,7 @@ class InputTextField extends StatelessWidget {
   final bool isRequired;
   final Function(PointerDownEvent value)? onTapOutSide;
   final Widget? labelTrail;
+  final bool multiLine;
   const InputTextField({
     super.key,
     required this.controller,
@@ -34,6 +35,7 @@ class InputTextField extends StatelessWidget {
     this.labelTrail,
     this.textCapitalization = TextCapitalization.none,
     this.textInputType,
+    this.multiLine = false,
   });
 
   @override
@@ -42,10 +44,9 @@ class InputTextField extends StatelessWidget {
     return Column(
       children: [
         LabelText(
-          text: labelText,
+          text: isRequired ? labelText : '$labelText (Optional)',
         ),
-        AppSpacer.verticalSpace(
-            height:  AppPadding.extraSmall),
+        AppSpacer.verticalSpace(height: AppPadding.extraSmall),
         SizedBox(
           width: MediaQuery.of(context).size.width,
           child: TextFormField(
@@ -73,6 +74,8 @@ class InputTextField extends StatelessWidget {
                             return null;
                           }
                         : null,
+            maxLines: multiLine ? null : 1,
+            minLines: multiLine ? 2 : null,
             enableSuggestions: isSuggest,
             keyboardType: isEmail ? TextInputType.emailAddress : textInputType,
             textCapitalization:

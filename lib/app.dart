@@ -22,6 +22,7 @@ class _AppState extends State<App> {
   @override
   void initState() {
     initialization();
+    
     super.initState();
   }
 

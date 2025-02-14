@@ -1,14 +1,24 @@
+import 'package:awesome_icons/awesome_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
+import 'package:icgc/app/config/navigation_key.dart';
+import 'package:icgc/app/routes/app_routes.dart';
 import 'package:icgc/app/routes/route_navigator.dart';
 import 'package:icgc/app/theme/app_color.dart';
 import 'package:icgc/app/theme/app_text_style.dart';
+import 'package:icgc/app/utils/colors_generator.dart';
+import 'package:icgc/app/utils/generic_modal_sheet.dart';
+import 'package:icgc/core/presentation/animated_widget.dart';
 import 'package:icgc/core/presentation/app_states/app_loading_state.dart';
-import 'package:icgc/features/sermons/data/bloc/officiate_bloc/officiate_bloc.dart';
-import 'package:icgc/features/sermons/data/bloc/officiate_bloc/officiate_events.dart';
-import 'package:icgc/features/sermons/data/bloc/officiate_bloc/officiate_states.dart';
-import 'package:icgc/features/sermons/data/models/sample_model.dart';
+import 'package:icgc/features/sermons/data/bloc/officiate_bloc/sermon_bloc.dart';
+import 'package:icgc/features/sermons/data/bloc/officiate_bloc/sermon_events.dart';
+import 'package:icgc/features/sermons/data/bloc/officiate_bloc/sermon_states.dart';
+import 'package:icgc/features/sermons/data/models/sermon_model.dart';
+import 'package:icgc/features/sermons/data/models/tag.dart';
+import 'package:icgc/features/sermons/widgets/options_modal.dart';
 import 'package:quill_html_editor/quill_html_editor.dart';
+
 
 class TextEditor extends StatefulWidget {
   const TextEditor({super.key});
@@ -21,8 +31,10 @@ class _TextEditorState extends State<TextEditor> {
   late QuillEditorController controller;
   final _titleController = TextEditingController();
   final _showToolbarValue = ValueNotifier(true);
+  SermonModel? _sampleModel;
   final _focusNode = FocusNode();
   final customToolBarList = [
+    ToolBarStyle.size,
     ToolBarStyle.bold,
     ToolBarStyle.italic,
     ToolBarStyle.align,
@@ -49,15 +61,16 @@ class _TextEditorState extends State<TextEditor> {
   @override
   Widget build(BuildContext context) {
     final sampleModel =
-        ModalRoute.settingsOf(context)?.arguments as SampleModel;
-
+        ModalRoute.settingsOf(context)?.arguments as SermonModel;
+    _sampleModel ??= sampleModel;
     return ValueListenableBuilder(
         valueListenable: _showToolbarValue,
         builder: (context, showToolbar, _) {
-          return BlocListener<OfficiateBloc, OfficiateStates>(
+          return BlocListener<SermonBloc, SermonStates>(
             listener: (context, state) {
-              if (state is OfficiateProcessingDoneState) {
+              if (state is SermonProcessingDoneState) {
                 popBack(context);
+                popBack(appContext ?? context);
               }
             },
             child: Scaffold(
@@ -67,24 +80,27 @@ class _TextEditorState extends State<TextEditor> {
                   padding: const EdgeInsets.all(16),
                   child: Column(
                     children: [
-                      AnimatedContainer(
+                      AppAnimatedWidget(
                         duration: Durations.medium1,
-                        height: showToolbar ? null : 0,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: ToolBar(
-                                controller: controller,
-                                toolBarConfig: customToolBarList,
-                                activeIconColor: AppColor.greenColor,
+                        opacity: showToolbar ? 1 : 0,
+                        child: SizedBox(
+                          height: showToolbar ? null : 0,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: ToolBar(
+                                  controller: controller,
+                                  toolBarConfig: customToolBarList,
+                                  activeIconColor: AppColor.greenColor,
+                                ),
                               ),
-                            ),
-                            IconButton(
-                                onPressed: () =>
-                                    _showToolbarValue.value = false,
-                                icon: const Icon(Icons.keyboard_arrow_up))
-                          ],
+                              IconButton(
+                                onPressed: () => showOptionsModal(),
+                                icon: const Icon(FontAwesomeIcons.ellipsisH),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                       CenteredTextField(
@@ -99,7 +115,7 @@ class _TextEditorState extends State<TextEditor> {
                           child: GestureDetector(
                             onTap: () => _focusNode.unfocus(),
                             child: QuillHtmlEditor(
-                              text: sampleModel.sample,
+                              text: _sampleModel?.sample,
                               backgroundColor: Colors.white,
                               controller: controller,
                               onFocusChanged: (p0) {
@@ -127,27 +143,40 @@ class _TextEditorState extends State<TextEditor> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   FloatingActionButton.extended(
+                    heroTag: 'notag',
+                    onPressed: () => _showToolbarValue.value = !showToolbar,
+                    tooltip: 'Show tool bar',
+                    label: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          showToolbar ? Icons.visibility_off : Icons.visibility,
+                          color: AppColor.primaryColor,
+                        ),
+                        const Text('Tools')
+                      ],
+                    ),
+                  ),
+                  const Gap(10),
+                  FloatingActionButton.extended(
                       onPressed: () async {
                         final htmlText = await controller.getText();
-                        final officiate = SampleModel(
+                        final sermon = SermonModel(
+                          id: DateTime.now().millisecondsSinceEpoch.toString(),
+                          color: generateColor,
                           title: _titleController.text,
                           sample: htmlText,
                           subTitle: sampleModel.subTitle,
+                          tags: _sampleModel?.tags ?? [],
                         );
                         if (context.mounted) {
                           context
-                              .read<OfficiateBloc>()
-                              .add(SaveOfficateEvent(officiate));
+                              .read<SermonBloc>()
+                              .add(SaveSermonEvent(sermon));
                         }
                       },
                       tooltip: 'Show tool bar',
                       label: const Text('Save')),
-                  if (!showToolbar)
-                    FloatingActionButton.small(
-                      onPressed: () => _showToolbarValue.value = true,
-                      tooltip: 'Show tool bar',
-                      child: const Icon(Icons.keyboard_arrow_down),
-                    ),
                 ],
               ),
             ),
@@ -157,6 +186,28 @@ class _TextEditorState extends State<TextEditor> {
 
   void setHtmlText(String text) async {
     await controller.setText(text);
+  }
+
+  void showOptionsModal() {
+    showGenericModalSheet(
+      isDismissible: true,
+      child: OptionsModal(
+        onViewTags: () {},
+        onAddTag: () async {
+          popBack(context);
+          final value = await routeNavigator(
+            context,
+            AppRoutes.newSermon,
+          );
+
+          if (value != null) {
+            final newValue = value as Tag;
+            _sampleModel = _sampleModel?.copyWith(tags: [newValue]);
+          }
+        },
+      ),
+      context: context,
+    );
   }
 }
 
@@ -174,8 +225,8 @@ class CenteredTextField extends StatelessWidget {
     final width = MediaQuery.sizeOf(context).width;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
-      width: (width * .4 + (controller.text.length * 15))
-          .clamp(width * .4, width * .9),
+      width: (width * .9 + (controller.text.length * 15))
+          .clamp(width * .9, width * .9),
       child: TextField(
         controller: controller,
         textAlign: TextAlign.center,

@@ -20,7 +20,7 @@ class NotificationTile extends StatelessWidget {
         trailing: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisSize: MainAxisSize.min,
-          children: [DescriptionText(text: date.formattedDate)],
+          children: [DescriptionText(text: date.formattedDateTime)],
         ),
         subTitle: message);
   }

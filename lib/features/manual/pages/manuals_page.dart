@@ -30,7 +30,7 @@ class ManualsPage extends StatefulWidget {
 
 class _ManualsPageState extends State<ManualsPage>
     with TickerProviderStateMixin {
-  final int _selectedIndex = 0;
+  int _selectedIndex = 0;
   late TabController _tabController;
   final _tabs = [
     const Tab(text: 'Manuals'),
@@ -45,7 +45,11 @@ class _ManualsPageState extends State<ManualsPage>
 
   @override
   void initState() {
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 3, vsync: this)
+      ..addListener(() {
+        _selectedIndex = _tabController.index;
+        setState(() {});
+      });
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final state = context.read<ManualPageBloc>().state;
       _tabController.animateTo(state.index);

@@ -22,27 +22,22 @@ class PolicyCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           border: Border.all(color: AppColor.buttonBorderColor)),
       margin: const EdgeInsets.symmetric(vertical: 5),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.asset(
-              'assets/images/policy_image.png',
-              fit: BoxFit.fill,
-              height: isTablet
-                  ? isPortrait
-                      ? height * .25
-                      : height * .4
-                  : height * .2,
-              width: isTablet
-                  ? isPortrait
-                      ? width * .3
-                      : width * .2
-                  : width * .4,
-            ),
-          ),
-        ],
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: Image.asset(
+          'assets/images/policy_image.png',
+          fit: BoxFit.fill,
+          height: isTablet
+              ? isPortrait
+                  ? height * .25
+                  : height * .4
+              : height * .25,
+          width: isTablet
+              ? isPortrait
+                  ? width * .3
+                  : width * .2
+              : width * .4,
+        ),
       ),
     );
   }

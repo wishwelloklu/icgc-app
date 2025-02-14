@@ -2,11 +2,19 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
+part 'color_model.g.dart';
+
+@HiveType(typeId: 3)
 class ColorModel extends Equatable {
+  @HiveField(0)
   final double alpha;
+  @HiveField(1)
   final double red;
+  @HiveField(2)
   final double green;
+  @HiveField(3)
   final double blue;
   const ColorModel({
     required this.alpha,
