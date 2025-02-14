@@ -20,7 +20,7 @@ class TextWithBackgroundColor extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
-          color: backgroundColor.withOpacity(opacity),
+          color: backgroundColor.withValues(alpha: opacity),
           borderRadius: BorderRadius.circular(100),
         ),
         padding: const EdgeInsets.symmetric(

@@ -9,9 +9,9 @@ import 'package:icgc/core/presentation/cards/elevated_container.dart';
 import 'package:icgc/core/presentation/text/title_text.dart';
 import 'package:icgc/features/sermons/data/models/sermon_detail_model.dart';
 import 'package:icgc/features/sermons/data/models/sermon_model.dart';
-import 'package:icgc/features/sermons/pages/sermon_list.dart';
-import 'package:icgc/features/sermons/widgets/book_cover.dart';
 import 'package:icgc/features/sermons/widgets/tag_widget.dart';
+
+import 'sermon_cover.dart';
 
 class TabbletView extends StatelessWidget {
   const TabbletView({
@@ -41,6 +41,10 @@ class TabbletView extends StatelessWidget {
       itemBuilder: (context, index) {
         final sermon = sermons[index];
         return ElevatedContainer(
+          gradient: LinearGradient(colors: [
+            sermon.color!.color.withValues(alpha: 0),
+            sermon.color!.color,
+          ]),
           child: InkWell(
             onTap: () {
               routeNavigator(
@@ -57,7 +61,7 @@ class TabbletView extends StatelessWidget {
                 SizedBox(
                   width: isPortrait ? width * .2 : width * .12,
                   height: isPortrait ? height * .15 : height * .2,
-                  child: BookCover(
+                  child: SermonCover(
                     title: sermon.title,
                     subTitle: sermon.subTitle,
                     color: sermon.color?.color ?? generateColor.color,

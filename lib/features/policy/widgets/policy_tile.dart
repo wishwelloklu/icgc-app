@@ -18,7 +18,7 @@ class PolicyTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var isTablet = ScreenSizeHelper(context).isTablet;
-    var isPortrait = ScreenSizeHelper(context).isPortrait;
+    // var isPortrait = ScreenSizeHelper(context).isPortrait;
     final double imageSize = isTablet ? 150 : 120;
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),

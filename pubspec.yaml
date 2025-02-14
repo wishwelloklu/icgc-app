@@ -43,6 +43,7 @@ dependencies:
   quill_html_editor: ^2.2.8
   flutter_local_notifications: ^18.0.1
   timezone: ^0.10.0
+  epub_view: ^3.2.0
 
 dependency_overrides:
   file_picker: ^8.3.5

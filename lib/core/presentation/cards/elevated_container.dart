@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ElevatedContainer extends StatelessWidget {
-  const ElevatedContainer({super.key, required this.child});
+  const ElevatedContainer({super.key, required this.child, this.gradient});
   final Widget child;
+  final Gradient? gradient;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -10,6 +11,7 @@ class ElevatedContainer extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8),
+          gradient: gradient,
           boxShadow: const [
             BoxShadow(
                 spreadRadius: 1,

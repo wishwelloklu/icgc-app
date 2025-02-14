@@ -4,6 +4,7 @@ import 'package:icgc/app/routes/app_routes.dart';
 import 'package:icgc/app/routes/route_navigator.dart';
 import 'package:icgc/app/theme/app_color.dart';
 import 'package:icgc/app/utils/screen_size.dart';
+import 'package:icgc/core/presentation/text/description_text.dart';
 import 'package:icgc/core/presentation/text/title_text.dart';
 import 'package:icgc/features/theme/data/models/theme_model.dart';
 
@@ -34,8 +35,8 @@ class ThemeBanner extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            gradient: const LinearGradient(colors: [
-              Color.fromARGB(192, 33, 70, 54),
+            gradient: LinearGradient(colors: [
+              AppColor.primaryColor.withValues(alpha: .2),
               AppColor.primaryColor,
             ])),
         child: Row(
@@ -46,8 +47,8 @@ class ThemeBanner extends StatelessWidget {
                   Container(
                     decoration: const BoxDecoration(boxShadow: [
                       BoxShadow(
-                        blurRadius: 15,
-                        spreadRadius: 5,
+                        blurRadius: 5,
+                        spreadRadius: .2,
                         color: AppColor.primaryColor,
                       )
                     ]),
@@ -63,12 +64,25 @@ class ThemeBanner extends StatelessWidget {
                   ),
                   const Gap(10),
                   Expanded(
-                    child: TitleText(
-                      text: theme.declaration,
-                      fontSize: isTablet ? 20 : 15,
-                      color: Colors.white,
-                      maxLine: 2,
-                      textAlign: TextAlign.start,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TitleText(
+                          text: '${theme.theme} - ${theme.year}',
+                          fontSize: isTablet ? 23 : 18,
+                          color: Colors.white,
+                          maxLine: 2,
+                          textAlign: TextAlign.start,
+                        ),
+                        const Gap(2),
+                        DescriptionText(
+                          text: theme.declaration,
+                          fontSize: isTablet ? 20 : 15,
+                          color: Colors.white,
+                          maxLine: 2,
+                          textAlign: TextAlign.start,
+                        ),
+                      ],
                     ),
                   ),
                 ],

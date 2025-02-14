@@ -95,7 +95,7 @@ class _SearchBookPageState extends State<SearchBookPage> {
   @override
   Widget build(BuildContext context) {
     // widget.pages.removeWhere((element) => element.title?.isEmpty ?? true);
-    return BlocBuilder<FontBloc, FontStates>(builder: (context, fontState) {
+    return BlocBuilder<FontBloc, FontState>(builder: (context, fontState) {
       switch (fontState) {
         case FontState():
           return Flexible(
@@ -106,7 +106,8 @@ class _SearchBookPageState extends State<SearchBookPage> {
                 children: [
                   SearchTextField(
                     controller: _searchController,
-                    borderColor: AppColor.textInputFieldBorder.withOpacity(1),
+                    borderColor:
+                        AppColor.textInputFieldBorder.withValues(alpha: 1),
                     hintText: 'Type a word or page number',
                     height: 15,
                   ),
@@ -135,8 +136,8 @@ class _SearchBookPageState extends State<SearchBookPage> {
                               : null,
                           subtitle: _isSearching
                               ? CustomeText(
-                                  text:book.content,fontSize: 
-                                  fontState.fontSize,
+                                  text: book.content,
+                                  fontSize: fontState.fontSize,
                                   searchText:
                                       _searchController.text.toLowerCase(),
                                   fontName: fontState.fontName,
@@ -156,8 +157,6 @@ class _SearchBookPageState extends State<SearchBookPage> {
       }
     });
   }
-
-
 }
 
 class Match {

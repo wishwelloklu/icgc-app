@@ -16,6 +16,7 @@ import 'package:icgc/features/sermons/data/models/tag.dart';
 import 'package:icgc/features/sermons/widgets/options_modal.dart';
 
 import '../../../app/routes/route_navigator.dart';
+import '../../../app/theme/app_color.dart';
 import '../../../app/utils/screen_size.dart';
 import '../data/bloc/officiate_bloc/sermon_events.dart';
 import '../widgets/tag_list.dart';
@@ -37,6 +38,7 @@ class SermonDetails extends HookWidget {
       key: scaffoldKey,
       endDrawer: Drawer(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        backgroundColor: AppColor.pageBackground,
         width: width * (isPortrait ? .6 : .5),
         child: SafeArea(child: TagList(sermon)),
       ),
@@ -109,20 +111,18 @@ class SermonDetails extends HookWidget {
                 );
               }
             : null,
-        child: BlocBuilder<FontBloc, FontStates>(builder: (context, state) {
-          if (state is FontState) {
-            return Padding(
-              padding: const EdgeInsets.all(16),
-              child: HtmlWidget(
-                sermon.sample,
-                renderMode: RenderMode.listView,
-                textStyle: TextStyle(
-                    fontFamily: state.fontName,
-                    fontSize: state.fontSize + (isTablet ? 5 : 0),
-                    color: Colors.black),
-              ),
-            );
-          }
+        child: BlocBuilder<FontBloc, FontState>(builder: (context, state) {
+          return Padding(
+            padding: const EdgeInsets.all(16),
+            child: HtmlWidget(
+              sermon.sample,
+              renderMode: RenderMode.listView,
+              textStyle: TextStyle(
+                  fontFamily: state.fontName,
+                  fontSize: state.fontSize + (isTablet ? 5 : 0),
+                  color: Colors.black),
+            ),
+          );
           return const SizedBox.shrink();
         }),
       ),

@@ -61,7 +61,7 @@ class HomePage extends StatelessWidget {
                     Container(
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: AppColor.primaryColor.withOpacity(.05)),
+                          color: AppColor.primaryColor.withValues(alpha: .05)),
                       child: IconButton(
                           onPressed: () {
                             routeNavigator(context, AppRoutes.notifications);
@@ -78,6 +78,7 @@ class HomePage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           shrinkWrap: true,
           children: [
+            Gap(isTablet ? 20 : 10),
             const EventSlider(),
             Gap(isTablet ? 30 : 20),
             const ThemeBanner(),

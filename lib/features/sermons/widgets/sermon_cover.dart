@@ -5,18 +5,16 @@ import 'package:icgc/core/presentation/text/title_text.dart';
 
 import 'line_paint.dart';
 
-class BookCover extends StatelessWidget {
-  const BookCover({
+class SermonCover extends StatelessWidget {
+  const SermonCover({
     super.key,
     required this.title,
     required this.subTitle,
     required this.color,
-    this.showSampleText = true,
   });
   final String title;
   final String subTitle;
   final Color color;
-  final bool showSampleText;
   @override
   Widget build(BuildContext context) {
     var isTablet = ScreenSizeHelper(context).isTablet;
@@ -24,7 +22,7 @@ class BookCover extends StatelessWidget {
 
     return Stack(
       fit: StackFit.expand,
-      alignment: AlignmentDirectional.centerStart,
+      alignment: AlignmentDirectional.center,
       children: [
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -41,6 +39,8 @@ class BookCover extends StatelessWidget {
         ),
         Positioned(
           left: 1,
+          top: 0,
+          bottom: 0,
           child: Container(
             height: height,
             width: 3,
@@ -49,7 +49,7 @@ class BookCover extends StatelessWidget {
                 BoxShadow(
                   color: Colors.grey,
                   offset: Offset(-3, 0),
-                  spreadRadius: .2,
+                  spreadRadius: .1,
                   blurRadius: 1,
                 ),
               ],
@@ -58,9 +58,11 @@ class BookCover extends StatelessWidget {
         ),
         Positioned(
           left: 12,
+          top: 0,
+          bottom: 0,
           child: Container(
             height: height,
-            width: 3,
+            width: 1,
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
@@ -79,38 +81,21 @@ class BookCover extends StatelessWidget {
             ),
           ),
         ),
-        Positioned(
-          left: 25,
-          right: 15,
-          top: 30,
-          bottom: 20,
-          child: TitleText(
-            maxLine: 3,
-            text: title,
-            fontSize: isTablet
-                ? 30
-                : showSampleText
-                    ? 20
-                    : 15,
-            textAlign: TextAlign.center,
-            color: Colors.white,
-          ),
-        ),
-        if (showSampleText)
-          Positioned(
-            left: 20,
-            right: 20,
-            bottom: 30,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Center(
             child: TitleText(
-              text: 'Sample Sermon',
-              fontSize: isTablet ? 20 : 15,
+              maxLine: 3,
+              text: title,
+              fontSize: isTablet ? 15 : 12,
               textAlign: TextAlign.center,
               color: Colors.white,
             ),
           ),
+        ),
         Container(
           margin:
-              const EdgeInsets.only(top: 10, right: 10, bottom: 10, left: 15),
+              const EdgeInsets.only(top: 10, right: 10, bottom: 10, left: 13),
           child: CustomPaint(
             painter: LinePaint(),
           ),

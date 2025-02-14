@@ -13,7 +13,6 @@ import '../../../../core/presentation/buttons/app_icon_button.dart';
 import '../../../../core/presentation/buttons/app_primary_button.dart';
 import '../../../../core/presentation/text/title_text.dart';
 import '../../../../core/presentation/text_field/input_text_field.dart';
-import '../../../../core/presentation/text_field/password_text_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

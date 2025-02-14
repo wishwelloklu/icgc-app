@@ -25,7 +25,7 @@ class SideNaveItem extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       decoration: BoxDecoration(
-          color: isSelected ? Colors.white.withOpacity(.2) : null,
+          color: isSelected ? Colors.white.withValues(alpha: .2) : null,
           borderRadius: BorderRadius.circular(8)),
       child: Row(
         spacing: 5,

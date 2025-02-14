@@ -8,11 +8,8 @@ import 'package:icgc/features/manual/data/bloc/manual_page_event.dart';
 import '../../../app/routes/app_routes.dart';
 import '../../../app/routes/route_navigator.dart';
 import '../../../app/theme/app_color.dart';
-import '../../../app/theme/app_font_size.dart';
-import '../../../app/theme/app_string.dart';
 import '../../../app/utils/generic_modal_sheet.dart';
 import '../../../app/utils/screen_size.dart';
-import '../../../core/presentation/text/title_text.dart';
 import '../../library/data/models/collections.dart';
 import '../data/bloc/manual_page_bloc.dart';
 import 'manual_list.dart';
@@ -61,28 +58,9 @@ class _ManualsPageState extends State<ManualsPage>
   @override
   Widget build(BuildContext context) {
     var isTablet = ScreenSizeHelper(context).isTablet;
-    var isPortrait = ScreenSizeHelper(context).isPortrait;
     return Scaffold(
       appBar: AppBar(
-        title: isTablet
-            ? isPortrait
-                ? TitleText(
-                    text: AppString.manual,
-                    fontSize: isTablet
-                        ? AppFontSize.titleLarge
-                        : AppFontSize.labelMedium,
-                  )
-                : null
-            : const TitleText(
-                text: AppString.sermons,
-                fontSize: AppFontSize.labelMedium,
-              ),
-        toolbarHeight: kToolbarHeight *
-            (isTablet
-                ? isPortrait
-                    ? 2
-                    : 1
-                : 1),
+        toolbarHeight: kToolbarHeight * .5,
         bottom: TabBar(
           labelStyle: isTablet ? AppTextStyle.appTitle(size: 25) : null,
           indicatorSize: TabBarIndicatorSize.tab,

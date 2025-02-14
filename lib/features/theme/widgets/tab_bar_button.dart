@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
+
 import '../../../app/theme/app_raduis.dart';
 
 class TabButton extends StatelessWidget {
-  const TabButton(
-      {super.key, required this.text, this.color, required this.isSelected});
+  const TabButton({super.key, required this.text, this.color});
   final String text;
   final Color? color;
-  final bool isSelected;
+
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).floatingActionButtonTheme.backgroundColor;
     return Container(
       width: double.infinity,
-      
       decoration: BoxDecoration(
-        color: isSelected ? color : null,
-      ),
+          // color:color?? AppColor.primaryColor.withOpacity(.1),
+          borderRadius: BorderRadius.circular(AppRadius.small)),
       child: Tab(text: text),
     );
   }

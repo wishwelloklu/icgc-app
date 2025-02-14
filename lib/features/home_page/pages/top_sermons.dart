@@ -5,7 +5,7 @@ import 'package:icgc/app/utils/screen_size.dart';
 import 'package:icgc/core/presentation/app_states/app_loading_state.dart';
 import 'package:icgc/features/sermons/data/bloc/sample_bloc/sample_bloc.dart';
 import 'package:icgc/features/sermons/data/bloc/sample_bloc/sample_states.dart';
-import 'package:icgc/features/sermons/widgets/book_cover.dart';
+import 'package:icgc/features/sermons/widgets/sample_cover.dart';
 
 import '../../../app/routes/app_routes.dart';
 import '../../../app/routes/route_navigator.dart';
@@ -66,7 +66,7 @@ class TopSermons extends StatelessWidget {
                             arguments: sample,
                           );
                         },
-                        child: BookCover(
+                        child: SampleCover(
                           title: sample.title,
                           subTitle: sample.subTitle,
                           color: sample.color!.color,

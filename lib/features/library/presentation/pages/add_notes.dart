@@ -18,36 +18,42 @@ class AddNotes extends HookWidget {
   Widget build(BuildContext context) {
     final titleControler = useTextEditingController();
     final descriptionControler = useTextEditingController();
-    return ListView(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      shrinkWrap: true,
-      children: [
-        InputTextField(
-          controller: titleControler,
-          labelText: AppString.title,
-          hintText: "Psalm 23:1-3...",
+    return SizedBox(
+      height: 500,
+      child: Expanded(
+        child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          children: [
+            InputTextField(
+              controller: titleControler,
+              labelText: AppString.tagName,
+              hintText: "Psalm 23:1-3...",
+            ),
+            const Gap(20),
+            InputTextField(
+              controller: descriptionControler,
+              labelText: AppString.details,
+              hintText: "JamesThe Lord is my shepherd..",
+              multiLine: true,
+              maxLine:20,
+            ),
+            const Gap(50),
+            AppTextButton(
+                text: AppString.save,
+                backgroundColor: AppColor.primaryColor,
+                color: AppColor.whiteColor,
+                onPressed: () {
+                  context.read<NotesBloc>().add(SaveNotesEvent(NotesItemModel(
+                        id: DateTime.now().toIso8601String(),
+                        dateTime: DateTime.now(),
+                        title: titleControler.text,
+                        note: descriptionControler.text,
+                      )));
+                  popBack(context);
+                })
+          ],
         ),
-        const Gap(20),
-        InputTextField(
-          controller: descriptionControler,
-          labelText: AppString.details,
-          hintText: "JamesThe Lord is my shepherd..",
-        ),
-        const Gap(50),
-        AppTextButton(
-            text: AppString.save,
-            backgroundColor: AppColor.primaryColor,
-            color: AppColor.whiteColor,
-            onPressed: () {
-              context.read<NotesBloc>().add(SaveNotesEvent(NotesItemModel(
-                    id: DateTime.now().toIso8601String(),
-                    dateTime: DateTime.now(),
-                    title: titleControler.text,
-                    note: descriptionControler.text,
-                  )));
-              popBack(context);
-            })
-      ],
+      ),
     );
   }
 }

@@ -18,7 +18,7 @@ class DeleteModal extends StatelessWidget {
     var isTablet = ScreenSizeHelper(context).isTablet;
     var isPortrait = ScreenSizeHelper(context).isPortrait;
     final width = MediaQuery.sizeOf(context).width;
-    final height = MediaQuery.sizeOf(context).height;
+    // final height = MediaQuery.sizeOf(context).height;
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       child: SizedBox(

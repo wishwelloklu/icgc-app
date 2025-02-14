@@ -48,8 +48,8 @@ class EventSlider extends StatelessWidget {
                         gradient: LinearGradient(
                           colors: [
                             Color.fromARGB(5, 0, 0, 0),
-                            Color.fromARGB(88, 0, 0, 0),
-                            Color.fromARGB(151, 0, 0, 0),
+                            Color.fromARGB(104, 0, 0, 0),
+                            Color.fromARGB(178, 0, 0, 0),
                           ],
                           begin: Alignment.center,
                           end: Alignment.bottomCenter,
@@ -67,7 +67,7 @@ class EventSlider extends StatelessWidget {
                       alignment: Alignment.bottomCenter,
                       child: TitleText(
                         text: event.title,
-                        fontSize: isTablet ? 40 : 25,
+                        fontSize: isTablet ? 35 : 20,
                         color: Colors.white,
                       ),
                     ),

@@ -56,7 +56,7 @@ class _NotesPageState extends State<NotesPage> with TickerProviderStateMixin {
                   icon: Icon(
                     Icons.note,
                     size: 100,
-                    color: AppColor.primaryColor.withOpacity(.8),
+                    color: AppColor.primaryColor.withValues(alpha: .8),
                   ),
                 ),
                 const Gap(10),
@@ -104,11 +104,10 @@ class _NotesPageState extends State<NotesPage> with TickerProviderStateMixin {
                     SlidableAction(
                       // An action can be bigger than the others.
                       borderRadius: BorderRadius.circular(8),
-                      padding: EdgeInsets.zero,
-                      spacing: 0,
                       onPressed: (context) {
                         context.read<NotesBloc>().add(DeleteNotesEvent(index));
                       },
+                      label: 'Delete',
                       backgroundColor: Colors.red,
                       foregroundColor: Colors.white,
                       icon: Icons.delete_outline_outlined,

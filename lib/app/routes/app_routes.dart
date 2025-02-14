@@ -32,4 +32,6 @@ class AppRoutes {
   static const String textEditor = 'textEditor';
 
   static const String newSermon = 'newSermon';
+
+  static const String epub = 'epub';
 }

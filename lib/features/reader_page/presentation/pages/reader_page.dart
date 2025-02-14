@@ -71,7 +71,7 @@ class _ReadJsonState extends State<ReaderPage> {
     final readModel = ModalRoute.settingsOf(context)!.arguments as ReadModel;
     final book = readModel.book;
     totalPage = book.pages.length;
-    return BlocBuilder<FontBloc, FontStates>(builder: (context, state) {
+    return BlocBuilder<FontBloc, FontState>(builder: (context, state) {
       switch (state) {
         case FontState():
           return AnimatedSwitcher(
@@ -92,11 +92,12 @@ class _ReadJsonState extends State<ReaderPage> {
                       ? (currentChild, previousChildren) {
                           return Scaffold(
                             key: const ValueKey(1),
-                            backgroundColor: readModel.color.withOpacity(1),
+                            backgroundColor:
+                                readModel.color.withValues(alpha: 1),
                             body: Container(
                               decoration: BoxDecoration(boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.2),
+                                  color: Colors.black.withValues(alpha: 0.2),
                                   spreadRadius: 3,
                                   blurRadius: 20,
                                   offset: const Offset(0, 10), // Deeper shadow
@@ -190,7 +191,6 @@ class _ReadJsonState extends State<ReaderPage> {
                                             );
                                           },
                                         ),
-                                       
                                         Positioned(
                                           top: 0,
                                           left: 0,
@@ -320,7 +320,6 @@ class _ReadJsonState extends State<ReaderPage> {
                                             ),
                                           ),
                                         )
-                                     
                                       ],
                                     ),
                                   ),

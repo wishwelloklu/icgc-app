@@ -59,27 +59,27 @@ class _LoginPageState extends State<LoginPhonePage> {
                 AppRoutes.otpPage,
               ),
             ),
-            const Gap(56),
-            Center(
-              child: Text.rich(TextSpan(
-                children: [
-                  TextSpan(
-                    text: AppString.alreadyHasAccount,
-                    style: AppTextStyle.appDescription(
-                        color: const Color(0xFF8A98AC),
-                        size: AppFontSize.small),
-                  ),
-                  TextSpan(
-                      text: AppString.signUp,
-                      style: AppTextStyle.appHeader(
-                          color: AppColor.primaryColor,
-                          size: AppFontSize.small),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap =
-                            () => routeNavigator(context, AppRoutes.signup))
-                ],
-              )),
-            )
+            // const Gap(56),
+            // Center(
+            //   child: Text.rich(TextSpan(
+            //     children: [
+            //       TextSpan(
+            //         text: AppString.alreadyHasAccount,
+            //         style: AppTextStyle.appDescription(
+            //             color: const Color(0xFF8A98AC),
+            //             size: AppFontSize.small),
+            //       ),
+            //       TextSpan(
+            //           text: AppString.signUp,
+            //           style: AppTextStyle.appHeader(
+            //               color: AppColor.primaryColor,
+            //               size: AppFontSize.small),
+            //           recognizer: TapGestureRecognizer()
+            //             ..onTap =
+            //                 () => routeNavigator(context, AppRoutes.signup))
+            //     ],
+            //   )),
+            // )
           ],
         ),
       ),

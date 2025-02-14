@@ -1,11 +1,8 @@
 import 'package:equatable/equatable.dart';
 
 // State
-abstract class FontStates extends Equatable {
-  const FontStates();
-}
 
-final class FontState extends FontStates {
+ class FontState extends Equatable {
   final double fontSize;
   final String fontName;
 

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../app/theme/app_font_size.dart';
 import '../../../app/theme/app_string.dart';
 import '../../../app/theme/app_text_style.dart';
 import '../../../app/utils/screen_size.dart';
 import '../../../core/presentation/tab_bar_page.dart';
-import '../../../core/presentation/text/title_text.dart';
 import '../../others/pages/others.dart';
 import '../../prayer/pages/prayer.dart';
 import '../../theme/pages/themes.dart';
@@ -46,25 +44,7 @@ class _DeclarationState extends State<Declaration>
     var isPortrait = ScreenSizeHelper(context).isPortrait;
     return Scaffold(
       appBar: AppBar(
-        title: isTablet
-            ? isPortrait
-                ? TitleText(
-                    text: AppString.declaration,
-                    fontSize: isTablet
-                        ? AppFontSize.titleLarge
-                        : AppFontSize.labelMedium,
-                  )
-                : null
-            : const TitleText(
-                text: AppString.declaration,
-                fontSize: AppFontSize.labelMedium,
-              ),
-        toolbarHeight: kToolbarHeight *
-            (isTablet
-                ? isPortrait
-                    ? 2
-                    : 1
-                : 1),
+        toolbarHeight: kToolbarHeight * .5,
         bottom: TabBar(
           labelStyle: isTablet ? AppTextStyle.appTitle(size: 25) : null,
           indicatorSize: TabBarIndicatorSize.tab,

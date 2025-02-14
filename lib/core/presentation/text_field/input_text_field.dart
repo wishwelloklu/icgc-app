@@ -22,6 +22,7 @@ class InputTextField extends StatelessWidget {
   final Function(PointerDownEvent value)? onTapOutSide;
   final Widget? labelTrail;
   final bool multiLine;
+  final int? maxLine;
   const InputTextField({
     super.key,
     required this.controller,
@@ -29,6 +30,7 @@ class InputTextField extends StatelessWidget {
     this.labelText = '',
     this.hintText = '',
     this.validator,
+    this.maxLine,
     this.isEmail = false,
     this.isSuggest = false,
     this.isRequired = false,

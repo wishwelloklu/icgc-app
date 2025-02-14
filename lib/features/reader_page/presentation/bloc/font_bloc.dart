@@ -5,7 +5,7 @@ import 'font_events.dart';
 import 'font_states.dart';
 
 // Bloc
-class FontBloc extends Bloc<FontEvents, FontStates> {
+class FontBloc extends Bloc<FontEvents, FontState> {
   String _fontName = ConstantConfig.satoshi;
 
   double _fontSize = 14;

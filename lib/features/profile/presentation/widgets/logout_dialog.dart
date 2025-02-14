@@ -58,7 +58,7 @@ class LogoutDialog extends StatelessWidget {
                         child: AppTextButton(
                       text: AppString.cancel,
                       onPressed: onCancle,
-                      backgroundColor: AppColor.grey.withOpacity(.3),
+                      backgroundColor: AppColor.grey.withValues(alpha: .3),
                       color: AppColor.blackColor,
                     )),
                     const Gap(16),

@@ -5,20 +5,21 @@ import 'package:icgc/app/theme/app_string.dart';
 import 'package:icgc/app/utils/date_time.dart';
 import 'package:icgc/app/utils/screen_size.dart';
 import 'package:icgc/core/presentation/buttons/app_primary_button.dart';
+import 'package:icgc/core/presentation/text/title_text.dart';
 import 'package:icgc/core/presentation/text_field/icon_text_field.dart';
 import 'package:icgc/core/presentation/text_field/input_text_field.dart';
 import 'package:icgc/features/sermons/data/models/tag.dart';
 
 import '../../../app/routes/route_navigator.dart';
 
-class SermonTag extends StatefulWidget {
-  const SermonTag({super.key});
+class AddTag extends StatefulWidget {
+  const AddTag({super.key});
 
   @override
-  State<SermonTag> createState() => _SermonTagState();
+  State<AddTag> createState() => _AddTagState();
 }
 
-class _SermonTagState extends State<SermonTag> {
+class _AddTagState extends State<AddTag> {
   final _placeController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _titleController = TextEditingController();
@@ -184,14 +185,22 @@ class InputWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isTablet = ScreenSizeHelper(context).isTablet;
     return ListView(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding:
+          EdgeInsets.symmetric(horizontal: isTablet && isPortrait ? 100 : 16),
       shrinkWrap: !isPortrait ? true : false,
       children: [
+        const Gap(20),
+        const TitleText(
+          text: 'Add Tag',
+          fontSize: 25,
+        ),
+        const Gap(20),
         InputTextField(
           controller: _titleController,
-          labelText: AppString.title,
-          hintText: AppString.titleHint,
+          labelText: AppString.tagName,
+          hintText: AppString.tagNameHime,
           isRequired: true,
           isSuggest: true,
         ),

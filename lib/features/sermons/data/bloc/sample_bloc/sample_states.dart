@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:icgc/features/notifications/data/models/notification.dart';
 
 import '../../models/sermon_model.dart';
 

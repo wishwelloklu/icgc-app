@@ -8,7 +8,7 @@ import 'package:icgc/core/presentation/app_states/app_error_state.dart';
 import 'package:icgc/core/presentation/app_states/app_loading_state.dart';
 import 'package:icgc/features/sermons/data/bloc/sample_bloc/sample_bloc.dart';
 import 'package:icgc/features/sermons/data/bloc/sample_bloc/sample_states.dart';
-import 'package:icgc/features/sermons/widgets/book_cover.dart';
+import 'package:icgc/features/sermons/widgets/sample_cover.dart';
 
 import '../../../app/utils/screen_size.dart';
 import '../data/models/sermon_detail_model.dart';
@@ -61,7 +61,7 @@ class SampleSermon extends StatelessWidget {
                     ),
                   );
                 },
-                child: BookCover(
+                child: SampleCover(
                   title: sample.title,
                   subTitle: sample.subTitle,
                   color: sample.color!.color,

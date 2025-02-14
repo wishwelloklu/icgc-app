@@ -37,106 +37,114 @@ class Wrapper extends StatelessWidget {
     ];
     return BlocBuilder<NavBarBloc, NavBarStates>(builder: (context, state) {
       final index = state.index;
-      return Scaffold(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        body: isTablet && !isPortrait
-            ? SideMenu(
-                currentIndex: index,
-                pages: pages,
-                child: Expanded(child: pages[index]),
-              )
-            : pages[index],
-        bottomNavigationBar: isPortrait
-            ? BottomNavigationBar(
-                landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
-                type: BottomNavigationBarType.fixed,
-                useLegacyColorScheme: false,
-                selectedLabelStyle: AppTextStyle.navBarLable(
-                  fontWeight: FontWeight.w500,
-                  color: AppColor.primaryColor,
-                  size: isTablet ? AppFontSize.labelSmall : 12,
-                ),
-                unselectedLabelStyle: AppTextStyle.navBarLable(
-                  fontWeight: FontWeight.w400,
-                  color: AppColor.blackColor,
-                  size: isTablet ? AppFontSize.labelSmall : 12,
-                ),
-                backgroundColor: AppColor.pageBackground,
-                unselectedItemColor: AppColor.blackColor,
-                // showUnselectedLabels: true,
-                onTap: (index) {
-                  context.read<NavBarBloc>().add(NavBarEvent(index));
-                },
-                currentIndex: index,
-                items: [
-                  BottomNavigationBarItem(
-                    icon: SvgIcon(
-                      icon: AppImages.homeLight,
-                      size: iconSize,
-                      color: AppColor.secondaryColor,
-                    ),
-                    activeIcon: SvgIcon(
-                      icon: AppImages.homeBold,
-                      size: iconSize + 3,
-                      color: AppColor.primaryColor,
-                    ),
-                    label: "Home",
+      return PopScope(
+        canPop: index == 0,
+        onPopInvokedWithResult: (didPop, result) {
+          if (index != 0) {
+            context.read<NavBarBloc>().add(NavBarEvent(0));
+          }
+        },
+        child: Scaffold(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          body: isTablet && !isPortrait
+              ? SideMenu(
+                  currentIndex: index,
+                  pages: pages,
+                  child: Expanded(child: pages[index]),
+                )
+              : pages[index],
+          bottomNavigationBar: isPortrait
+              ? BottomNavigationBar(
+                  landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
+                  type: BottomNavigationBarType.fixed,
+                  useLegacyColorScheme: false,
+                  selectedLabelStyle: AppTextStyle.navBarLable(
+                    fontWeight: FontWeight.w500,
+                    color: AppColor.primaryColor,
+                    size: isTablet ? AppFontSize.labelSmall : 12,
                   ),
-                  BottomNavigationBarItem(
-                    icon: SvgIcon(
-                      icon: AppImages.booksLight,
-                      size: iconSize,
-                      color: AppColor.secondaryColor,
-                    ),
-                    activeIcon: SvgIcon(
-                      icon: AppImages.booksBold,
-                      size: iconSize + 3,
-                      color: AppColor.primaryColor,
-                    ),
-                    label: AppString.manual,
+                  unselectedLabelStyle: AppTextStyle.navBarLable(
+                    fontWeight: FontWeight.w400,
+                    color: AppColor.blackColor,
+                    size: isTablet ? AppFontSize.labelSmall : 12,
                   ),
-                  BottomNavigationBarItem(
-                    icon: SvgIcon(
-                      icon: AppImages.sermonsLight,
-                      size: iconSize,
-                      color: AppColor.secondaryColor,
+                  backgroundColor: AppColor.pageBackground,
+                  unselectedItemColor: AppColor.blackColor,
+                  // showUnselectedLabels: true,
+                  onTap: (index) {
+                    context.read<NavBarBloc>().add(NavBarEvent(index));
+                  },
+                  currentIndex: index,
+                  items: [
+                    BottomNavigationBarItem(
+                      icon: SvgIcon(
+                        icon: AppImages.homeLight,
+                        size: iconSize,
+                        color: AppColor.secondaryColor,
+                      ),
+                      activeIcon: SvgIcon(
+                        icon: AppImages.homeBold,
+                        size: iconSize + 3,
+                        color: AppColor.primaryColor,
+                      ),
+                      label: "Home",
                     ),
-                    activeIcon: SvgIcon(
-                      icon: AppImages.sermonsBold,
-                      size: iconSize + 3,
-                      color: AppColor.primaryColor,
+                    BottomNavigationBarItem(
+                      icon: SvgIcon(
+                        icon: AppImages.booksLight,
+                        size: iconSize,
+                        color: AppColor.secondaryColor,
+                      ),
+                      activeIcon: SvgIcon(
+                        icon: AppImages.booksBold,
+                        size: iconSize + 3,
+                        color: AppColor.primaryColor,
+                      ),
+                      label: AppString.manual,
                     ),
-                    label: AppString.sermons,
-                  ),
-                  BottomNavigationBarItem(
-                    icon: SvgIcon(
-                      icon: AppImages.declarationLight,
-                      size: iconSize,
-                      color: AppColor.secondaryColor,
+                    BottomNavigationBarItem(
+                      icon: SvgIcon(
+                        icon: AppImages.sermonsLight,
+                        size: iconSize,
+                        color: AppColor.secondaryColor,
+                      ),
+                      activeIcon: SvgIcon(
+                        icon: AppImages.sermonsBold,
+                        size: iconSize + 3,
+                        color: AppColor.primaryColor,
+                      ),
+                      label: AppString.sermons,
                     ),
-                    activeIcon: SvgIcon(
-                      icon: AppImages.declarationBold,
-                      size: iconSize + 3,
-                      color: AppColor.primaryColor,
+                    BottomNavigationBarItem(
+                      icon: SvgIcon(
+                        icon: AppImages.declarationLight,
+                        size: iconSize,
+                        color: AppColor.secondaryColor,
+                      ),
+                      activeIcon: SvgIcon(
+                        icon: AppImages.declarationBold,
+                        size: iconSize + 3,
+                        color: AppColor.primaryColor,
+                      ),
+                      label: "Declaration",
                     ),
-                    label: "Declaration",
-                  ),
-                  BottomNavigationBarItem(
-                    icon: SvgIcon(
-                      icon: AppImages.moreLight,
-                      size: iconSize,
-                      color: AppColor.secondaryColor,
+                    BottomNavigationBarItem(
+                      icon: SvgIcon(
+                        icon: AppImages.moreLight,
+                        size: iconSize,
+                        color: AppColor.secondaryColor,
+                      ),
+                      activeIcon: SvgIcon(
+                        icon: AppImages.moreBold,
+                        size: iconSize + 3,
+                        color: AppColor.primaryColor,
+                      ),
+                      label: "More",
                     ),
-                    activeIcon: SvgIcon(
-                      icon: AppImages.moreBold,
-                      size: iconSize + 3,
-                      color: AppColor.primaryColor,
-                    ),
-                    label: "More",
-                  ),
-                ],
-              )
-            : null,
+                  ],
+                )
+              : null,
+        ),
       );
     });
   }

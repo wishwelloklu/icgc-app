@@ -9,9 +9,9 @@ import 'package:icgc/core/presentation/cards/elevated_container.dart';
 import 'package:icgc/core/presentation/text/title_text.dart';
 import 'package:icgc/features/sermons/data/models/sermon_detail_model.dart';
 import 'package:icgc/features/sermons/data/models/sermon_model.dart';
-import 'package:icgc/features/sermons/pages/sermon_list.dart';
-import 'package:icgc/features/sermons/widgets/book_cover.dart';
 import 'package:icgc/features/sermons/widgets/tag_widget.dart';
+
+import 'sermon_cover.dart';
 
 class MobileView extends StatelessWidget {
   const MobileView({
@@ -61,11 +61,10 @@ class MobileView extends StatelessWidget {
                     child: SizedBox(
                       width: width * .25,
                       height: height * .13,
-                      child: BookCover(
+                      child: SermonCover(
                         subTitle: sermon.subTitle,
                         title: sermon.title,
                         color: sermon.color?.color ?? generateColor.color,
-                        showSampleText: false,
                       ),
                     ),
                   ),

@@ -46,7 +46,7 @@ class _ReadJsonState extends State<VariableReadPage> {
     final isTablet = ScreenSizeHelper(context).isTablet;
     final namingModel =
         ModalRoute.settingsOf(context)!.arguments as NamingCeremoneyVariable;
-    return BlocBuilder<FontBloc, FontStates>(builder: (context, state) {
+    return BlocBuilder<FontBloc, FontState>(builder: (context, state) {
       switch (state) {
         case FontState():
           return ValueListenableBuilder(

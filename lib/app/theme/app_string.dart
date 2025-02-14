@@ -117,7 +117,7 @@ class AppString {
   static const String help = "Help";
 
   //Notes
-  static const String title = "Title";
+  static const String tagName = "Tag";
   static const String details = "Details";
   static const String save = "Save";
 
@@ -199,7 +199,7 @@ class AppString {
 
   static const String date = 'Date';
 
-  static const String titleHint = 'Sermon title...';
+  static const String tagNameHime = 'Tag name';
 
   static const String placeHint = 'Where sermon will be preached';
 

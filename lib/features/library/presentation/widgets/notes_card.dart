@@ -43,21 +43,22 @@ class NotesCard extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TitleText(text: title),
-                      Text(
-                        note,
-                        style: AppTextStyle.appDescription(
-                          color: AppColor.descriptionColor,
-                        ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      )
-                    ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TitleText(text: title),
+                        Text(
+                          note,
+                          style: AppTextStyle.appDescription(
+                            color: AppColor.descriptionColor,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        )
+                      ],
+                    ),
                   ),
-                  const Spacer(),
                   Text(time, style: AppTextStyle.appDescription()),
                 ],
               ),

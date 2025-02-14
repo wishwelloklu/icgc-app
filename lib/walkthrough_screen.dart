@@ -100,7 +100,7 @@ class _WalkthroughScreenState extends State<WalkthroughScreen> {
                     text: AppString.login,
                     onPressed: () => routeNavigator(
                       context,
-                      AppRoutes.login,
+                      AppRoutes.loginWithPhone,
                     ),
                   ),
                   const Gap(10),

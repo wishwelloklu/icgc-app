@@ -18,10 +18,15 @@ import '../../../app/utils/screen_size.dart';
 import '../data/bloc/officiate_bloc/sermon_bloc.dart';
 import '../data/bloc/officiate_bloc/sermon_events.dart';
 
-class TagList extends StatelessWidget {
-  TagList(this.sermon, {super.key});
+class TagList extends StatefulWidget {
+  const TagList(this.sermon, {super.key});
   final SermonModel sermon;
 
+  @override
+  State<TagList> createState() => _TagListState();
+}
+
+class _TagListState extends State<TagList> {
   final _maxLines = ValueNotifier<int>(3);
 
   final _expandedIndex = ValueNotifier<int>(-1);
@@ -58,7 +63,7 @@ class TagList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    tags = sermon.tags ?? [];
+    tags = widget.sermon.tags ?? [];
     var isTablet = ScreenSizeHelper(context).isTablet;
     return BlocBuilder<SermonBloc, SermonStates>(builder: (context, state) {
       return ValueListenableBuilder(
@@ -270,7 +275,7 @@ class TagList extends StatelessWidget {
                                                           final newValue =
                                                               value as Tag;
                                                           final newSermon =
-                                                              sermon;
+                                                              widget.sermon;
 
                                                           tags[index] =
                                                               newValue;
@@ -293,8 +298,10 @@ class TagList extends StatelessWidget {
                                                         context
                                                             .read<SermonBloc>()
                                                             .add(UpdateSermon(
-                                                              sermon.copyWith(
-                                                                  tags: tags),
+                                                              widget.sermon
+                                                                  .copyWith(
+                                                                      tags:
+                                                                          tags),
                                                             ));
                                                       },
                                                       child:
@@ -312,7 +319,7 @@ class TagList extends StatelessWidget {
                               });
                             },
                           )
-                        : const TitleText(text: 'No tag'),
+                        : const Center(child: TitleText(text: 'No tag')),
                   );
                 });
           });

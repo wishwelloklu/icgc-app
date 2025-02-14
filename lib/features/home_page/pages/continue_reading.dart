@@ -121,16 +121,14 @@ class ContinueReading extends StatelessWidget {
                 )),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: BlocBuilder<FontBloc, FontStates>(
+                  child: BlocBuilder<FontBloc, FontState>(
                       builder: (context, state) {
-                    if (state is FontState) {
-                      return CustomeText(
-                        text: book.pages[0].content,
-                        fontSize: 18,
-                        searchText: '',
-                        fontName: state.fontName,
-                      );
-                    }
+                    return CustomeText(
+                      text: book.pages[0].content,
+                      fontSize: 18,
+                      searchText: '',
+                      fontName: state.fontName,
+                    );
                     return const SizedBox(
                       height: 20,
                       width: 20,
