@@ -89,8 +89,8 @@ class _ManualListState extends State<ManualList> {
                     crossAxisCount: isTablet ? 3 : 2,
                     mainAxisExtent: isTablet
                         ? isPortrait
-                            ? height * .3
-                            : height * .47
+                            ? height * .35
+                            : height * .48
                         : height * .3,
                     // childAspectRatio: 0.3,
                     crossAxisSpacing: isTablet ? 25 : 20,

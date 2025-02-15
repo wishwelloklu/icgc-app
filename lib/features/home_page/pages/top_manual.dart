@@ -39,13 +39,13 @@ class TopManual extends StatelessWidget {
           children: [
             ViewAllTitle(
               onViewAll: () => context.read<NavBarBloc>().add(NavBarEvent(1)),
-              text: "Top officiating manuals",
+              text: "Ministry manuals",
               horizontalPadding: 0,
             ),
             SizedBox(
               height: isTablet
                   ? isPortrait
-                      ? height * .3
+                      ? height * .32
                       : height * .47
                   : height * .3,
               child: ListView.separated(
