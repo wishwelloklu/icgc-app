@@ -54,7 +54,7 @@ class Others extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                     child: InkWell(
                       onTap: () {
-                        routeNavigator(context, AppRoutes.prayerDetails,
+                        routeNavigator(context, AppRoutes.othersDetails,
                             arguments: theme);
                       },
                       child: Padding(
