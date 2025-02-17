@@ -5,6 +5,7 @@ import 'package:icgc/app/routes/app_routes.dart';
 import 'package:icgc/app/routes/route_navigator.dart';
 import 'package:icgc/features/others/data/bloc/others_bloc.dart'
     show OthersBloc;
+import 'package:icgc/features/others/data/bloc/others_events.dart';
 import 'package:icgc/features/others/data/bloc/prayer_states.dart';
 
 import '../../../app/theme/app_string.dart';
@@ -15,9 +16,19 @@ import '../../../core/presentation/app_states/app_loading_state.dart';
 import '../../../core/presentation/text/description_text.dart';
 import '../../../core/presentation/text/title_text.dart';
 
-class Others extends StatelessWidget {
+class Others extends StatefulWidget {
   const Others({super.key});
 
+  @override
+  State<Others> createState() => _OthersState();
+}
+
+class _OthersState extends State<Others> {
+   @override
+  void initState() {
+    context.read<OthersBloc>().add(LoadOthers());
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var isTablet = ScreenSizeHelper(context).isTablet;

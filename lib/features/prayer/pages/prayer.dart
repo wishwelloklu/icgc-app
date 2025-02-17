@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:icgc/app/routes/app_routes.dart';
 import 'package:icgc/app/routes/route_navigator.dart';
 import 'package:icgc/features/prayer/data/bloc/prayer_bloc.dart';
+import 'package:icgc/features/prayer/data/bloc/prayer_events.dart';
 import 'package:icgc/features/prayer/data/bloc/prayer_states.dart';
 
 import '../../../app/theme/app_string.dart';
@@ -13,12 +14,20 @@ import '../../../core/presentation/app_states/app_error_state.dart';
 import '../../../core/presentation/app_states/app_loading_state.dart';
 import '../../../core/presentation/text/description_text.dart';
 import '../../../core/presentation/text/title_text.dart';
-import '../../theme/data/bloc/theme_bloc.dart';
-import '../../theme/data/bloc/theme_states.dart';
 
-class Prayer extends StatelessWidget {
+class Prayer extends StatefulWidget {
   const Prayer({super.key});
 
+  @override
+  State<Prayer> createState() => _PrayerState();
+}
+
+class _PrayerState extends State<Prayer> {
+  @override
+  void initState() {
+    context.read<PrayerBloc>().add(LoadPrayer());
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var isTablet = ScreenSizeHelper(context).isTablet;
@@ -55,6 +64,7 @@ class Prayer extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                     child: InkWell(
                       onTap: () {
+                       
                         routeNavigator(context, AppRoutes.prayerDetails,
                             arguments: theme);
                       },

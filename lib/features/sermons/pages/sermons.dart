@@ -25,7 +25,7 @@ class _SermonsState extends State<Sermons> with TickerProviderStateMixin {
 
   final pages = [
     const SampleSermon(),
-    const OfficiatesList(),
+    const SermonList(),
   ];
 
   @override

@@ -5,6 +5,7 @@ import 'package:icgc/core/data/bloc/naming/naming_bloc.dart';
 import 'package:icgc/core/data/bloc/naming/naming_states.dart';
 import 'package:icgc/core/presentation/tab_bar_page.dart';
 import 'package:icgc/features/manual/data/bloc/manual_page_event.dart';
+import 'package:icgc/features/others/pages/others.dart';
 import '../../../app/routes/app_routes.dart';
 import '../../../app/routes/route_navigator.dart';
 import '../../../app/theme/app_color.dart';
@@ -12,7 +13,6 @@ import '../../../app/utils/generic_modal_sheet.dart';
 import '../../../app/utils/screen_size.dart';
 import '../../library/data/models/collections.dart';
 import '../data/bloc/manual_page_bloc.dart';
-import 'manual_list.dart';
 import 'officiate_page.dart';
 import '../../policy/pages/policies_page.dart';
 
@@ -30,14 +30,16 @@ class _ManualsPageState extends State<ManualsPage>
   int _selectedIndex = 0;
   late TabController _tabController;
   final _tabs = [
-    const Tab(text: 'Manuals'),
-    const Tab(text: 'Policies'),
     const Tab(text: 'Officiate'),
+    const Tab(text: 'Policies'),
+    const Tab(text: 'Others'),
   ];
   final pages = [
-    const ManualList(),
-    const PoliciesPage(),
     const OfficiatePage(),
+    // const ManualList(),
+    const PoliciesPage(),
+    const Others()
+
   ];
 
   @override

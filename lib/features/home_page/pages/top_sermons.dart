@@ -34,7 +34,7 @@ class TopSermons extends StatelessWidget {
           children: [
             ViewAllTitle(
               onViewAll: () => context.read<NavBarBloc>().add(NavBarEvent(2)),
-              text: "Top sermons",
+              text: "SERMONS",
               horizontalPadding: 0,
             ),
             SizedBox(

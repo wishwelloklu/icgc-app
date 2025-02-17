@@ -39,7 +39,7 @@ class TopManual extends StatelessWidget {
           children: [
             ViewAllTitle(
               onViewAll: () => context.read<NavBarBloc>().add(NavBarEvent(1)),
-              text: "Ministry manuals",
+              text: "MINISTRY MANUALS",
               horizontalPadding: 0,
             ),
             SizedBox(

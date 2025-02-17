@@ -11,8 +11,8 @@ import 'package:icgc/features/sermons/widgets/tabblet_view.dart';
 
 import '../../../app/utils/screen_size.dart';
 
-class OfficiatesList extends StatelessWidget {
-  const OfficiatesList({super.key});
+class SermonList extends StatelessWidget {
+  const SermonList({super.key});
 
   @override
   Widget build(BuildContext context) {

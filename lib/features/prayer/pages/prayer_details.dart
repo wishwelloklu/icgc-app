@@ -5,7 +5,6 @@ import 'package:icgc/app/theme/app_color.dart';
 import 'package:icgc/app/utils/screen_size.dart';
 import 'package:icgc/core/presentation/read_widgets.dart';
 import 'package:icgc/core/presentation/text/title_text.dart';
-import 'package:icgc/features/others/data/model/others_model.dart';
 import 'package:icgc/features/prayer/data/prayer_model.dart';
 import 'package:icgc/features/reader_page/presentation/bloc/font_bloc.dart';
 import 'package:icgc/features/reader_page/presentation/bloc/font_states.dart';

@@ -46,7 +46,7 @@ class TopPolicy extends StatelessWidget {
                 context.read<NavBarBloc>().add(NavBarEvent(1));
                 context.read<ManualPageBloc>().add(ManualPageEvent(1));
               },
-              text: "Top policy manuals",
+              text: "POLICY MANUALS",
               horizontalPadding: 0,
             ),
             SizedBox(

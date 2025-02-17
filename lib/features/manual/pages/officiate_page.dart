@@ -30,6 +30,7 @@ class OfficiatePage extends StatefulWidget {
 }
 
 class _OfficiatePageState extends State<OfficiatePage> {
+  
   @override
   void initState() {
     context.read<NamingBloc>().add(LoadAllNamingEvent());
