@@ -27,7 +27,6 @@ class AppIconButton extends StatelessWidget {
       width: width ?? MediaQuery.of(context).size.width,
       height: height,
       child: ElevatedButton(
-        iconAlignment: IconAlignment.start,
         style: ElevatedButton.styleFrom(
           elevation: 0.0,
           textStyle: AppTextStyle.buttonText(),

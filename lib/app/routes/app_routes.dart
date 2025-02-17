@@ -34,4 +34,8 @@ class AppRoutes {
   static const String newSermon = 'newSermon';
 
   static const String epub = 'epub';
+
+  static const String prayerDetails = 'prayerDetails';
+
+  static const String othersDetails = 'othersDetails';
 }

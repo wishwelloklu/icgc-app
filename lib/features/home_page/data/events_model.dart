@@ -58,31 +58,27 @@ class EventsModel extends Equatable {
       title: 'Greater Works 2024',
       description:
           "\"Greater works\" is a phrase that refers to the work of Jesus' followers that extend beyond his earthly ministry. It can also refer to the idea that believers can do greater works than Jesus himself.",
-      image: AppImages.event1,
+      image: AppImages.foutyOne,
     ),
+ 
+   
     EventsModel(
-      title: 'Greater Works 2022',
+      title: 'Doulos',
       description:
           "\"Greater works\" is a phrase that refers to the work of Jesus' followers that extend beyond his earthly ministry. It can also refer to the idea that believers can do greater works than Jesus himself.",
-      image: AppImages.event2,
+      image: AppImages.doulos,
     ),
     EventsModel(
       title: '40 Days Of Power',
       description:
           "The significance of 40 days in the Bible is that God allows us to go through challenges in order to grow spiritually. The 40-day time period highlights the importance of strengthening our faith by relying on God's help in challenging circumstances. Also, 40 days highlights God's patience with us.",
-      image: AppImages.event3,
-    ),
-    EventsModel(
-      title: 'Greater Works 2022',
-      description:
-          "\"Greater works\" is a phrase that refers to the work of Jesus' followers that extend beyond his earthly ministry. It can also refer to the idea that believers can do greater works than Jesus himself.",
-      image: AppImages.event2,
+      image: AppImages.foutyDays,
     ),
     EventsModel(
       title: 'Greater Works 2024',
       description:
           "\"Greater works\" is a phrase that refers to the work of Jesus' followers that extend beyond his earthly ministry. It can also refer to the idea that believers can do greater works than Jesus himself.",
-      image: AppImages.event1,
+      image: AppImages.greaterWorks,
     ),
   ];
 }

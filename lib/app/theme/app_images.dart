@@ -63,13 +63,17 @@ class AppImages {
 
   static const String font = 'assets/icons/font.svg';
 
-  static const String event2 = 'assets/images/events_images/event1.jpeg';
 
-  static const String event1 = 'assets/images/events_images/event2.jpg';
-
-  static const String event3 = 'assets/images/events_images/event3.png';
+  static const String greaterWorks = 'assets/images/events_images/event2.jpg';
+  static const String doulos = 'assets/images/events_images/doulos.jpeg';
+  static const String foutyOne = 'assets/images/events_images/41.jpeg';
+  static const String foutyDays = 'assets/images/events_images/event1.jpeg';
 
   static const String child = 'assets/images/namingceremonybaby.jpg';
 
   static const String preach = 'assets/images/preach.jpeg';
+
+  static const String prayer = 'assets/images/icgc_images/prayer.jpeg';
+
+  static const String creed = 'assets/images/icgc_images/creed.jpeg';
 }

@@ -36,7 +36,6 @@ class AppTwoIconButton extends StatelessWidget {
       width: useWidth ? (width ?? MediaQuery.of(context).size.width) : null,
       height: height,
       child: TextButton(
-        iconAlignment: IconAlignment.start,
         style: TextButton.styleFrom(
           elevation: 0.0,
           textStyle: AppTextStyle.buttonText(),

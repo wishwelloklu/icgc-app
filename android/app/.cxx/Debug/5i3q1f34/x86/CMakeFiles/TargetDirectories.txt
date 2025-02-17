@@ -1,0 +1,2 @@
+/Users/wishwell/Projects/API Technologies/icgc/android/app/.cxx/Debug/5i3q1f34/x86/CMakeFiles/edit_cache.dir
+/Users/wishwell/Projects/API Technologies/icgc/android/app/.cxx/Debug/5i3q1f34/x86/CMakeFiles/rebuild_cache.dir

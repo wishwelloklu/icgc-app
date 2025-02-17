@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-import 'package:icgc/core/presentation/text/title_text.dart';
 import 'package:icgc/features/home_page/data/events_model.dart';
 
 import '../../../app/utils/screen_size.dart';
@@ -62,15 +61,6 @@ class EventSlider extends StatelessWidget {
                     ),
                     // if (_activeIndex ==
                     //     EventsModel.eventMock.indexOf(event))
-                    Container(
-                      padding: const EdgeInsets.all(8.0),
-                      alignment: Alignment.bottomCenter,
-                      child: TitleText(
-                        text: event.title,
-                        fontSize: isTablet ? 35 : 20,
-                        color: Colors.white,
-                      ),
-                    ),
                   ],
                 ),
               );

@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:icgc/app/routes/modules/sermon_routes%20copy.dart';
 import 'package:icgc/core/presentation/epub_reader.dart';
+import 'package:icgc/features/others/pages/others_details.dart';
+import 'package:icgc/features/prayer/pages/prayer_details.dart';
 import 'app_routes.dart';
 import 'modules/auth_routes.dart';
 import 'modules/home_routes.dart';
@@ -19,6 +21,8 @@ class Routes {
   static Map<String, RouteType> _resolveRoutes() {
     return {
         AppRoutes.epub: (context, settings) => const EpubReader(),
+        AppRoutes.prayerDetails: (context, settings) => const PrayerDetails(),
+      AppRoutes.othersDetails: (context, settings) => const OthersDetails(),
       ...onboardRoutes,
       ...authRoutes,
       ...onboardRoutes,
